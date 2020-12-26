@@ -109,7 +109,7 @@ gulp.task('copyjs', function () {
 var jest = require('gulp-jest').default;
 
 gulp.task('jestonly', function () {
-  process.env.NODE_ENV = 'test';
+  process.env.NODE_ENV = 'dev'; // test';
   return gulp.src('test').pipe(jest({
     'preprocessorIgnorePatterns': [
       './dist/', './node_modules/'
