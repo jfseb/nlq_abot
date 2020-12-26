@@ -273,7 +273,6 @@ export function removeDuplicates(records: any[]) {
  */
 export function applyUnwind(records:any[], unwind : any) : any[] {
   var res = [];
-  debugger;
   var prop = unwind.path;
   records.forEach( r => {
     if ( _.isArray(r[prop]) && r[prop].length > 0 ) {
@@ -331,7 +330,6 @@ export function applyStep(records:any[], queryStep: any) : any[] {
 
 export function filterByQuery(records:any[], query: any): any[] {
   var res = records;
-  debugger;
   query.forEach( qcomp => { res = applyStep(res,qcomp)});
   return removeDuplicates(res);
 }
@@ -408,7 +406,6 @@ class APseudoModel implements IPseudoModel {
     if ( Object.getOwnPropertyNames(query).length == 0) {
       return new Promise<ISynonym[]>( (resolve,reject) => { resolve(self.records)});    
     }
-    debugger;
     console.log("find " + JSON.stringify(query));
     throw "Find " + JSON.stringify(query);
   }

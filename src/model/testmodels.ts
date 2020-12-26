@@ -19,7 +19,6 @@ export function getTestModel1(): Promise<void | IFModel.IModels> {
  * Model.releaseModel(theModelInstance)
  */
 export function getTestModel2(): Promise<void | IFModel.IModels> {
-  debugger;
   var srcHandle = SrcHandle.createSourceHandle();
   return Model.loadModelsOpeningConnection( srcHandle, "testmodel2", "./testmodel2");
 }

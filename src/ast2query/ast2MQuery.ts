@@ -180,7 +180,6 @@ export function makeMongoMatchFromAst(node: AST.ASTNode, sentence: IFErBase.ISen
     //console.log('here is the domain ' + Object.keys(theModel.mongoHandle.mongoMaps).join("\n"));
     //console.log(JSON.stringify(theModel.mongoHandle.mongoMaps[mongodomain], undefined,2));
     var mongocatfullpath = mongoMap[category].fullpath; // Model.getMongoosePath(theModel, category); //makeMongoName(cat);
-    debugger;
     debuglog(() => `here is the fullpath for ${category} is ${mongocatfullpath} `);
     var fact = (n.children.length > 1) && getFactForNode(n.children[1], sentence);
     var catIsNumeric = isNumericTypeOrHasNumericType(mongoHandleRaw, domain, category);
