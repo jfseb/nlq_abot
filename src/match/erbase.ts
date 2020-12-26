@@ -610,7 +610,6 @@ export function isBadOperatorArgs(sentence : IMatch.ISentence, operators: IMatch
       var argtypex = argtype.map(  (x) => Word.WordType.fromCategoryString( x ));
       if ( argtypex.indexOf( ith_arg.rule.wordType ) < 0 )
       {
-        console.log( "discarding due to arg " + op.operator + " arg #" + i + " expected" + JSON.stringify( argtypex ) + " was "  + ith_arg.rule.wordType);
         debuglog( ()=> { return "discarding due to arg " + op.operator + " arg #" + i + " expected" + JSON.stringify( argtypex ) + " was "  + ith_arg.rule.wordType;});
         return false;
       }

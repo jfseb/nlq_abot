@@ -3,14 +3,15 @@
 var process = require('process');
 var root = (process.env.FSD_COVERAGE) ? '../js_cov' : '../js';
 var Parser = require(root + '/parser.js');
+var debuglog = require('debug')('parser.test');
 
 
 function parseInput(text,startrule) {
   var lexingResult = Parser.SelectLexer.tokenize(text);
-  console.log(JSON.stringify(lexingResult));
+  //console.log(JSON.stringify(lexingResult));
   const parser = new Parser.SelectParser(lexingResult.tokens);
   if(typeof parser[startrule] !== 'function') {
-    console.log('where is the startrule '+ startrule);
+    debuglog('where is the startrule '+ startrule);
   }
   var res = parser[startrule]();
   //console.log('here res: ' + JSON.stringify(res));
@@ -265,35 +266,6 @@ it('testCatListCFinvalids', done => {
   });
   done();
 });
-
-
-
-/*
-exports.testCatSEtExpression = function (test) {
-  var inputText = 'latest CAT';
-  parseInput(inputText,'catSetExpression');
-  test.equal(1,1);
-  test.done();
-};
-*/
-/*
-
-exports.testCatListMoreCATequalsFact = function (test) {
-  var inputText = 'CAT equals FACT';
-  parseInput(inputText,'filterExpression');
-  test.equal(1,1);
-  test.done();
-};
-
-/*
-exports.testCatListMoreCATisFact = function (test) {
-  var inputText = 'CAT is FACT';
-  parseInput(inputText,'filterExpression');
-  test.equal(1,1);
-  test.done();
-};*/
-
-
 
 it('testCatListMoreInFaommaABC', done => {
   ['contains', 'containing', 'ends_with', 'ending_with', 'starts_with', 'starting_with'].forEach((op)=> {

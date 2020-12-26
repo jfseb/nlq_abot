@@ -9,7 +9,7 @@
 var process = require('process');
 var root = (process.env.FSD_COVERAGE) ? '../../js_cov' : '../../js';
 
-var debuglog = require('debug')('erbase.nunit');
+var debuglog = require('debug')('erbase.test');
 
 const Erbase = require(root + '/match/erbase.js');
 
