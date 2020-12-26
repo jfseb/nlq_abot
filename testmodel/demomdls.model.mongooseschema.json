@@ -1,0 +1,73 @@
+{
+  "props": {
+    "sender": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "sender",
+      "index": true
+    },
+    "standort": {
+      "type": [ "String" ],
+      "trim": true,
+      "_m_category": "standort",
+      "index": true
+    },
+    "sendertyp": {
+      "type": [ "String"],
+      "items": {
+        "type": "String"
+      },
+      "trim": true,
+      "_m_category": "sendertyp",
+      "index": true
+    },
+    "besitzer": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "besitzer",
+      "index": true
+    },
+    "gr_ndungsjahr": {
+      "type": "Number",
+      "trim": true,
+      "_m_category": "gründungsjahr"
+    },
+    "betriebsende": {
+      "type": "Number",
+      "trim": true,
+      "_m_category": "betriebsende",
+      "index": true
+    },
+    "nachfolger": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "nachfolger",
+      "index": true
+    },
+    "_synonyms" :[
+      { "category" : {
+      "type": "String",
+      "trim": true,
+      "index": false
+        },
+      "fact" : {
+      "type": "String",
+      "trim": true,
+      "index": false
+      },
+      "synonyms" : [
+         {
+      "type": "String",
+      "trim": true,
+      "index" : false
+      }
+      ]}
+    ]
+  },
+  "index": {
+    "sender": "text",
+    "sendertyp": "text",
+    "standort": "text",
+    "nachfolger": "text"
+  }
+}

@@ -1,0 +1,388 @@
+[
+  {
+    "nr": 1,
+    "query": "domains ending with ABC",
+    "astNice": "BINOP -1(2)\n  OPAll -1(1)\n    LIST -1(1)\n      CAT 0\n  LIST -1(1)\n    OPEndsWith 1(2)\n      CAT 0\n      ANY 2\n",
+    "match_json": 
+      {
+        "$match": { "$and" :[ {"$regex" : [{"$eval":"domain" }, {"$regex": "/abc$/i"}] }] }
+      },
+    "group": {
+      "$group": [ "domain"]
+    },
+    "projection": {
+      "$project": {
+        "domain": 1
+      }
+    }
+  },
+  {
+    "nr": 2,
+    "query": "categories ending with ABC",
+    "astNice": "BINOP -1(2)\n  OPAll -1(1)\n    LIST -1(1)\n      CAT 0\n  LIST -1(1)\n    OPEndsWith 1(2)\n      CAT 0\n      ANY 2\n",
+    "match_json": { 
+      "$match": { "$and" :[ {"$regex" : [{"$eval":"_categories.category" }, {"$regex": "/abc$/i"}] }] }
+    },
+    "projection": {
+      "$project": {      
+        "category": "_categories.category"
+      }
+    },
+    "group": {
+      "$group": [ "category"]
+    }
+  },
+  {
+    "nr": 3,
+    "query": "mass, albedo with object name Alpha Centauri B or mars",
+    "parseError": "or"
+  },
+  {
+    "nr": 4,
+    "query": "mass, albedo with object name Alpha Centauri B mars",
+    "astNice": "BINOP -1(2)\n  OPAll -1(1)\n    LIST -1(2)\n      CAT 0\n      CAT 1\n  LIST -1(2)\n    OPEqIn -1(2)\n      CAT 3\n      FACT 4\n    OPEqIn -1(2)\n      CATPH -1(0)\n      FACT 5\n",
+    "match_json": {"$match": {"$and": [ { "$eq": [{ "$eval" : "object_name"},"Alpha Centauri B"]},
+                                        { "$eq": [{ "$eval" : "object_name"},"Mars"]}
+    ]}},
+    "projection": {
+      "$project": {
+        "mass": 1,
+        "albedo": 1
+      }
+    },
+    "group": {
+      "$group": [ "mass","albedo"]
+    }
+  },
+  {
+    "nr": 5,
+    "query": "mass, albedo with name \"Alpha Centauri B\" mars",
+    "parseError": "any"
+  },
+  {
+    "nr": 6,
+    "query": "sender, standort with more than 3 standort",
+    "match_json": {"$match": {"$and": [{"$expr": {"$gt": [{"$ARRAYSIZE_OR_VAL_OR1": "standort"}, 3]}}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort"] 
+    }
+  },
+  {
+    "nr": 7,
+    "query": "sender, standort with less than 3 standort",
+    "match_json": {"$match": {"$and": [{"$expr": {"$lt": [{"$ARRAYSIZE_OR_VAL_OR1": "standort"}, 3]}}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort"] 
+    }
+  },
+  {
+    "nr": 8,
+    "query": "sender, standort with exactly 3 standort",
+    "match_json": {"$match": {"$and": [{"$expr": {"$eq": [{"$ARRAYSIZE_OR_VAL_OR1": "standort"}, 3]}}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort"] 
+    }
+  },
+  {
+    "nr": 9,
+    "query": "sender, standort with gründungsjahr < 1972",
+    "match_json": { "$match" : {"$and" : [ { "$lt" :[{"$eval":"gr_ndungsjahr"}, 1972]}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 10,
+    "query": "sender, standort with gründungsjahr <= 1972",
+    "match_json": { "$match" : {"$and" : [ { "$lte" :[{"$eval":"gr_ndungsjahr"}, 1972]}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 11,
+    "query": "sender, standort with gründungsjahr = 1972",
+    "match_json": { "$match" : {"$and" : [ { "$eq" :[{"$eval":"gr_ndungsjahr"}, 1972]}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 12,
+    "query": "sender, standort with gründungsjahr > 1972",
+    "match_json": { "$match" : {"$and" : [ { "$gt" :[{"$eval":"gr_ndungsjahr"}, 1972]}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 112,
+    "query": "sender, standort with gründungsjahr >= 1972",
+    "match_json": { "$match" : {"$and" : [ { "$gte" :[{"$eval":"gr_ndungsjahr"}, 1972]}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 13,
+    "query": "sender, standort with gründungsjahr != 1972",
+    "match_json": { "$match" : {"$and" : [ { "$ne" :[{"$eval":"gr_ndungsjahr"}, 1972]}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 15,
+    "query": "sender, standort with less than 3 standort order by gründungsjahr",
+    "match_json": {"$match": {"$and": [{"$expr": {"$lt": [{"$ARRAYSIZE_OR_VAL_OR1": "standort"}, 3]}}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 16,
+    "query": "sender, standort with less than 3 standort order by sendertyp",
+    "match_json": {"$match": {"$and": [{"$expr": {"$lt": [{"$ARRAYSIZE_OR_VAL_OR1": "standort"}, 3]}}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 17,
+    "query": "sender, standort with less than 3 standort order descending by sender",
+    "match_json": {"$match": {"$and": [{"$expr": {"$lt": [{"$ARRAYSIZE_OR_VAL_OR1": "standort"}, 3]}}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 18,
+    "query": "sender, standort with existing besitzer",
+    "match_json": {"$match": {"$and": [{ "$exists":[{ "$eval":"besitzer" },true]}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 19,
+    "query": "sender, standort with not existing besitzer",
+    "match_json": {"$match": {"$and": [{ "$exists":[{ "$eval":"besitzer"},false]}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 20,
+    "query": "sender, standort with less than 3 standort order descending by standort",
+    "match_json": {"$match": {"$and": [{"$expr": {"$lt": [{"$ARRAYSIZE_OR_VAL_OR1": "standort"}, 3]}}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 21,
+    "query": "sender, standort with standort < \"Mue\"",
+    "match_json": {"$match": {"$and": [{"$lt": [{"$eval": "standort" },"Mue"]}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 22,
+    "query": "sender, standort with less than 3 standort",
+    "match_json": {"$match": {"$and": [{"$expr": {"$lt": [{"$ARRAYSIZE_OR_VAL_OR1": "standort"}, 3]}}]}},
+    "projection": {
+      "$project": {
+        "sender": 1,
+        "standort": 1
+      }
+    },
+    "group": {
+      "$group": ["sender", "standort" ]
+    }
+  },
+  {
+    "nr": 25,
+    "query": "tables in domain IUPAC",
+    "parseError": "but found: 'FACT'"
+  },
+  {
+    "nr": 26,
+    "query": "element_names with element_number = 11",
+    "match_json": { "$match": { "$and":[ {"$eq": [{"$eval": "element_number"}, 11]}]}},
+    "projection": {
+      "$project": {
+        "element_name": 1
+      }
+    },
+    "group": {
+      "$group": ["element_name" ]
+    }
+  },
+  {
+    "nr": 260,
+    "query": "element_names with element_number 11",
+    "match_json": { "$match": { "$and":[ {"$eq": [{"$eval": "element_number"}, 11]}]}},
+    "projection": {
+      "$project": {
+        "element_name": 1
+      }
+    },
+    "group": {
+      "$group": ["element_name" ]
+    }
+  },
+  {
+    "nr": 27,
+    "query": "element_names with element_number < 11",
+    "match_json": { "$match": { "$and":[ {"$eq": [{"$eval": "element_number"}, 11]}]}},
+    "projection": {
+      "$project": {
+        "element_name": 1
+      }
+    },
+    "group": {
+      "$group": ["element_name" ]
+    }
+  },
+  {
+    "nr": 28,
+    "query": "element_names with element_number less than 11",
+    "match_json": { "$match": { "$and":[ {"$lt": [{"$eval": "element_number"}, 11]}]}},
+    "projection": {
+      "$project": {
+        "element_name": 1
+      }
+    },
+    "group": {
+      "$group": ["element_name" ]
+    }
+  },
+  {
+    "nr": 29,
+    "query": "element_names with element_number less than 1111",
+    "match_json": { "$match": { "$and":[ {"$lt": [{"$eval": "element_number"}, 1111]}]}},
+    "projection": {
+      "$project": {
+        "element_name": 1
+      }
+    },
+    "group": {
+      "$group": ["element_name" ]
+    }
+  },
+  {
+    "nr": 30,
+    "query": "element_names with less than 4 element_number",
+    "parseError": "Expecting token of type --> Integer"
+  },
+  {
+    "nr": 31,
+    "query": "element_names with less than 4444 element_number",
+    "match_json": { "$match": {"$and": [{ "$expr" : { "$lt": [{"$ARRAYSIZE_OR_VAL_OR1": "element_number"}, 4444 ]}}]}},
+    "projection": {
+      "$project": {
+        "element_name": 1
+      }
+    },
+    "group": {
+      "$group": ["element_name" ]
+    }
+  }
+]

@@ -1,0 +1,970 @@
+{
+  "props": {
+    "country": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "country",
+      "index": true
+    },
+    "fieldId": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "fieldId"
+    },
+    "fieldName": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "fieldName",
+      "index": true
+    },
+    "TRANSPORTATION___NOTE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TRANSPORTATION - NOTE"
+    },
+    "DIPLOMATIC_REPRESENTATION_FROM_THE_US": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DIPLOMATIC REPRESENTATION FROM THE US"
+    },
+    "DEPENDENCY_STATUS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DEPENDENCY STATUS"
+    },
+    "AFFILIATION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AFFILIATION"
+    },
+    "GDP___PER_CAPITA__PPP_": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GDP - PER CAPITA (PPP)"
+    },
+    "GDP___REAL_GROWTH_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GDP - REAL GROWTH RATE"
+    },
+    "POPULATION_GROWTH_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "POPULATION GROWTH RATE"
+    },
+    "GDP__PURCHASING_POWER_PARITY_": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GDP (PURCHASING POWER PARITY)"
+    },
+    "DEPENDENCY_RATIOS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DEPENDENCY RATIOS"
+    },
+    "GROSS_NATIONAL_SAVING": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GROSS NATIONAL SAVING"
+    },
+    "GDP___COMPOSITION__BY_END_USE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GDP - COMPOSITION, BY END USE"
+    },
+    "CONTRACEPTIVE_PREVALENCE_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CONTRACEPTIVE PREVALENCE RATE"
+    },
+    "DEMOGRAPHIC_PROFILE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DEMOGRAPHIC PROFILE"
+    },
+    "MOTHER_S_MEAN_AGE_AT_FIRST_BIRTH": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MOTHER'S MEAN AGE AT FIRST BIRTH"
+    },
+    "CHILD_LABOR___CHILDREN_AGES_5_14": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CHILD LABOR - CHILDREN AGES 5-14"
+    },
+    "CARBON_DIOXIDE_EMISSIONS_FROM_CONSUMPTION_OF_ENERGY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CARBON DIOXIDE EMISSIONS FROM CONSUMPTION OF ENERGY"
+    },
+    "NATURAL_GAS___PROVED_RESERVES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATURAL GAS - PROVED RESERVES"
+    },
+    "NATURAL_GAS___IMPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATURAL GAS - IMPORTS"
+    },
+    "NATURAL_GAS___EXPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATURAL GAS - EXPORTS"
+    },
+    "NATURAL_GAS___CONSUMPTION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATURAL GAS - CONSUMPTION"
+    },
+    "NATURAL_GAS___PRODUCTION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATURAL GAS - PRODUCTION"
+    },
+    "REFINED_PETROLEUM_PRODUCTS___IMPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "REFINED PETROLEUM PRODUCTS - IMPORTS"
+    },
+    "REFINED_PETROLEUM_PRODUCTS___EXPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "REFINED PETROLEUM PRODUCTS - EXPORTS"
+    },
+    "REFINED_PETROLEUM_PRODUCTS___CONSUMPTION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "REFINED PETROLEUM PRODUCTS - CONSUMPTION"
+    },
+    "REFINED_PETROLEUM_PRODUCTS___PRODUCTION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "REFINED PETROLEUM PRODUCTS - PRODUCTION"
+    },
+    "CRUDE_OIL___PROVED_RESERVES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CRUDE OIL - PROVED RESERVES"
+    },
+    "CRUDE_OIL___IMPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CRUDE OIL - IMPORTS"
+    },
+    "CRUDE_OIL___EXPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CRUDE OIL - EXPORTS"
+    },
+    "CRUDE_OIL___PRODUCTION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CRUDE OIL - PRODUCTION"
+    },
+    "ELECTRICITY___FROM_OTHER_RENEWABLE_SOURCES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ELECTRICITY - FROM OTHER RENEWABLE SOURCES"
+    },
+    "ELECTRICITY___FROM_NUCLEAR_FUELS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ELECTRICITY - FROM NUCLEAR FUELS"
+    },
+    "ELECTRICITY___FROM_HYDROELECTRIC_PLANTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ELECTRICITY - FROM HYDROELECTRIC PLANTS"
+    },
+    "ELECTRICITY___FROM_FOSSIL_FUELS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ELECTRICITY - FROM FOSSIL FUELS"
+    },
+    "ELECTRICITY___INSTALLED_GENERATING_CAPACITY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ELECTRICITY - INSTALLED GENERATING CAPACITY"
+    },
+    "ELECTRICITY___IMPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ELECTRICITY - IMPORTS"
+    },
+    "ELECTRICITY___EXPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ELECTRICITY - EXPORTS"
+    },
+    "ELECTRICITY___CONSUMPTION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ELECTRICITY - CONSUMPTION"
+    },
+    "ELECTRICITY___PRODUCTION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ELECTRICITY - PRODUCTION"
+    },
+    "NATIONAL_SYMBOL_S_": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATIONAL SYMBOL(S)"
+    },
+    "UNEMPLOYMENT__YOUTH_AGES_15_24": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "UNEMPLOYMENT, YOUTH AGES 15-24"
+    },
+    "OBESITY___ADULT_PREVALENCE_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "OBESITY - ADULT PREVALENCE RATE"
+    },
+    "HOSPITAL_BED_DENSITY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "HOSPITAL BED DENSITY"
+    },
+    "PHYSICIANS_DENSITY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "PHYSICIANS DENSITY"
+    },
+    "HEALTH_EXPENDITURES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "HEALTH EXPENDITURES"
+    },
+    "CHILDREN_UNDER_THE_AGE_OF_5_YEARS_UNDERWEIGHT": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CHILDREN UNDER THE AGE OF 5 YEARS UNDERWEIGHT"
+    },
+    "MATERNAL_MORTALITY_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MATERNAL MORTALITY RATE"
+    },
+    "BUDGET_SURPLUS_____OR_DEFICIT____": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BUDGET SURPLUS (+) OR DEFICIT (-)"
+    },
+    "TAXES_AND_OTHER_REVENUES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TAXES AND OTHER REVENUES"
+    },
+    "INTERNATIONAL_LAW_ORGANIZATION_PARTICIPATION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "INTERNATIONAL LAW ORGANIZATION PARTICIPATION"
+    },
+    "MAJOR_URBAN_AREAS___POPULATION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MAJOR URBAN AREAS - POPULATION"
+    },
+    "NATIONAL_ANTHEM": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATIONAL ANTHEM"
+    },
+    "SANITATION_FACILITY_ACCESS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "SANITATION FACILITY ACCESS"
+    },
+    "DRINKING_WATER_SOURCE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DRINKING WATER SOURCE"
+    },
+    "STOCK_OF_BROAD_MONEY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "STOCK OF BROAD MONEY"
+    },
+    "STOCK_OF_NARROW_MONEY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "STOCK OF NARROW MONEY"
+    },
+    "BROADCAST_MEDIA": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BROADCAST MEDIA"
+    },
+    "URBANIZATION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "URBANIZATION"
+    },
+    "STOCK_OF_DOMESTIC_CREDIT": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "STOCK OF DOMESTIC CREDIT"
+    },
+    "STOCK_OF_QUASI_MONEY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "STOCK OF QUASI MONEY"
+    },
+    "STOCK_OF_MONEY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "STOCK OF MONEY"
+    },
+    "COMMERCIAL_BANK_PRIME_LENDING_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "COMMERCIAL BANK PRIME LENDING RATE"
+    },
+    "CENTRAL_BANK_DISCOUNT_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CENTRAL BANK DISCOUNT RATE"
+    },
+    "EDUCATION_EXPENDITURES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "EDUCATION EXPENDITURES"
+    },
+    "SCHOOL_LIFE_EXPECTANCY__PRIMARY_TO_TERTIARY_EDUCATION_": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "SCHOOL LIFE EXPECTANCY (PRIMARY TO TERTIARY EDUCATION)"
+    },
+    "ECONOMY_OF_THE_AREA_ADMINISTERED_BY_TURKISH_CYPRIOTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ECONOMY OF THE AREA ADMINISTERED BY TURKISH CYPRIOTS"
+    },
+    "GEOGRAPHIC_OVERVIEW": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GEOGRAPHIC OVERVIEW"
+    },
+    "FRESHWATER_WITHDRAWAL__DOMESTIC_INDUSTRIAL_AGRICULTURAL_": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "FRESHWATER WITHDRAWAL (DOMESTIC/INDUSTRIAL/AGRICULTURAL)"
+    },
+    "TOTAL_RENEWABLE_WATER_RESOURCES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TOTAL RENEWABLE WATER RESOURCES"
+    },
+    "MARKET_VALUE_OF_PUBLICLY_TRADED_SHARES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MARKET VALUE OF PUBLICLY TRADED SHARES"
+    },
+    "STOCK_OF_DIRECT_FOREIGN_INVESTMENT___ABROAD": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "STOCK OF DIRECT FOREIGN INVESTMENT - ABROAD"
+    },
+    "STOCK_OF_DIRECT_FOREIGN_INVESTMENT___AT_HOME": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "STOCK OF DIRECT FOREIGN INVESTMENT - AT HOME"
+    },
+    "TRAFFICKING_IN_PERSONS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TRAFFICKING IN PERSONS"
+    },
+    "GDP__OFFICIAL_EXCHANGE_RATE_": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GDP (OFFICIAL EXCHANGE RATE)"
+    },
+    "REFUGEES_AND_INTERNALLY_DISPLACED_PERSONS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "REFUGEES AND INTERNALLY DISPLACED PERSONS"
+    },
+    "MAJOR_INFECTIOUS_DISEASES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MAJOR INFECTIOUS DISEASES"
+    },
+    "PRELIMINARY_STATEMENT": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "PRELIMINARY STATEMENT"
+    },
+    "MEMBER_STATES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MEMBER STATES"
+    },
+    "POLITICAL_STRUCTURE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "POLITICAL STRUCTURE"
+    },
+    "UNION_NAME": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "UNION NAME"
+    },
+    "RESERVES_OF_FOREIGN_EXCHANGE_AND_GOLD": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "RESERVES OF FOREIGN EXCHANGE AND GOLD"
+    },
+    "CURRENT_ACCOUNT_BALANCE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CURRENT ACCOUNT BALANCE"
+    },
+    "PUBLIC_DEBT": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "PUBLIC DEBT"
+    },
+    "INTERNET_HOSTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "INTERNET HOSTS"
+    },
+    "MEDIAN_AGE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MEDIAN AGE"
+    },
+    "DISTRIBUTION_OF_FAMILY_INCOME___GINI_INDEX": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DISTRIBUTION OF FAMILY INCOME - GINI INDEX"
+    },
+    "HIV_AIDS___DEATHS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "HIV/AIDS - DEATHS"
+    },
+    "HIV_AIDS___PEOPLE_LIVING_WITH_HIV_AIDS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "HIV/AIDS - PEOPLE LIVING WITH HIV/AIDS"
+    },
+    "HIV_AIDS___ADULT_PREVALENCE_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "HIV/AIDS - ADULT PREVALENCE RATE"
+    },
+    "INTERNET_COUNTRY_CODE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "INTERNET COUNTRY CODE"
+    },
+    "INTERNET_USERS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "INTERNET USERS"
+    },
+    "TELEPHONES___MOBILE_CELLULAR": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TELEPHONES - MOBILE CELLULAR"
+    },
+    "TELEPHONES___MAIN_LINES_IN_USE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TELEPHONES - MAIN LINES IN USE"
+    },
+    "DIPLOMATIC_REPRESENTATION_IN_THE_US": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DIPLOMATIC REPRESENTATION IN THE US"
+    },
+    "AREA": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AREA"
+    },
+    "IRRIGATED_LAND": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "IRRIGATED LAND"
+    },
+    "MAP_REFERENCES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MAP REFERENCES"
+    },
+    "LOCATION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LOCATION"
+    },
+    "COUNTRY_NAME": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "COUNTRY NAME"
+    },
+    "GOVERNMENT___NOTE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GOVERNMENT - NOTE"
+    },
+    "COMMUNICATIONS___NOTE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "COMMUNICATIONS - NOTE"
+    },
+    "MILITARY___NOTE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MILITARY - NOTE"
+    },
+    "UNEMPLOYMENT_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "UNEMPLOYMENT RATE"
+    },
+    "GOVERNMENT_TYPE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GOVERNMENT TYPE"
+    },
+    "TOTAL_FERTILITY_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TOTAL FERTILITY RATE"
+    },
+    "TERRAIN": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TERRAIN"
+    },
+    "TELEPHONE_SYSTEM": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TELEPHONE SYSTEM"
+    },
+    "SUFFRAGE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "SUFFRAGE"
+    },
+    "RELIGIONS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "RELIGIONS"
+    },
+    "RAILWAYS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "RAILWAYS"
+    },
+    "PORTS_AND_TERMINALS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "PORTS AND TERMINALS"
+    },
+    "POPULATION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "POPULATION"
+    },
+    "POLITICAL_PARTIES_AND_LEADERS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "POLITICAL PARTIES AND LEADERS"
+    },
+    "PIPELINES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "PIPELINES"
+    },
+    "ECONOMY___OVERVIEW": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ECONOMY - OVERVIEW"
+    },
+    "POLITICAL_PRESSURE_GROUPS_AND_LEADERS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "POLITICAL PRESSURE GROUPS AND LEADERS"
+    },
+    "GEOGRAPHY___NOTE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GEOGRAPHY - NOTE"
+    },
+    "NET_MIGRATION_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NET MIGRATION RATE"
+    },
+    "NATURAL_RESOURCES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATURAL RESOURCES"
+    },
+    "NATIONALITY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATIONALITY"
+    },
+    "NATIONAL_HOLIDAY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATIONAL HOLIDAY"
+    },
+    "MERCHANT_MARINE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MERCHANT MARINE"
+    },
+    "INTERNATIONAL_ORGANIZATION_PARTICIPATION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "INTERNATIONAL ORGANIZATION PARTICIPATION"
+    },
+    "MARITIME_CLAIMS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MARITIME CLAIMS"
+    },
+    "MANPOWER_AVAILABLE_FOR_MILITARY_SERVICE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MANPOWER AVAILABLE FOR MILITARY SERVICE"
+    },
+    "LITERACY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LITERACY"
+    },
+    "LIFE_EXPECTANCY_AT_BIRTH": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LIFE EXPECTANCY AT BIRTH"
+    },
+    "LEGISLATIVE_BRANCH": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LEGISLATIVE BRANCH"
+    },
+    "LEGAL_SYSTEM": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LEGAL SYSTEM"
+    },
+    "LANGUAGES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LANGUAGES"
+    },
+    "LAND_USE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LAND USE"
+    },
+    "LAND_BOUNDARIES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LAND BOUNDARIES"
+    },
+    "LABOR_FORCE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LABOR FORCE"
+    },
+    "JUDICIAL_BRANCH": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "JUDICIAL BRANCH"
+    },
+    "WATERWAYS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "WATERWAYS"
+    },
+    "INFLATION_RATE__CONSUMER_PRICES_": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "INFLATION RATE (CONSUMER PRICES)"
+    },
+    "INFANT_MORTALITY_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "INFANT MORTALITY RATE"
+    },
+    "INDUSTRIES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "INDUSTRIES"
+    },
+    "INDUSTRIAL_PRODUCTION_GROWTH_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "INDUSTRIAL PRODUCTION GROWTH RATE"
+    },
+    "INDEPENDENCE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "INDEPENDENCE"
+    },
+    "IMPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "IMPORTS"
+    },
+    "ILLICIT_DRUGS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ILLICIT DRUGS"
+    },
+    "ROADWAYS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ROADWAYS"
+    },
+    "FLAG_DESCRIPTION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "FLAG DESCRIPTION"
+    },
+    "FISCAL_YEAR": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "FISCAL YEAR"
+    },
+    "DEBT___EXTERNAL": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DEBT - EXTERNAL"
+    },
+    "EXPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "EXPORTS"
+    },
+    "EXECUTIVE_BRANCH": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "EXECUTIVE BRANCH"
+    },
+    "EXCHANGE_RATES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "EXCHANGE RATES"
+    },
+    "ETHNIC_GROUPS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ETHNIC GROUPS"
+    },
+    "DISPUTES___INTERNATIONAL": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DISPUTES - INTERNATIONAL"
+    },
+    "DEPENDENT_AREAS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DEPENDENT AREAS"
+    },
+    "DEATH_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "DEATH RATE"
+    },
+    "CONSTITUTION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CONSTITUTION"
+    },
+    "IMPORTS___PARTNERS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "IMPORTS - PARTNERS"
+    },
+    "COASTLINE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "COASTLINE"
+    },
+    "CLIMATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CLIMATE"
+    },
+    "IMPORTS___COMMODITIES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "IMPORTS - COMMODITIES"
+    },
+    "CAPITAL": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "CAPITAL"
+    },
+    "BUDGET": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BUDGET"
+    },
+    "MILITARY_BRANCHES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MILITARY BRANCHES"
+    },
+    "BIRTH_RATE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BIRTH RATE"
+    },
+    "AIRPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AIRPORTS"
+    },
+    "AGRICULTURE___PRODUCTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AGRICULTURE - PRODUCTS"
+    },
+    "ADMINISTRATIVE_DIVISIONS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ADMINISTRATIVE DIVISIONS"
+    },
+    "EXPORTS___PARTNERS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "EXPORTS - PARTNERS"
+    },
+    "EXPORTS___COMMODITIES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "EXPORTS - COMMODITIES"
+    },
+    "LABOR_FORCE___BY_OCCUPATION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LABOR FORCE - BY OCCUPATION"
+    },
+    "HOUSEHOLD_INCOME_OR_CONSUMPTION_BY_PERCENTAGE_SHARE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "HOUSEHOLD INCOME OR CONSUMPTION BY PERCENTAGE SHARE"
+    },
+    "POPULATION_BELOW_POVERTY_LINE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "POPULATION BELOW POVERTY LINE"
+    },
+    "MILITARY_EXPENDITURES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MILITARY EXPENDITURES"
+    },
+    "ENVIRONMENT___INTERNATIONAL_AGREEMENTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ENVIRONMENT - INTERNATIONAL AGREEMENTS"
+    },
+    "ENVIRONMENT___CURRENT_ISSUES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ENVIRONMENT - CURRENT ISSUES"
+    },
+    "AIRPORTS___WITH_UNPAVED_RUNWAYS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AIRPORTS - WITH UNPAVED RUNWAYS"
+    },
+    "AIRPORTS___WITH_PAVED_RUNWAYS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AIRPORTS - WITH PAVED RUNWAYS"
+    },
+    "BACKGROUND": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BACKGROUND"
+    },
+    "MANPOWER_REACHING_MILITARILY_SIGNIFICANT_AGE_ANNUALLY": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MANPOWER REACHING MILITARILY SIGNIFICANT AGE ANNUALLY"
+    },
+    "MANPOWER_FIT_FOR_MILITARY_SERVICE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MANPOWER FIT FOR MILITARY SERVICE"
+    },
+    "MILITARY_SERVICE_AGE_AND_OBLIGATION": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "MILITARY SERVICE AGE AND OBLIGATION"
+    },
+    "AREA___COMPARATIVE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AREA - COMPARATIVE"
+    },
+    "PEOPLE___NOTE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "PEOPLE - NOTE"
+    },
+    "NATURAL_HAZARDS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "NATURAL HAZARDS"
+    },
+    "ELEVATION_EXTREMES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ELEVATION EXTREMES"
+    },
+    "HELIPORTS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "HELIPORTS"
+    },
+    "SEX_RATIO": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "SEX RATIO"
+    },
+    "TELEVISION_BROADCAST_STATIONS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TELEVISION BROADCAST STATIONS"
+    },
+    "RADIO_BROADCAST_STATIONS": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "RADIO BROADCAST STATIONS"
+    },
+    "GDP___COMPOSITION__BY_SECTOR_OF_ORIGIN": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GDP - COMPOSITION, BY SECTOR OF ORIGIN"
+    },
+    "GEOGRAPHIC_COORDINATES": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "GEOGRAPHIC COORDINATES"
+    },
+    "AGE_STRUCTURE": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AGE STRUCTURE"
+    }
+  },
+  "index": {
+    "fieldName": "text",
+    "country": "text"
+  }
+}

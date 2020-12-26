@@ -1,0 +1,37 @@
+{
+  "props": {
+    "tcode": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "tcode",
+      "index": true
+    },
+    "devclass": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "devclass",
+      "index": true
+    },
+    "systemId": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "systemId"
+    },
+    "client": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "client"
+    },
+    "transaction_description": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "transaction description",
+      "index": true
+    }
+  },
+  "index": {
+    "transaction_description": "text",
+    "tcode": "text",
+    "devclass": "text"
+  }
+}

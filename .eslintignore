@@ -1,0 +1,3 @@
+src/extern/*.js
+src/extern/elizabot/*.js
+/src/extern/elizabot/*.js

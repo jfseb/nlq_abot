@@ -1,0 +1,19 @@
+{
+  "domain": "hints",
+  "modelname": "hints",
+  "collectionname": "hints",
+  "_categories": [
+    {
+      "category": "hints",
+      "category_description": "",
+      "QBEColumnProps": {},
+      "category_synonyms": [
+        "tips and tricks",
+        "tips",
+        "tricks",
+        "expert tips"
+      ]
+    }
+  ],
+  "columns": []
+}

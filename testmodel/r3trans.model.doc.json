@@ -1,0 +1,27 @@
+{
+  "domain": "SAP Transaction Codes",
+  "domain_description": "An extract of SAP Basis transactions",
+  "_categories": [
+    {
+      "category": "tcode",
+      "category_description": "SAP Transaction code",
+      "wordindex": true
+    },
+    {
+      "category": "devclass",
+      "category_description": "Development class (Package) in system",
+      "wordindex": true
+    },
+    {
+      "category": "systemId"
+    },
+    {
+      "category": "client"
+    },
+    {
+      "category": "transaction description",
+      "category_description": "English text of the transaction"
+    }
+  ],
+  "columns": []
+}

@@ -1,0 +1,93 @@
+{
+  "props": {
+    "object_name": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "object name",
+      "index": true
+    },
+    "visual_magnitude": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "visual magnitude"
+    },
+    "visual_luminosity": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "visual luminosity"
+    },
+    "mass": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "mass"
+    },
+    "radius": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "radius"
+    },
+    "object_type": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "object type",
+      "index": true
+    },
+    "orbits": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "orbits",
+      "index": true
+    },
+    "distance": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "distance"
+    },
+    "_url": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "_url"
+    },
+    "orbit_radius": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "orbit radius"
+    },
+    "eccentricity": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "eccentricity"
+    },
+    "orbital_period": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "orbital period"
+    },
+    "_synonyms": [
+      {
+        "category" : {
+          "type": "String",
+          "trim": true
+        },
+        "fact" : {
+          "type": "String",
+          "trim": true
+        },
+        "synonyms" : [{
+          "type": "String",
+          "trim": true
+        }]
+      }
+    ],
+    "albedo": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "albedo"
+    }
+  },
+  "index": {
+    "object_name": "text",
+    "object_type": "text",
+    "orbits": "text"
+  }
+}

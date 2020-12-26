@@ -1,0 +1,93 @@
+{
+  "modelname" : "metamodels",
+  "collectionname" : "metamodels",
+  "mongoosemodelname" : "metamodels",
+  "domain": "metamodel",
+  "domain_description": "metamodel",
+  "_categories": [
+    {
+      "category": "uri",
+      "category_description": "link to domain description",
+      "QBEColumnProps": {
+        "QBE": true
+      },
+      "wordindex" : false,
+      "exactmatch": false
+    },
+    {
+      "category": "domain",
+      "category_description": "the model name",
+      "QBEColumnProps": {
+        "QBE": true,
+        "LUNRIndex" : true
+      },
+      "wordindex" : true,
+      "exactmatch": false
+    },
+    {
+      "category": "domain description",
+      "category_description": "description of the model",
+      "QBEColumnProps": {
+        "QBE": true
+      },
+      "exactmatch": true
+    },
+    {
+      "category": "category",
+      "category_description": "Object property",
+      "QBEColumnProps": {
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex": true,
+      "category_synonyms": [
+      ]
+    },
+    {
+      "category": "category description",
+      "category_description": "Description of the category"
+    },
+    {
+      "category": "QBE",
+      "category_description": "whether to include the category in QBE tables"
+    },
+    {
+      "category": "LUNRIndex",
+      "category_description": "whether to include the category in a LUNR Index"
+    },
+    {
+      "category": "wordindex",
+      "category_description": "whether to include the category in a LUNR Index"
+    },
+    {
+      "category": "exactmatch",
+      "category_description": "whether a match on a given value has to be precise"
+    },
+    {
+      "category": "showURI",
+      "category_description": "display uri"
+    },
+    {
+      "category": "showURIRank",
+      "category_description": "display uri rank"
+    },
+    {
+      "category": "category synonyms",
+      "category_description": "synonyms for the category"
+    },
+    {
+      "category": "columns",
+      "category_description": "the columns in order which are shown in a table"
+    }
+  ],
+  "columns": [
+    "domain",
+    "category",
+    "exactmatch",
+    "domain description",
+    "category description"
+  ],
+  "domain_synonyms": [
+    "meta model"
+  ]
+}

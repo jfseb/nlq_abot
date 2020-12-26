@@ -1,0 +1,17 @@
+{
+  "domain": "example commands",
+  "modelname": "commands",
+  "collectionname": "commands",
+  "_categories": [
+    {
+      "category": "example commands",
+      "category_description": "",
+      "QBEColumnProps": {},
+      "category_synonyms": [
+        "commands",
+        "sample commands"
+      ]
+    }
+  ],
+  "columns": []
+}

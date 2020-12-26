@@ -1,0 +1,14 @@
+r3trans
+
+repalce transaction description => transaction_description
+
+
+reuse text
+Catalog Description
+
+
+rename bom.data to fioriapps.data
+
+rename iupac to iupacs 
+
+rename geneticDNA to geneticdna

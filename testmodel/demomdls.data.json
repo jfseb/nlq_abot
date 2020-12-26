@@ -1,0 +1,57 @@
+[
+  {
+    "sender": "ARundfunkD",
+    "standort" : [ "Berlin", "München", "Frankfurt" ,"Hamburg", "Bremen"],
+    "sendertyp" : ["öffentlich"]
+  },
+  {
+    "sender": "ZDFernsehen",
+    "standort" : ["Mainz"],
+    "sendertyp" : ["öffentlich", "fernsehen"]
+  },
+  {
+    "sender": "DeutschLandFunk",
+    "standort": ["Köln"],
+    "sendertyp" : ["öffentlich", "radio"]
+  },
+  {
+    "sender": "RadioImAmerikanischenSektor",
+    "standort": ["Berlin"],
+    "sendertyp" : ["öffentlich"]
+  },
+  {
+    "sender": "RadioImAmerikanischenSektor",
+    "standort": ["Berlin"],
+    "sendertyp" : ["government"],
+    "gr_ndungsjahr" : 1946,
+    "betriebsende" : 1994,
+    "nachfolger" : "rs2"
+  },
+  {
+    "sender": "BFBS",
+    "standort": ["Berlin"],
+    "sendertyp" : ["militärisch" , "radio"],
+    "gr_ndungsjahr" : 1949,
+    "betriebsende" : 1994
+  },
+  {
+    "sender": "RTL",
+    "standort": ["Berlin"],
+    "sendertyp" : ["privat", "fernsehen"],
+    "besitzer" :  "RTLMediengruppe",
+    "gr_ndungsjahr" : 1984
+  },
+  {
+    "sender": "VOX",
+    "standort": ["Berlin"],
+    "sendertyp" : ["privat", "fernsehen"],
+    "besitzer" :  "RTLMediengruppe",
+    "gr_ndungsjahr" : 1993
+  },
+  {
+    "sender": "Nitro",
+    "standort": ["Berlin"],
+    "sendertyp" : ["privat", "fernsehen"],
+    "besitzer" :  "RTLMediengruppe"
+  }
+]

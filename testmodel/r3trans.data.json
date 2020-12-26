@@ -1,0 +1,22 @@
+[
+ {
+    "tcode": "SOBJ",
+    "devclass": "SCTS_OBJ",
+    "transaction_description": "Maintenance Object Attributes"
+  },
+  {
+    "tcode": "SOBL_MODEL",
+    "devclass": "SOBL",
+    "transaction_description": "Model Data Object Relationships"
+  },
+  {
+    "tcode": "LICENSE_ATTRIBUTES",
+    "devclass": "SLIM",
+    "transaction_description": "Maintain License Attributes of Roles"
+  },
+  {
+    "tcode": "MI_SYNEWS",
+    "devclass": "S_ME_MESSAGES",
+    "transaction_description": "MI SystemNews"
+  }
+]

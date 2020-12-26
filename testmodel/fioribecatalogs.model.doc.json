@@ -1,0 +1,83 @@
+{
+  "domain": "Fiori Backend Catalogs",
+  "domain_description": "R/3 Backend catalogs as modelled in table SUI_TM_MM_APPS. \nThis delivery is used to model technical catalogs which are imported (replicated) into the ABAP Frontend Server.\n It maps existing GUI and WebDynpro Transactions into the Fiori World by specifying Intent and potentially tile information for them. Note that there is an overlap with the FioriBOM domain. Note also, that the ApplicationComponetn here is the Application Component of the Backend Catalog Definition in SUI_TM_MM_APPS (the UIAD transport object)",
+  "_categories": [
+    {
+      "category": "fiori intent",
+      "category_description": "A combination of \"#\" <SemanticObject> - <Semanticaction> which appears in the URL of the Fiori Launchpad when addressing the application",
+      "wordindex": true,
+      "category_synonyms": [
+        "fiori intents",
+        "intents",
+        "intent"
+      ]
+    },
+    {
+      "category": "ApplicationComponent",
+      "category_description": "Support component for the Backend catalog entry, (the Package associated with the UIAD Transport record containing the Catalog Definition (SUI_TM_MM_APPS table). This is the component repsonsible for the Catalog, (not necessarily for the legacy application!)",
+      "wordindex": true,
+       "category_synonyms": [
+        "Application Component",
+        "Application components",
+        "ApplicationComponents",
+        "Support Component",
+        "Component"
+      ]
+    },
+    {
+      "category": "WebDynproApplication",
+      "category_description": "Name of the web dynpro application",
+      "wordindex": true
+    },
+    {
+      "category": "devclass",
+      "category_description": "devclass ( Package) of the backend catalog record (not necessarily the transaction",
+      "wordindex": true
+    },
+    {
+      "category": "BackendCatalogId",
+      "category_description": "Name of the technical catalog (_TC_..._BE_), (same as FioriBOM Technical Catalog) (identical to entry in /UI2/SYSALIASCAT), \n(in /UI2/PB_C_CHIP.REFERENCEID  *ADCAT*...)",
+      "wordindex": true,
+      "category_synonyms": [
+        "Fiori Backend Catalog",
+        "Fiori Backend Catalogs",
+        "Backend Catalog"
+      ]
+    },
+    {
+      "category": "TechnicalCatalogSystemAlias",
+      "category_description": "Name of the System alias associated with this Technical catalog (entry delivered in /UI2/SYSALIASCAT)"
+    },
+    {
+      "category": "BusinessCatalog",
+      "category_description": "Name of the Business Catalog referencing this catalog (in /UI2/PB_C_CACHE.ID *CATALOGPAGE:*  _BC_ .."
+    },
+    {
+      "category": "SemanticObject",
+      "category_description": "The first part of the \"fiori intent\", identifying the Business entity, e.g. \"SalesOrder\",\"GLAcount\" used for generic navigation ",
+      "wordindex": true
+    },
+    {
+      "category": "SemanticAction",
+      "category_description": "The second part of the \"fiori intent\", identifying the action, e.g. \"maintain\", \"create\" ",
+      "wordindex": true
+    },
+    {
+      "category": "SoftwareComponent",
+      "category_description": "Software component containing the Backend catalog",
+      "exactmatch": true
+    },
+    {
+      "category": "TransactionCode",
+      "category_description": "For GUI based transaction, the transaction code behind intent, a classical R/3 SAPGUi transaction",
+      "exactmatch": true,
+      "wordindex": true,
+      "category_synonyms": [
+        "Transactions",
+        "TransactionCode",
+        "TransactionCodes"
+      ]
+    }
+  ],
+  "columns": []
+}

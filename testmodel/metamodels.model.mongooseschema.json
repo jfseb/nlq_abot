@@ -1,0 +1,114 @@
+{
+  "props": {
+    "modelname": {
+      "type": "String",
+      "trim": true,
+      "required" : true,
+      "_m_category": "modelname"
+    },
+    "mongoosemodelname": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "mongoosemodelname"
+    },
+    "collectionname": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "collectionname"
+    },
+    "domain": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "domain"
+    },
+    "uri": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "uri"
+    },
+    "domain_description": {
+      "type": "String",
+      "trim": true,
+      "required": true,
+      "_m_category": "domain description",
+      "index": true
+    },
+    "domain_synonyms": [{
+      "type": "String",
+      "trim": true,
+      "_m_category": "domain synonyms"
+    }],
+    "columns" : [
+      { "type" : "String",
+        "trim" : true,
+        "_m_category" : "columns"
+      }
+    ],
+    "_categories": [
+      {
+        "category": {
+          "type": "String",
+          "trim": true,
+          "_m_category": "category"
+        },
+        "category_description": {
+          "type": "String",
+          "trim": true,
+          "_m_category": "category description"
+        },
+        "wordindex": {
+          "type": "Boolean",
+          "_m_category": "wordindex"
+        },
+        "exactmatch": {
+          "type": "Boolean",
+          "_m_category": "exactmatch"
+        },
+        "showURI": {
+          "type": "Boolean",
+          "_m_category": "showURI"
+        },
+        "showURIRank": {
+          "type": "Boolean",
+          "_m_category": "showURIRank"
+        },
+        "hidden": {
+          "type": "Boolean",
+          "_m_category": "hidden"
+        },
+        "category_synonyms" : [
+          {
+            "type": "String",
+            "trim": true,
+            "_m_category": "category synonyms"
+          }
+        ],
+        "QBEColumnProps" : {
+          "defaultWidth" : {
+            "type" : "Number",
+            "_m_category" : "defaultWidth"
+          },
+          "QBE" : {
+            "type" : "Boolean",
+            "_m_category" : "QBE"
+          },
+          "QBEInclude" : {
+            "type" : "Boolean",
+            "_m_category" : "QBEInclude"
+          },
+          "LUNRIndex" : {
+            "type" : "Boolean",
+            "_m_category" : "LUNRIndex"
+          }
+        }
+      }
+    ]
+  },
+  "index" : {
+    "category_synonym" : "text",
+    "domain_synonyms" : "text",
+    "domain_description" : "text",
+    "domain" : "text",
+    "category" : "text"
+  }
+}

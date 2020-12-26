@@ -1,0 +1,13 @@
+{
+  "props": {
+    "example_commands": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "example commands",
+      "index" : true
+    }
+  },
+  "index": {
+    "example_commands" : "text"
+  }
+}

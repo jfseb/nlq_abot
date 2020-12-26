@@ -1,0 +1,23 @@
+{
+  "props": {
+    "fieldId": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "fieldId"
+    },
+    "fieldName": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "fieldName",
+      "index": true
+    },
+    "field_description": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "field description"
+    }
+  },
+  "index": {
+    "fieldName": "text"
+  }
+}

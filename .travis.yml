@@ -1,0 +1,8 @@
+language: node_js
+before_script:
+  - gulp
+node_js:
+ - 12
+after_script:
+  - tsc
+  - npm run coveralls

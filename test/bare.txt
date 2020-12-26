@@ -1,0 +1,16 @@
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\bot\plainrecognizer.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\bot\smartdialog.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\exec\makeqbetable.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\match\describe.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\match\indexwords.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\match\listall.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\match\operator.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\match\whatis.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\model\vismodel.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\model\vismodel2.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\regress\smartdialog.regress.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\ui\htmlconnector.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\utils\appdata.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\utils\dialoglogger.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\utils\history.nunit 
+C:\progenv\nodejs\botbuilder\mgnlq_abot\test\utils\logger.nunit 

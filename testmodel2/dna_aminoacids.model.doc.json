@@ -1,0 +1,21 @@
+{
+  "domain": "GeneticDNA",
+  "domain_description": "an incomplte model of the Amino acids and associated DNA triples",
+  "modelname": "dna_aminoacids",
+  "collectionname": "dna_aminoacids",
+  "_categories": [
+    {
+      "category": "nucleotid sequence",
+      "category_description": "triplet of nucleotids encoding this amino acid",
+      "QBEColumnProps": {},
+      "wordindex": true
+    },
+    {
+      "category": "Amino acid",
+      "category_description": "Name encoding",
+      "QBEColumnProps": {},
+      "wordindex": true
+    }
+  ],
+  "columns": []
+}

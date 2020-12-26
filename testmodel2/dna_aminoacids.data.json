@@ -1,0 +1,174 @@
+[
+  {
+    "nucleotid_sequence": "UUU",
+    "Amino_acid": "phenylalanine"
+  },
+  {
+    "nucleotid_sequence": "UUC",
+    "Amino_acid": "phenylalanine"
+  },
+  {
+    "nucleotid_sequence": "UUA",
+    "Amino_acid": "leucine"
+  },
+  {
+    "nucleotid_sequence": "UUG",
+    "Amino_acid": "leucine"
+  },
+  {
+    "nucleotid_sequence": "CUU",
+    "Amino_acid": "leucine"
+  },
+  {
+    "nucleotid_sequence": "CUC",
+    "Amino_acid": "leucine"
+  },
+  {
+    "nucleotid_sequence": "CUA",
+    "Amino_acid": "leucine"
+  },
+  {
+    "nucleotid_sequence": "CUG",
+    "Amino_acid": "leucine"
+  },
+  {
+    "nucleotid_sequence": "AUU",
+    "Amino_acid": "Isoleucine"
+  },
+  {
+    "nucleotid_sequence": "AUC",
+    "Amino_acid": "Isoleucine"
+  },
+  {
+    "nucleotid_sequence": "AUA",
+    "Amino_acid": "Isoleucine"
+  },
+  {
+    "nucleotid_sequence": "AUG",
+    "Amino_acid": "Methionine"
+  },
+  {
+    "nucleotid_sequence": "GUU",
+    "Amino_acid": "Valine"
+  },
+  {
+    "nucleotid_sequence": "GUC",
+    "Amino_acid": "Valine"
+  },
+  {
+    "nucleotid_sequence": "GUA",
+    "Amino_acid": "Valine"
+  },
+  {
+    "nucleotid_sequence": "GUG",
+    "Amino_acid": "Valine"
+  },
+  {
+    "nucleotid_sequence": "UCU",
+    "Amino_acid": "Serine"
+  },
+  {
+    "nucleotid_sequence": "UCC",
+    "Amino_acid": "Serine"
+  },
+  {
+    "nucleotid_sequence": "UCA",
+    "Amino_acid": "Serine"
+  },
+  {
+    "nucleotid_sequence": "UCG",
+    "Amino_acid": "Serine"
+  },
+  {
+    "nucleotid_sequence": "CCU",
+    "Amino_acid": "Proline"
+  },
+  {
+    "nucleotid_sequence": "CCC",
+    "Amino_acid": "Proline"
+  },
+  {
+    "nucleotid_sequence": "CCA",
+    "Amino_acid": "Proline"
+  },
+  {
+    "nucleotid_sequence": "CCG",
+    "Amino_acid": "Proline"
+  },
+  {
+    "nucleotid_sequence": "ACU",
+    "Amino_acid": "Theonine"
+  },
+  {
+    "nucleotid_sequence": "ACC",
+    "Amino_acid": "Theonine"
+  },
+  {
+    "nucleotid_sequence": "ACA",
+    "Amino_acid": "Theonine"
+  },
+  {
+    "nucleotid_sequence": "ACG",
+    "Amino_acid": "Theonine"
+  },
+  {
+    "nucleotid_sequence": "GCU",
+    "Amino_acid": "Alanine"
+  },
+  {
+    "nucleotid_sequence": "GCC",
+    "Amino_acid": "Alanine"
+  },
+  {
+    "nucleotid_sequence": "GCA",
+    "Amino_acid": "Alanine"
+  },
+  {
+    "nucleotid_sequence": "GCG",
+    "Amino_acid": "Alanine"
+  },
+  {
+    "nucleotid_sequence": "UAU",
+    "Amino_acid": "Typrosine"
+  },
+  {
+    "nucleotid_sequence": "UAA",
+    "Amino_acid": "Typrosine"
+  },
+  {
+    "nucleotid_sequence": "UAA",
+    "Amino_acid": "Stop (Ochre)"
+  },
+  {
+    "nucleotid_sequence": "UAG",
+    "Amino_acid": "Stop (Amber)"
+  },
+  {
+    "nucleotid_sequence": "CAU",
+    "Amino_acid": "Histidine"
+  },
+  {
+    "nucleotid_sequence": "CAC",
+    "Amino_acid": "Histidine"
+  },
+  {
+    "nucleotid_sequence": "CAA",
+    "Amino_acid": "Glutamine"
+  },
+  {
+    "nucleotid_sequence": "CAG",
+    "Amino_acid": "Glutamine"
+  },
+  {
+    "nucleotid_sequence": "AAU",
+    "Amino_acid": "Asparagine"
+  },
+  {
+    "nucleotid_sequence": "AAC",
+    "Amino_acid": "Asparagine"
+  },
+  {
+    "nucleotid_sequence": "AAC",
+    "Amino_acid": "Asparagine"
+  }
+]

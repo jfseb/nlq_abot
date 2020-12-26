@@ -1,0 +1,93 @@
+{
+  "props": {
+    "fiori_intent": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "fiori intent",
+      "index": true
+    },
+    "ApplicationComponent": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ApplicationComponent",
+      "index": true
+    },
+    "WebDynproApplication": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "WebDynproApplication",
+      "index": true
+    },
+    "devclass": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "devclass",
+      "index": true
+    },
+    "BackendCatalogId": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BackendCatalogId",
+      "index": true
+    },
+    "TechnicalCatalogSystemAlias": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TechnicalCatalogSystemAlias"
+    },
+    "BusinessCatalog": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BusinessCatalog"
+    },
+    "SemanticObject": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "SemanticObject",
+      "index": true
+    },
+    "SemanticAction": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "SemanticAction",
+      "index": true
+    },
+    "Tile_keywords": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "Tile keywords",
+      "index": false
+    },
+    "objectkey": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "objectkey",
+      "index": false
+    },
+    "Title": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "Title",
+      "index": false
+    },
+    "SoftwareComponent": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "SoftwareComponent"
+    },
+    "TransactionCode": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TransactionCode",
+      "index": true
+    }
+  },
+  "index": {
+    "WebDynproApplication": "text",
+    "SemanticObject": "text",
+    "SemanticAction": "text",
+    "fiori_intent": "text",
+    "ApplicationComponent": "text",
+    "BackendCatalogId": "text"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "props": {
+    "element_name": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "element name",
+      "index": true
+    },
+    "element_properties": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "element properties"
+    }
+  },
+  "index": {
+    "element_name": "text"
+  }
+}

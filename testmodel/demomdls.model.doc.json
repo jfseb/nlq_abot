@@ -1,0 +1,91 @@
+{
+  "domain": "demomdls",
+  "_categories": [
+    {
+      "category": "sender",
+      "category_description": "sender",
+      "QBEColumnProps": {
+        "defaultWidth": 120,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex" : true,
+      "category_synonyms": [
+        "name"
+      ]
+    },
+    {
+      "category": "standort",
+      "category_description": "standort",
+      "QBEColumnProps": {
+        "defaultWidth": 80,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex": true,
+      "category_synonyms": [
+        "senderstandort",
+        "produktionsort",
+        "betriebsstätte"
+      ]
+    },
+    {
+      "category": "sendertyp",
+      "category_description": "sendertyp",
+      "QBEColumnProps": {
+        "defaultWidth": 60,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex": true
+    },
+    {
+      "category": "besitzer",
+      "category_description": "besitzer",
+      "QBEColumnProps": {
+        "defaultWidth": 60,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex": true
+    },
+    {
+      "category": "gründungsjahr",
+      "category_description": "gründungsjahr",
+      "QBEColumnProps": {
+        "defaultWidth": 60,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex": true
+    },
+    {
+      "category": "betriebsende",
+      "category_description": "betriebsende",
+      "QBEColumnProps": {
+        "defaultWidth": 60,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex": true
+    },
+    {
+      "category": "nachfolger",
+      "category_description": "nachfolger",
+      "QBEColumnProps": {
+        "defaultWidth": 60,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex": true
+    }
+  ],
+  "columns": [
+    "sender",
+    "standort",
+    "sendertyp",
+    "gründungsjahr",
+    "betriebsende",
+    "nachfolger"
+  ]
+}

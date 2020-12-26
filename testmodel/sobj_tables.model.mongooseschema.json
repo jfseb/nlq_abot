@@ -1,0 +1,71 @@
+{
+  "props": {
+    "recordKey": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "recordKey"
+    },
+    "TransportObject": {
+      "type": "String",
+      "trim": true,
+      "required": true,
+      "_m_category": "TransportObject",
+      "index": true
+    },
+    "Shorttext": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "Shorttext"
+    },
+    "clientSpecific": {
+      "type": "Boolean",
+      "trim": true,
+      "_m_category": "clientSpecific",
+      "index": true
+    },
+    "Object_name_length": {
+      "type": "Number",
+      "trim": true,
+      "_m_category": "Object name length"
+    },
+    "category": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "category"
+    },
+    "TranslationRelevant": {
+      "type": "Boolean",
+      "trim": true,
+      "_m_category": "TranslationRelevant",
+      "index": true
+    },
+    "Type": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "Type"
+    },
+    "_tables": [
+      {
+        "Table": {
+          "type": "String",
+          "required" : true,
+          "trim": true,
+          "_m_category": "Table",
+          "index": true
+        },
+        "TableTransportKeySpec": {
+          "type": "String",
+          "trim": true,
+          "_m_category": "TableTransportKeySpec"
+        },
+        "PrimaryTable": {
+          "type": "Boolean",
+          "trim": true,
+          "_m_category": "PrimaryTable",
+          "index": true
+        }
+      }
+    ]
+  },
+  "index": {}
+}

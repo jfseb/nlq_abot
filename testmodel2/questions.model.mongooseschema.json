@@ -1,0 +1,18 @@
+{
+  "props": {
+    "example_question": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "example question",
+      "index" :true
+    },
+    "questionId": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "questionId"
+    }
+  },
+  "index": {
+    "example_question" : "text"
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "operators": {
+    "containing": {
+      "arity": 2,
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "_fragment"
+        ]
+      ]
+    },
+    "starting with": {
+      "arity": 2,
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "_fragment"
+        ]
+      ]
+    },
+    "ending with":{
+      "arity": 2,
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "_fragment"
+        ]
+      ]
+    },
+    "excluding": {
+      "arity": 1,
+      "argcategory": [
+        [
+          "fact"
+        ]
+      ]
+    },
+    "being": {
+      "arity": 2,
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "category"
+        ]
+      ]
+    },
+    "having" : {
+      "arity": 2,
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "category"
+        ]
+      ]
+    },
+    "more than" : {
+      "arity": 2,
+      "operatorpos" : -1,
+      "explanation" : " count comparison, e.g. 'more than than 2 Business Catalogs'",
+      "argcategory": [
+        [
+          "number"
+        ],
+        [
+          "category"
+        ]
+      ]
+    },
+    "less than" : {
+      "arity": 2,
+      "operatorpos" : -1,
+      "explanation" : "count comparison, e.g. 'less than than 2 Business Catalogs'",
+      "argcategory": [
+        [
+          "number"
+        ],
+        [
+          "category"
+        ]
+      ]
+    },
+    "exactly" : {
+      "arity": 2,
+      "operatorpos" : -1,
+      "explanation" : "count comparison, e.g. 'exactly 2 Business Catalogs'",
+      "argcategory": [
+        [
+          "number"
+        ],
+        [
+          "category"
+        ]
+      ]
+    },
+    "<" : {
+      "arity": 2,
+      "explanation" : " numeric or alphabetical comparison, e.g. 'element number < 12' or 'element name < Ar'",
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "any", "number"
+        ]
+      ]
+    },
+    "<=" : {
+      "arity": 2,
+      "explanation" : " numeric or alphabetical comparison, e.g. 'element number < 12' or 'element name < Ar'",
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "any", "number"
+        ]
+      ]
+    },
+    "!=" : {
+      "arity": 2,
+      "explanation" : " numeric or alphabetical comparison, e.g. 'element number != 12' or 'element name != Ar'",
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "any", "number"
+        ]
+      ]
+    },
+    "=" : {
+      "arity": 2,
+      "explanation" : " numeric or alphabetical comparison, e.g. 'element number = 12' or 'element name = Ar'",
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "any", "number"
+        ]
+      ]
+    },
+    ">" : {
+      "arity": 2,
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "any", "number"
+        ]
+      ]
+    },
+    ">=" : {
+      "arity": 2,
+      "argcategory": [
+        [
+          "category"
+        ],
+        [
+          "any", "number"
+        ]
+      ]
+    },
+    "order by" : {
+      "arity": 1,
+      "operatorpos" : -1,
+      "argcategory": [
+        [
+          "category"
+        ]
+      ]
+    },
+    "order descending by" : {
+      "arity": 1,
+      "operatorpos" : -1,
+      "argcategory": [
+        [
+          "category"
+        ]
+      ]
+    },
+    "existing" : {
+      "arity": 1,
+      "operatorpos" : -1,
+      "argcategory": [
+        [
+          "category"
+        ]
+      ]
+    },
+    "not existing" : {
+      "arity": 1,
+      "operatorpos" : -1,
+      "argcategory": [
+        [
+          "category"
+        ]
+      ]
+    },
+    "left_paren" : {
+      "arity": 0,
+      "argcategory": [
+      ]
+    },
+    "right_paren" : {
+      "arity": 0,
+      "argcategory": [
+      ]
+    },
+    "logical_or" : {
+      "arity": 0,
+      "argcategory": [
+      ]
+    },
+    "logical_and" : {
+      "arity": 0,
+      "argcategory": [
+      ]
+    }
+  },
+  "synonyms": {
+    "starting with": [
+      "starts with", "begins with", "begin with", "which begin with",
+      "which begins with"
+    ],
+    "ending with": [
+      "ends with", "which end with", "which ends with", "which ends with a",
+      "which ends with an", "which terminates with", "which ends with a"
+    ],
+    "being": [ "is",
+      "beeing", "beeing a", "beeing an", "is a", "is an"
+    ],
+    "containing" : [
+      "contains"
+    ],
+    "having": [
+      "has a", "has an"
+    ],
+    "more than": [
+      "which has more than"
+    ],
+    "less than": [
+      "which has less than"
+    ],
+    "exactly": [
+      "which has exactly"
+    ],
+    "order by": [
+      "sort by", "sort ascending by", "order ascending by"
+    ],
+    "order descending by": [
+      "sort descending by"
+    ]
+  }
+}

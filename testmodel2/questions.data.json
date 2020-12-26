@@ -1,0 +1,71 @@
+[
+  {
+    "example_question": "what are the sanitation facilities in tuvalu"
+  },
+  {
+    "example_question": "What is the BSPName for Fiori App \"Manage Labels\""
+  },
+  {
+    "example_question": "List all appNames in ApplicationComponent PLM-FIO-RCP"
+  },
+  {
+    "example_question": "list all element names starting with ni"
+  },
+  {
+    "example_question": "list all Application Components starting with FIN-"
+  },
+  {
+    "example_question": "What is the BSPName for Fiori App \"Manage Labels\""
+  },
+  {
+    "example_question": "List all ODataServices for FI-FIO-GL"
+  },
+  {
+    "example_question": "what is the element name for element number 117"
+  },
+  {
+    "example_question": "what is the \"ui5 component name\" for fiori intent #RequestForQuotation-manage"
+  },
+  {
+    "example_question": "what is the ApplicationComponent for sap.cus.sd.lib.processflow"
+  },
+  {
+    "example_question": "what is the ApplicationType for #ControllingDocument-setControllingArea"
+  },
+  {
+    "example_question": "list all Application Component, BSPName, ODataService, fiori intent for maintain"
+  },
+  {
+    "example_question": "list all OData Services for retail.store.stockcorrection"
+  },
+  {
+    "example_question": "list all BSP Urls for ui2.ssuite.s2p.mm.pu.po.create.s1"
+  },
+  {
+    "example_question": "list all fiori intents in FI-FIO-GL with ApplicationType Analytical"
+  },
+  {
+    "example_question": "list all AppIds for FI-FIO-GL with ApplicationType \"Reuse Component\""
+  },
+  {
+    "example_question": "list all intents for FI-FIO-GL with ApplicationType \"FPM/WebDynpro\""
+  },
+  {
+    "example_question": "list all intents for FI-FIO-GL with ApplicationType \"FPM/WebDynpro\""
+  },
+  {
+    "example_question": "list all ApplicationTypes for #GLAccount-manage"
+  },
+  {
+    "example_question": "list all BSP Urls for ui2.ssuite.s2p.mm.pu.po.create.s1"
+  },
+  {
+    "example_question": "list all categories"
+  },
+  {
+    "example_question": "list all example commands"
+  },
+  {
+    "example_question": "list all hints"
+  }
+]

@@ -1,0 +1,73 @@
+{
+  "domain": "SOBJ Tables",
+  "domain_description": "R/3 Transport objects and associated tables. This domains allows to quickly lookup up if and in what transport object a given table content is transported, e.g. \"What is the Transport Object, Primary Table for /UIF/LREPDCONT\" ",
+  "_categories": [
+    {
+      "category": "recordKey"
+    },
+    {
+      "category": "TransportObject",
+      "category_description": "The transport object key (SOBJ)",
+      "category_synonyms": [
+        "SOBJ",
+        "Transport Key"
+      ]
+    },
+    {
+      "category": "Shorttext",
+      "category_description": "Short text of transport object"
+    },
+    {
+      "category": "Table",
+      "category_description": " The DDIC Table ",
+      "wordindex": true,
+      "exactmatch": true,
+      "category_synonyms": [
+        "Tables",
+        "Database Table",
+        "Transport Table"
+      ]
+    },
+    {
+      "category": "TableTransportKeySpec",
+      "category_description": "Key specification for the table",
+      "exactmatch": true
+    },
+    {
+      "category": "PrimaryTable",
+      "category_description": "Primary table of transport object, if existing",
+      "wordindex": true,
+      "exactmatch": true,
+      "category_synonyms": [
+        "Primary Table"
+      ]
+    },
+    {
+      "category": "clientSpecific",
+      "category_description": "Whether the object is client specific",
+      "wordindex": true,
+      "exactmatch": true
+    },
+    {
+      "category": "Object name length",
+      "category_description": "Length of transport key",
+      "exactmatch": true
+    },
+    {
+      "category": "category",
+      "category_description": "Category of the transport",
+      "exactmatch": true
+    },
+    {
+      "category": "TranslationRelevant",
+      "category_description": "Boolean (\"true\",\"false\") whether object is translation relevant",
+      "wordindex": true,
+      "exactmatch": true
+    },
+    {
+      "category": "Type",
+      "exactmatch": true
+    }
+  ],
+  "columns": []
+}

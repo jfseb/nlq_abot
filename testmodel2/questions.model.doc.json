@@ -1,0 +1,31 @@
+{
+  "domain": "example questions",
+  "modelname": "questions",
+  "collectionname": "questions",
+  "_categories": [
+    {
+      "category": "example question",
+      "category_description": "",
+      "wordindex": false,
+      "exactmatch": false,
+      "QBEColumnProps": {
+        "defaultWidth": 100
+      },
+      "category_synonyms": [
+        "questions",
+        "sample questions",
+        "sample question"
+      ]
+    },
+    {
+      "category": "questionId",
+      "category_description": "",
+      "wordindex": false,
+      "exactmatch": false,
+      "QBEColumnProps": {
+        "defaultWidth": 100
+      }
+    }
+  ],
+  "columns": []
+}

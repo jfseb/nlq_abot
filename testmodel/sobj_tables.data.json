@@ -1,0 +1,178 @@
+[
+  {
+    "TransportObject": "LRCC",
+    "Shorttext": "LRepository cross-client content",
+    "clientSpecific": false,
+    "Object_name_length": 40,
+    "TranslationRelevant": true,
+    "category": "n/a",
+    "Type": "n/a",
+    "_tables": [
+      {
+        "Table": "/UIF/LREPDCONT",
+        "TableTransportKeySpec": "/&",
+        "PrimaryTable": true
+      },
+      {
+        "Table": "/UIF/LREPDATTR",
+        "TableTransportKeySpec": "/&/*",
+        "PrimaryTable": false
+      },
+      {
+        "Table": "/UIF/LREPDREF",
+        "TableTransportKeySpec": "/&/*",
+        "PrimaryTable": false
+      },
+      {
+        "Table": "/UIF/LREPDEREF",
+        "TableTransportKeySpec": "/&/*",
+        "PrimaryTable": false
+      },
+      {
+        "Table": "/UIF/LREPDSTXT",
+        "TableTransportKeySpec": "/&/L/*",
+        "PrimaryTable": false
+      },
+      {
+        "Table": "/UIF/LREPDLTXT",
+        "TableTransportKeySpec": "/&/L/*",
+        "PrimaryTable": false
+      },
+      {
+        "Table": "/UIF/LREPDTEXT",
+        "TableTransportKeySpec": "/&/*"
+      }
+    ]
+  },
+  {
+    "TransportObject": "LRCD",
+    "Shorttext": "LRepository client-dependent content",
+    "TranslationRelevant": true,
+    "clientSpecific": true,
+    "Object_name_length": 40,
+    "category": "n/a",
+    "Type": "n/a",
+    "_tables": [
+      {
+        "Table": "/UIF/LREPDCONTCD",
+        "TableTransportKeySpec": "/C/&",
+        "PrimaryTable": true
+      },
+      {
+        "Table": "/UIF/LREPDATTRCD",
+        "TableTransportKeySpec": "/C/&/*",
+        "PrimaryTable": false
+      },
+      {
+        "Table": "/UIF/LREPDREFCD",
+        "TableTransportKeySpec": "/C/&/*",
+        "PrimaryTable": false
+      },
+      {
+        "Table": "/UIF/LREPDEREFCD",
+        "TableTransportKeySpec": "/C/&/*",
+        "PrimaryTable": false
+      },
+      {
+        "Table": "/UIF/LREPDSTXTCD",
+        "TableTransportKeySpec": "/C/&/L/*",
+        "PrimaryTable": false
+      },
+      {
+        "Table": "/UIF/LREPDLTXTCD",
+        "TableTransportKeySpec": "/C/&/L/*",
+        "PrimaryTable": false
+      },
+      {
+       "Table": "/UIF/LREPDTEXTCD",
+        "TableTransportKeySpec": "/C/&/*",
+        "PrimaryTable": false
+      }
+    ]
+  },
+  {
+    "TransportObject": "LTHR",
+    "Shorttext": "ALV: HTML Templates (Raw Version)",
+    "TranslationRelevant": false,
+    "clientSpecific": false,
+    "Object_name_length": 20,
+    "category": "n/a",
+    "Type": "n/a",
+    "_tables": [
+      {
+        "Table": "LTDHTRAW",
+        "TableTransportKeySpec": "/&/*",
+        "PrimaryTable": true
+      }
+    ]
+  },
+  {
+    "TransportObject": "LTHT",
+    "Shorttext": "ALV: HTML Templates (Translated Templates)",
+    "TranslationRelevant": true,
+    "clientSpecific": false,
+    "Object_name_length": 20,
+    "category": "n/a",
+    "Type": "n/a",
+    "_tables": [
+      {
+        "Table": "LTDHTTMPL",
+        "TableTransportKeySpec": "/L/&/*",
+        "PrimaryTable": true
+      }
+    ]
+  },
+  {
+    "TransportObject": "LTRC",
+    "Shorttext": "Landscape Transformation Repository: Object Version",
+    "TranslationRelevant": false,
+    "category": "n/a",
+    "clientSpecific": false,
+    "Object_name_length": 40,
+    "Type": "n/a",
+    "_tables": [
+      {
+        "PrimaryTable": true,
+        "Table": "LTR_REPOSITORY",
+        "TableTransportKeySpec": "AA/&/*"
+      }
+    ]
+  },
+  {
+    "TransportObject": "SOBJ",
+    "Shorttext": "Business object types",
+    "Object_name_length": 10,
+    "category": "n/a",
+    "TranslationRelevant": true,
+    "clientSpecific": false,
+    "Type": "n/a",
+    "_tables": [
+      {
+        "Table": "SWOTDQ",
+        "PrimaryTable": true,
+        "TableTransportKeySpec": "/&/*"
+      },
+      {
+        "Table": "SWOTDI",
+        "TableTransportKeySpec": "/&/*",
+        "PrimaryTable": false
+      }
+    ]
+  },
+  {
+    "TransportObject": "01DY",
+    "Object_name_length": 79,
+    "Shorttext": "Screen sequence for rental units transport object",
+    "TranslationRelevant": false,
+    "clientSpecific": true,
+    "category": "n/a",
+    "Type": "n/a",
+    "_tables": [
+      {
+        "Table": "TZS02",
+        "TableTransportKeySpec": "/C/&",
+        "PrimaryTable": true
+      }
+    ]
+  }
+]

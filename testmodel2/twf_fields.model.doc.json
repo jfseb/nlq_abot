@@ -1,0 +1,36 @@
+{
+  "domain": "TWF fields",
+  "domain_description": "The world factbook fields",
+  "modelname": "twf_fields",
+  "collectionname": "twf_fields",
+  "_categories": [
+    {
+      "category": "fieldId",
+      "category_description": "Technical key of field",
+      "wordindex": false,
+      "exactmatch": true,
+      "QBEColumnProps": {
+        "defaultWidth": 100
+      }
+    },
+    {
+      "category": "fieldName",
+      "category_description": "name of field",
+      "wordindex": true,
+      "exactmatch": false,
+      "QBEColumnProps": {
+        "defaultWidth": 100
+      }
+    },
+    {
+      "category": "field description",
+      "category_description": "verbose description of field",
+      "wordindex": false,
+      "exactmatch": false,
+      "QBEColumnProps": {
+        "defaultWidth": 100
+      }
+    }
+  ],
+  "columns": []
+}

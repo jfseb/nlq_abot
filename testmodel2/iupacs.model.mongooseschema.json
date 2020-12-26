@@ -1,0 +1,50 @@
+{
+  "props": {
+    "element_name": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "element name",
+      "index": true
+    },
+    "element_symbol": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "element symbol",
+      "index": true
+    },
+    "atomic_weight": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "atomic weight"
+    },
+    "element_number": {
+      "type": "Number",
+      "trim": true,
+      "_m_category": "element number",
+      "index": true
+    },
+    "_synonyms" :[
+      { "category" : {
+      "type": "String",
+      "trim": true,
+      "index": false
+        },
+      "fact" : {
+      "type": "String",
+      "trim": true,
+      "index": false
+      },
+      "synonyms" : [
+         {
+      "type": "String",
+      "trim": true,
+      "index" : false
+      }
+      ]}
+    ]
+  },
+  "index": {
+    "element_name": "text",
+    "element_number": "text"
+  }
+}

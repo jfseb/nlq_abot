@@ -1,0 +1,80 @@
+{
+  "domain": "demomdls",
+  "defaulturi" : "http://kcvs.ca/isotopesmatter/iupacMaterials/javascript/Interactive%20Periodic%20Table%20of%20the%20Isotopes/HTML5/index.html",
+  "defaultkeycolumn" : "sender",
+  "category": [
+   	{
+      "name": "sender",
+      "description": "sender",
+      "defaultWidth": 120,
+      "QBE": true,
+      "LUNRIndex": true
+    },
+   	{
+      "name": "standort",
+      "description": "standort",
+      "defaultWidth": 160,
+      "QBE": true,
+      "LUNRIndex": true
+    },
+  	{
+      "name": "sendertyp",
+      "description": "sendertyp",
+      "defaultWidth": 80,
+      "QBE": true,
+      "LUNRIndex": false
+    },
+    {
+      "name": "besitzer",
+      "description": "besitzer",
+      "defaultWidth": 60,
+      "QBE": true,
+      "LUNRIndex": true
+    },
+  	{
+      "name": "gründungsjahr",
+      "description": "gründungsjahr",
+      "defaultWidth": 60,
+      "QBE": true,
+      "LUNRIndex": true
+    },
+  	{
+      "name": "betriebsende",
+      "description": "betriebsende",
+      "defaultWidth": 60,
+      "QBE": true,
+      "LUNRIndex": true
+    },
+  	{
+      "name": "nachfolger",
+      "description": "nachfolger",
+      "defaultWidth": 60,
+      "QBE": true,
+      "LUNRIndex": true
+    }
+  ],
+  "wordindex": [
+    "sender", "sendertyp", "standort", "gründungsjahr", "betriebsende", "nachfolger"
+   ],
+   "exactmatch" : [
+   ],
+  "columns": [
+    "sender",
+    "standort",
+    "sendertyp",
+    "besitzer",
+    "gründungsjahr",
+    "betriebsende",
+    "nachfolger"
+  ],
+  "hidden": [
+    "_urlpattern"
+  ],
+  "tool": {
+  },
+  "synonyms" : {
+    "standort" : [
+    "produktionsort",
+    "betriebsstätte"]
+  }
+}

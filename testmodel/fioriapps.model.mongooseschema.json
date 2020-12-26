@@ -1,0 +1,205 @@
+{
+  "props": {
+    "uri": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "uri"
+    },
+    "uri_rank": {
+      "type": "Number",
+      "trim": true,
+      "_m_category": "uri_rank"
+    },
+    "AppKey": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AppKey",
+      "index": true
+    },
+    "ArtifactId": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ArtifactId",
+      "index": true
+    },
+    "appId": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "appId",
+      "index": true
+    },
+    "fiori_intent": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "fiori intent",
+      "index": true
+    },
+    "UITechnology" : {
+      "type" : "String",
+      "trim" : true,
+      "_m_category": "UITechnology",
+      "index" : true
+    },
+    "AppName": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AppName",
+      "index": true
+    },
+    "ApplicationComponent": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ApplicationComponent",
+      "index": true
+    },
+    "RoleName": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "RoleName",
+      "index": true
+    },
+    "ApplicationType": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ApplicationType",
+      "index": true
+    },
+    "BSPName": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BSPName",
+      "index": true
+    },
+    "BSPApplicationURL": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BSPApplicationURL",
+      "index": true
+    },
+    "releaseName": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "releaseName",
+      "index": true
+    },
+    "releaseId": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "releaseId",
+      "index": true
+    },
+    "BusinessCatalog": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BusinessCatalog",
+      "index": true
+    },
+    "TechnicalCatalog": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TechnicalCatalog",
+      "index": true
+    },
+    "detailsurl": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "detailsurl"
+    },
+    "isPublished": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "isPublished"
+    },
+    "BSPPackage": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BSPPackage",
+      "index": true
+    },
+    "AppDocumentationLinkKW": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "AppDocumentationLinkKW"
+    },
+    "BusinessRoleName": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BusinessRoleName",
+      "index": true
+    },
+    "BusinessGroupName": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BusinessGroupName",
+      "index": true
+    },
+    "BusinessGroupDescription": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "BusinessGroupDescription",
+      "index": true
+    },
+    "PrimaryODataServiceName": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "PrimaryODataServiceName",
+      "index": true
+    },
+    "SemanticObject": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "SemanticObject",
+      "index": true
+    },
+    "SemanticAction": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "SemanticAction",
+      "index": true
+    },
+    "FrontendSoftwareComponent": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "FrontendSoftwareComponent",
+      "index": true
+    },
+    "TransactionCode": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "TransactionCode",
+      "index": true
+    },
+    "URLParameters": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "URLParameters"
+    },
+    "LPDCustInstance": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "LPDCustInstance",
+      "index": true
+    },
+    "PrimaryODataPFCGRole": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "PrimaryODataPFCGRole",
+      "index": true
+    },
+    "ExternalReleaseName": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "ExternalReleaseName",
+      "index": true
+    }
+  },
+  "index": {
+    "ArtifactId": "text",
+    "fiori_intent": "text",
+    "AppName": "text",
+    "BSPApplicationURL": "text",
+    "BusinessGroupDescription": "text",
+    "SemanticObject": "text",
+    "SemanticAction": "text"
+  }
+}

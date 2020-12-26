@@ -1,0 +1,20 @@
+{
+  "props": {
+    "nucleotid_sequence": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "nucleotid sequence",
+      "index": true
+    },
+    "Amino_acid": {
+      "type": "String",
+      "trim": true,
+      "_m_category": "Amino acid",
+      "index": true
+    }
+  },
+  "index": {
+    "nucleotid_sequence": "text",
+    "Amino_acid": "text"
+  }
+}

@@ -1,0 +1,111 @@
+[
+  {
+    "object_name" : "Alpha Centauri A",
+    "visual_magnitude" : "-0.27",
+    "visual_luminosity" : "1.519*sun",
+    "object_type": "star",
+    "mass" : "1.1*sun",
+    "distance": "4.37 lightyears, 1.34pc",
+    "_synonyms": [
+      {
+       "category" :"object name",
+       "fact" : "Alpha Centauri A",
+        "synonyms" : ["Rigil Kentaurus"]
+      }
+    ]
+  },
+  {
+    "object_name" : "Alpha Centauri B",
+    "visual_luminosity" : "0.445*sun",
+    "mass" : ".907*sun",
+    "visual_magnitude" : "n/a",
+    "distance": "4.37 lightyears, 1.34pc"
+  },
+  {
+    "object_name" : "Alpha Centauri C",
+    "visual_luminosity" : "-0.27",
+    "mass" : "n/a",
+    "visual_magnitude" : "n/a",
+    "orbits" : "n/a",
+    "object_type" : "star, red dwarf",
+    "distance" : "4.24 lightyears, 1.30pc",
+    "_synonyms": [
+      {
+        "category": "object name",
+        "fact" : "Alpha Centauri B",
+        "synonyms" : [
+          "Proxima Centauri"
+        ]
+      }
+    ]
+  },
+  {
+    "object_name" : "Proxima Centauri b",
+    "visual_luminosity" : "n/a",
+    "mass" : "0.134*sun, 1.27*earth",
+    "radius" : "0.141*sun, 1.1+/-0.3*earth",
+    "visual_magnitude" : "n/a",
+    "object_type" : "planet",
+    "orbits" : "Alpha Centauri C",
+    "distance" : "4.2 lightyears, 1.30pc",
+    "_url": "https://en.wikipedia.org/wiki/Proxima_Centauri_b",
+    "_synonyms": [
+      {
+        "category": "object name",
+        "fact" : "Proxima Centauri b",
+        "synonyms" : [
+        "Proxima b"
+      ]}
+    ]
+  },
+  {
+    "object_name" : "Mars",
+    "visual_luminosity" : "n/a",
+    "orbit_radius" : "1.66AU-1.523679AU",
+    "eccentricity" : "0.0934",
+    "orbital_period" : "1.880years, 668 sols",
+    "mass" : "0.107*earth",
+    "radius" : "0.53*earth, 3.390 km",
+    "visual_magnitude" : "+1.6 to -3.0",
+    "object_type" : "planet",
+    "orbits" : "Sun",
+    "distance" : "n/a",
+    "_url" : "https://en.wikipedia.org/wiki/Mars"
+  },
+  {
+    "object_name" : "earth",
+    "visual_luminosity" : "n/a",
+    "orbit_radius" : "1.016 - 0.983 AU, 152,100,000km - 14,.095,000km",
+    "eccentricity" : "0.0167",
+    "orbital_period" : "1years, 365.256363004 d 668 sols",
+    "mass" : "1*earth, 5.2*10^24kg",
+    "radius" : "1*earth, 6371km",
+    "visual_magnitude" : "n/a",
+    "albedo" : "0.367",
+    "object_type" : "planet",
+    "orbits" : "Sun",
+    "distance" : "0",
+    "_url" : "https://en.wikipedia.org/wiki/Earth",
+    "_synonyms" : [
+      { "category" : "object name",
+        "fact" : "earth",
+        "synonyms" : [ "blue planet" , "gaia"]
+      },
+      { "category" : "orbits",
+        "fact" : "Sun",
+        "synonyms" : [ "Sol"]
+      }
+    ]
+  },
+  {
+    "object_name" : "Sun",
+    "visual_luminosity" : "n/a",
+    "orbit_radius" : "1.016 - 0.983 AU, 152,100,000km - 14,.095,000km",
+    "mass" : "333,000*earth, 1.989×10^30 kg",
+    "radius" : "109*earth, 695700km",
+    "visual_magnitude" : "-27",
+    "object_type" : "star",
+    "distance" : "1au; 1.496x10^8 km, 8min 19s at light speed",
+    "_url" : "https://en.wikipedia.org/wiki/Sun"
+  }
+]

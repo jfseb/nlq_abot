@@ -1,0 +1,57 @@
+{
+  "domain": "IUPAC",
+  "_categories": [
+    {
+      "category": "element name",
+      "category_description": "element name",
+      "QBEColumnProps": {
+        "defaultWidth": 120,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex" : true,
+      "category_synonyms": [
+        "name"
+      ]
+    },
+    {
+      "category": "element symbol",
+      "category_description": "element symbol",
+      "QBEColumnProps": {
+        "defaultWidth": 60,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex": true,
+      "category_synonyms": [
+        "symbol"
+      ]
+    },
+    {
+      "category": "atomic weight",
+      "category_description": "weigth of the element",
+      "QBEColumnProps": {
+        "defaultWidth": 80,
+        "QBE": true
+      },
+      "category_synonyms": [
+        "element weight"
+      ]
+    },
+    {
+      "category": "element number",
+      "category_description": "weigth of the element",
+      "QBEColumnProps": {
+        "defaultWidth": 60,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex": true
+    }
+  ],
+  "columns": [
+    "element symbol",
+    "element number",
+    "element name"
+  ]
+}
