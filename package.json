@@ -1,0 +1,86 @@
+{
+  "name": "nlq_abot",
+  "version": "0.0.1",
+  "description": "a bot engine using an english query language",
+  "main": "js/index.js",
+  "typings": "js/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/jfseb/nlq_abot.git"
+  },
+  "bugs": {
+    "url": "http://github.com/jfseb/nlq_abot/issues"
+  },
+  "scripts": {
+    "setup": "gulp default",
+    "test": "gulp test",
+    "build": "gulp && tsc",
+    "startConsole": "node console_app.js",
+    "version": "npm show nlq_abot@* version",
+    "run": "node smartbot",
+    "start": "node smartbot",
+    "coverage": "jest --coverage",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "jfsebpublic@gmail.com",
+  "license": "MIT",
+  "directories": {
+    "lib": "./lib",
+    "src": "./src",
+    "test": "./test",
+    "doc": "./doc",
+    "man": "./man1"
+  },
+  "babel": {
+    "comments": true
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 120000,
+    "testPathIgnorePatterns": [
+      "test/regress/smartdialog.regress.test.js",
+      "js/extern/elizabot/elizabot.js",
+      "js/extern/elizabot/"
+    ],
+    "collectCoverageFrom": [
+      "src/*.{ts,js}",
+      "!js/extern/elizabot/elizabot.js",
+      "js/**/{!(elizabot.js),}.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.5",
+    "@types/lodash": "^4.14.161",
+    "@types/node": "^8.10.64",
+    "del": "^5.1.0",
+    "elasticlunr": "^0.9.5",
+    "eslint-plugin-jest": "^24.1.0",
+    "gulp": "^4.0.2",
+    "gulp-env": "^0.4.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-jest": "https://registry.npmjs.org/@jacobq/gulp-jest/-/gulp-jest-4.0.3-PR65.tgz",
+    "gulp-jsdoc3": "^2.0.0",
+    "gulp-run": "^1.7.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-typescript": "^5.0.1",
+    "gulp-watch": "^5.0.1",
+    "jest": "^26.5.2",
+    "levelgraph": "^1.3.1",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "abot_stringdist": "^0.1.3",
+    "chevrotain": "^0.27.3",
+    "abot_utils": "^1.0.3",
+    "botbuilder": "^3.4.4",
+    "debugf": "^0.1.2",
+    "elizabot": "0.0.2",
+    "lodash": "^4.17.4",
+    "merge-stream": "^2.0.0",
+    "pg": "^7.12.1",
+    "uuid": "^3.1.0"
+  }
+}
