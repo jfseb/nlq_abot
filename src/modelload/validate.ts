@@ -46,8 +46,8 @@ function addSynonyms(synonyms: string[], category: string, synonymFor: string, b
             type: IMatch.EnumRuleType.WORD,
             word: syn,
             bitindex: bitindex,
-            bitSentenceAnd : bitSentenceAnd,
-            wordType : wordType,
+            bitSentenceAnd: bitSentenceAnd,
+            wordType: wordType,
             _ranking: 0.95
         };
         debuglog(debuglog.enabled ? ("inserting synonym" + JSON.stringify(oRule)) : '-');
@@ -84,8 +84,8 @@ export function addBestSplit(mRules: Array<IMatch.mRule>, rule: IMatch.mRule, se
         category: rule.category,
         matchedString: rule.matchedString,
         bitindex: rule.bitindex,
-        bitSentenceAnd : rule.bitindex,
-        wordType : rule.wordType,
+        bitSentenceAnd: rule.bitindex,
+        wordType: rule.wordType,
         word: best.longestToken,
         type: 0,
         lowercaseword: best.longestToken,
@@ -105,6 +105,7 @@ function insertRuleIfNotPresent(mRules: Array<IMatch.mRule>, rule: IMatch.mRule,
     seenRules: { [key: string]: IMatch.mRule[] }) {
 
     if (rule.type !== IMatch.EnumRuleType.WORD) {
+        debuglog('not a  word return fast '+ rule.matchedString);
         mRules.push(rule);
         return;
     }
@@ -118,7 +119,7 @@ function insertRuleIfNotPresent(mRules: Array<IMatch.mRule>, rule: IMatch.mRule,
      }*/
     rule.lowercaseword = rule.word.toLowerCase();
     if (seenRules[r]) {
-        debuglog(debuglog.enabled ? ("Attempting to insert duplicate" + JSON.stringify(rule, undefined, 2)) : "-");
+        debuglog(() => ("Attempting to insert duplicate" + JSON.stringify(rule, undefined, 2) + " : " + r));
         var duplicates = seenRules[r].filter(function (oEntry) {
             return 0 === InputFilterRules.compareMRuleFull(oEntry, rule);
         });
@@ -138,13 +139,16 @@ function insertRuleIfNotPresent(mRules: Array<IMatch.mRule>, rule: IMatch.mRule,
     return;
 }
 
-function readFileAsJSON(filename : string) : any {
+export function readFileAsJSON(filename: string): any {
     var data = fs.readFileSync(filename, 'utf-8');
     try {
         return JSON.parse(data);
-    } catch(e) {
-        console.log("Content of file "+ filename + " is no json" + e);
-        process.exit(-1);
+    } catch (e) {
+        console.log("Content of file " + filename + " is no json" + e);
+        process.stdout.on('drain', function() {
+            process.exit(-1);
+        });
+        //process.exit(-1);
     }
     return undefined;
 }
@@ -219,37 +223,8 @@ function loadModel(modelPath: string, sModelName: string, oModel: IMatch.IModels
     loadModelData(modelPath, oMdl, sModelName, oModel);
 }
 
-export function getAllDomainsBitIndex(oModel : IMatch.IModels): number {
-    var len = oModel.domains.length;
-    var res = 0;
-    for(var i = 0; i < len; ++i) {
-        res = res << 1;
-        res = res | 0x0001;
-    }
-    return res;
-}
 
-export function getDomainBitIndex(domain: string, oModel: IMatch.IModels): number {
-    var index = oModel.domains.indexOf(domain);
-    if (index < 0) {
-        index = oModel.domains.length;
-    }
-    if (index >= 32) {
-        throw new Error("too many domain for single 32 bit index");
-    }
-    return 0x0001 << index;
-}
 
-/**
- * Given a bitfield, return an unsorted set of domains matching present bits
- * @param oModel
- * @param bitfield
- */
-export function getDomainsForBitField(oModel: IMatch.IModels, bitfield : number) : string[] {
-    return oModel.domains.filter(domain =>
-       (getDomainBitIndex(domain,oModel) & bitfield)
-    );
-}
 
 function mergeModelJson(sModelName: string, oMdl: IModel, oModel: IMatch.IModels) {
     var categoryDescribedMap = {} as { [key: string]: IMatch.ICategoryDesc };

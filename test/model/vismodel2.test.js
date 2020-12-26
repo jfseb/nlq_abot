@@ -12,7 +12,6 @@ const getModel2 = require(root + '/model/testmodels.js').getTestModel2;
 
 it('testCalcCategoryRecordAppComp', done => {
   getModel2().then((mdl2) => {
-    debugger;
     Vismodel.calcCategoryRecord(mdl2, 'ApplicationComponent', 'FioriBOM').then((rec) => {
       expect(rec).toEqual({
         otherdomains: [],

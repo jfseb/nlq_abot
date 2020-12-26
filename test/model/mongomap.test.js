@@ -9,7 +9,6 @@ var Model = require(root + '/model/model.js');
 var testmodelPath = './testmodel/';
 
 var Schemaload = require(root + '/modelload/schemaload.js');
-var MongoUtils  = require(root + '/utils/mongo.js');
 var eSchemaSOBJ_Tables = Schemaload.loadExtendedMongooseSchema(testmodelPath, 'sobj_tables');
 var eDocSOBJ = Schemaload.loadModelDoc(testmodelPath, 'sobj_tables');
 var getModel = require(root + '/model/testmodels.js').getTestModel1;
@@ -32,10 +31,6 @@ process.on('unhandledRejection', function onError(err) {
   console.log(err.stack);
   throw err;
 });
-
-var connectionStringTestDB = 'mongodb://localhost/testdb';
-//  srcHandle.connect('mongodb://localhost/nodeunit');
-
 
 it('testCollectCats', async () => {
   var props = {

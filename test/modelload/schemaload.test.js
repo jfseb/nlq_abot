@@ -3,9 +3,9 @@ var process = require('process');
 var root = '../../js';
 
 var Schemaload = require(root + '/modelload/schemaload.js');
-var FUtils = require(root + '/model/model.js');
+//var FUtils = require(root + '/model/model.js');
 
-var debuglog = require('debugf')('schemaload.nunit.js');
+//var debuglog = require('debugf')('schemaload.nunit.js');
 var modelPath = 'testmodel/';
 /**
  * Unit test for sth
