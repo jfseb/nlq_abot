@@ -39,6 +39,7 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "verbose" : true,
     "testTimeout": 120,
     "testPathIgnorePatterns": [
       "test/regress/smartdialog.regress.test.js",
