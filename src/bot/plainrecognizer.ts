@@ -222,6 +222,7 @@ export class RegExpRecognizer implements builder.IIntentRecognizer {
 
   recognize(context: builder.IRecognizeContext, callback: (err: Error, result: builder.IIntentRecognizerResult) => void): void {
     var u = {} as builder.IIntentRecognizerResult;
+    context.message.text = context.message.text || '';
     var text = context.message.text;
     var that = this;
     var r = checkForLength(text);

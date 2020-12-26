@@ -4,23 +4,19 @@
 // })
 
 var builder = require('botbuilder');
-var process = require('process');
-var ABOT_MONGODB = process.env.ABOT_MONGODB || 'testdb';
-
-var MONGO_DBURL = 'mongodb://localhost/' + ABOT_MONGODB;
-
 // Create bot and bind to console
 var connector = new builder.ConsoleConnector().listen();
 
 var botdialog = require('./js/bot/smartdialog.js');
 
+var root = './js';
 
-var srcHandle = require('srcHandle');
+var srcHandle = require(root + '/model/srchandle.js').createSourceHandle();
 
 var Model = require(root + '/model/index_model.js').Model;
 
 function loadModel() {
-  return Model.loadModelsOpeningConnection(srcHandle, MONGO_DBURL, 'smbmodel');
+  return Model.loadModelsOpeningConnection(srcHandle, 'testmodel', './testmodel');
 }
 
 
