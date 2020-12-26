@@ -313,28 +313,6 @@ function logQuery(session: builder.Session, intent: string, result?: Array<any>)
   });
 }
 
-/*
-
-function logQueryWhatIs(session: builder.Session, intent: string, result?: Array<IMatch.IWhatIsAnswer>) {
-
-  fs.appendFile('./logs/showmequeries.txt', "\n" + JSON.stringify({
-    text: session.message.text,
-    timestamp: session.message.timestamp,
-    intent: intent,
-    res: result && result.length && WhatIs.dumpNice(result[0]) || "0",
-    conversationId: session.message.address
-    && session.message.address.conversation
-    && session.message.address.conversation.id || "",
-    userid: session.message.address
-    && session.message.address.user
-    && session.message.address.user.id || ""
-  }), function (err, res) {
-    if (err) {
-      debuglog("logging failed " + err);
-    }
-  });
-}
-*/
 
 function logQueryWhatIsTupel(session: builder.Session, intent: string, result?: Array<IMatch.IWhatIsTupelAnswer>) {
 
@@ -380,22 +358,8 @@ function makeBot(connector,
   }
 
   bot = new builder.UniversalBot(connector);
-
-
-
-  // Create LUIS recognizer that points at our model and add it as the root '/' dialog for our Cortana Bot.
-  // var model = sensitive.modelurl;
-  // var model = 'https://api.projectoxford.ai/luis/v2.0/apps/c413b2ef-382c-45bd-8ff0-f76d60e2a821?subscription-key=c21398b5980a4ce09f474bbfee93b892&q='
   var recognizer = new PlainRecognizer.RegExpRecognizer(oRules);
-
   var dialog = new builder.IntentDialog({ recognizers: [recognizer] });
-  // dialog.onBegin(function(session,args) {
-  // console.log("beginning ...")
-  // session.dialogData.retryPrompt = args && args.retryPrompt || "I am sorry"
-  // session.send("What do you want?")
-  //
-  // })
-
   var dialogUpDown = new builder.IntentDialog({ recognizers: [new SimpleUpDownRecognizer()] });
 
   bot.dialog('/updown', dialogUpDown);
@@ -460,10 +424,9 @@ function makeBot(connector,
     function (session, args, next) {
       var isCombinedIndex = {};
       var oNewEntity;
-      // ShowMe is a special form of WhatIs which also selects teh
+      // ShowMe is a special form of WhatIs which also selects the
       // "closest _url" ranked by _preferredUrlOrder
       // if present, the _url is put into exec.action
-
       //
       /// TODO REMODEL
       // expecting entity A1
@@ -718,8 +681,6 @@ function makeBot(connector,
         dialoglog("ShowMe", session, send(reply));
       });
     }
-
-
   ]);
 
   dialog.matches('Describe', [
@@ -1018,71 +979,6 @@ function makeBot(connector,
     }
   ]);
 
-  /*
-    // Add intent handlers
-    dialog.matches('train', [
-      function (session, args, next) {
-        debuglog('train');
-        // Resolve and store any entities passed from LUIS.
-        var title = builder.EntityRecognizer.findEntity(args.entities, 'builtin.alarm.title');
-        var time = builder.EntityRecognizer.resolveTime(args.entities);
-        var alarm = session.dialogData.alarm = {
-          title: title ? title.entity : null,
-          timestamp: time ? time.getTime() : null
-        };
-        // Prompt for title
-        if (!alarm.title) {
-          dialogLogger({
-            session: session,
-            intent: "train",
-            response: 'What fact would you like to train?'
-          });
-          builder.Prompts.text(session, 'What fact would you like to train?');
-        } else {
-          next();
-        }
-      },
-      function (session, results, next) {
-        var alarm = session.dialogData.alarm;
-        if (results.response) {
-          alarm.title = results.response;
-        }
-
-        // Prompt for time (title will be blank if the user said cancel)
-        if (alarm.title && !alarm.timestamp) {
-
-
-          builder.Prompts.time(session, 'What time would you like to set the alarm for?');
-        } else {
-          next();
-        }
-      },
-      function (session, results) {
-        var alarm = session.dialogData.alarm;
-        if (results.response) {
-          var time = builder.EntityRecognizer.resolveTime([results.response]);
-          alarm.timestamp = time ? time.getTime() : null;
-        }
-        // Set the alarm (if title or timestamp is blank the user said cancel)
-        if (alarm.title && alarm.timestamp) {
-          // Save address of who to notify and write to scheduler.
-          alarm.address = session.message.address;
-          //alarms[alarm.title] = alarm;
-
-          // Send confirmation to user
-          var date = new Date(alarm.timestamp);
-          var isAM = date.getHours() < 12;
-          session.send('Creating alarm named "%s" for %d/%d/%d %d:%02d%s',
-            alarm.title,
-            date.getMonth() + 1, date.getDate(), date.getFullYear(),
-            isAM ? date.getHours() : date.getHours() - 12, date.getMinutes(), isAM ? 'am' : 'pm');
-        } else {
-          session.send('Ok... no problem.');
-        }
-      }
-    ]);
-  */
-
   dialog.onDefault(function (session) {
     logQuery(session, "onDefault");
     var eliza = getElizaBot(getConversationId(session));
@@ -1093,23 +989,6 @@ function makeBot(connector,
     //builder.DialogAction.send('I\'m sorry I didn\'t understand. I can only show start and ring');
   });
 
-  /*
-  // Very simple alarm scheduler
-  var alarms = {};
-  setInterval(function () {
-    var now = new Date().getTime();
-    for (var key in alarms) {
-      var alarm = alarms[key];
-      if (now >= alarm.timestamp) {
-        var msg = new builder.Message()
-          .address(alarm.address)
-          .text('Here\'s your \'%s\' alarm.', alarm.title);
-        bot.send(msg);
-        delete alarms[key];
-      }
-    }
-  }, 15000);
-  */
   return bot;
 }
 
