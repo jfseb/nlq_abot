@@ -4,8 +4,6 @@ var fs = require('fs');
 var debug = require('debug')('makeToken');
 
 function run() {
-
-
   var tokens = JSON.parse(fs.readFileSync('src/tokens.json'));
 
   tokens = tokens.map(tok => {
@@ -57,7 +55,6 @@ function run() {
 
   debug('here toks' + tokens.map(t=>t.name).join('<\n>'));
 
-
   var tokenstrings = tokens.map(tok => {
     var tokName = tok.name.replace(/ /g,'_');
     tok.niceName = tokName;
@@ -92,9 +89,7 @@ function run() {
     ${objexport}
   `;
 
-
-  fs.writeFileSync('src/tokens.ts', src);
-
+  fs.writeFileSync('src/tokens.ts.tmp', src);
 }
 
 run();

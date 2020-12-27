@@ -25,14 +25,13 @@ import { ASTNodeType as NT} from './ast';
 
 import { IFModel as IFModel} from './model/index_model';
 
-  var WhiteSpace = createToken({name: "WhiteSpace", pattern: /\s+/});
+var WhiteSpace = createToken({name: "WhiteSpace", pattern: /\s+/});
 
-  WhiteSpace.GROUP = Lexer.SKIPPED;
+WhiteSpace.GROUP = Lexer.SKIPPED;
 
-  import { OperatorLookup as OperatorLookup, Tokens as T }  from './tokens';
-  // whitespace is normally very common so it is placed first to speed up the lexer
-  var allTokens = Object.keys(T).map(key => T[key]);
-
+import { OperatorLookup as OperatorLookup, Tokens as T }  from './tokens';
+// whitespace is normally very common so it is placed first to speed up the lexer
+var allTokens = Object.keys(T).map(key => T[key]);
 
 export function makeToken(t : IFErBase.IWord, index : number, OL : any ) {
   if (!t.rule) {
@@ -183,5 +182,4 @@ export function parseSentenceToAsts(s : string, model : IFModel.IModels, words :
 export {
    SelectLexer,
    parse
-   // defaultRule : "selectStatement"
 };

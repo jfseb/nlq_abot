@@ -57,6 +57,8 @@
       "js/extern/*.js",
       "js/makeToken.js",
       "js/debug.js",
+      "js/tokens.js",
+      "src/tokens.js",
       "src/makeToken.tc",
       "src/debug.tc",
       "src/parser.ts",
