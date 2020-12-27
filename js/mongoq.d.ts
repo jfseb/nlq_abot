@@ -82,15 +82,6 @@ export declare function makeAggregateFromAst(astnode: AST.ASTNode, sentence: IFM
         };
     };
 };
-export declare function makeAggregateFromAstOld(astnode: AST.ASTNode, sentence: IFModel.IWord[], models: IFModel.IModels, collectionName: string, fixedCategories: string[]): {
-    query: any[];
-    columnsReverseMap: {
-        columns: string[];
-        reverseMap: {
-            [key: string]: string;
-        };
-    };
-};
 export declare function containsFixedCategories(theModel: IFModel.IModels, domain: string, fixedCategories: string[]): boolean;
 export declare function augmentCategoriesWithURI(fixedCategories: string[], theModel: IFModel.IModels, domain: string): string[];
 export declare function prepareQueries(query: string, theModel: IFModel.IModels, fixedCategories: string[], options?: IQueryOptions): IPreparedQuery;

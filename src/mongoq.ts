@@ -336,54 +336,6 @@ export function makeAggregateFromAst(astnode: AST.ASTNode, sentence: IFModel.IWo
   return { query: query, columnsReverseMap: columnsReverseMap };
 }
 
-
-export function makeAggregateFromAstOld(astnode: AST.ASTNode, sentence: IFModel.IWord[],
-  models : IFModel.IModels,
-  collectionName : string, fixedCategories: string[]) {
-  var nodeFieldList = astnode.children[0].children[0];
-  var nodeFilter = astnode.children[1];
-  var mongoMap = undefined as IFModel.CatMongoMap;
-  mongoMap = models.mongoHandle.mongoMaps[collectionName];
-  var modelHandleRaw = models.mongoHandle;
-  // todo: detect any explicit sorts
-  // { sortCartegoryList : ["cat1"],
-  //  [ {cat1 : 1} ,{ cat2 : -1} ]
-  //
-  // then iff explicit sort,
-  // project out cat+sortCart, the then sort by it, only then project out desiredcat
-  //
-  //}//
-  var explicitSort = mQ.extractExplicitSortFromAst( nodeFilter, sentence, mongoMap, collectionName, modelHandleRaw );
-
-  var match = mQ.makeMongoMatchFromAst(nodeFilter, sentence,  mongoMap, collectionName, modelHandleRaw);
-  // TODO: be better than full unwind, use only relelvant categories!
-  var unwind = MongoMap.unwindsForNonterminalArrays(mongoMap);
-  var head = [match] as any[];
-  if (unwind.length) {
-    head = head.concat(unwind);
-    head.push(match);
-  }
-  var categoryList = mQ.getCategoryList(fixedCategories, nodeFieldList, sentence);
-  var categoryListPlusExplicitSort = mQ.amendCategoryList(explicitSort, categoryList);
-  var proj = mQ.makeMongoProjectionFromAst(categoryList, mongoMap);
-  var sort = mQ.makeMongoSortFromAst(categoryList, mongoMap);
-  var group = mQ.makeMongoGroupFromAst(categoryList, mongoMap);
-  var columnsReverseMap = mQ.makeMongoColumnsFromAst(categoryList, mongoMap);
-
-  debuglog(" catPlus " + JSON.stringify(categoryListPlusExplicitSort));
-  var projExplicit = mQ.makeMongoProjectionFromAst(categoryListPlusExplicitSort, mongoMap);
-  var sortExplicit = mQ.makeMongoExplicitSort(explicitSort, categoryList, mongoMap);
-  var groupExplicit = mQ.makeMongoGroupFromAst(categoryListPlusExplicitSort, mongoMap);
-  //   console.log(' query: ' + JSON.stringify(r)); // how to get domain?
-  // test.equal(domain, 'FioriBOM',' got domain');
-  debuglog(" explicitSort" + JSON.stringify(explicitSort));
-  var query = ( explicitSort.length > 0) ?
-        head.concat([sortExplicit, groupExplicit, projExplicit, sortExplicit, proj ])
-      : head.concat([group, proj, sort]);
-  return { query: query, columnsReverseMap: columnsReverseMap };
-}
-
-
 export function containsFixedCategories(theModel: IFModel.IModels, domain: string, fixedCategories: string[]): boolean {
   if (fixedCategories.length === 0) {
     return true;

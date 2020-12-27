@@ -243,49 +243,12 @@ var SchemaFillers = { fillers : [{
 }]
 };
 
-export function getOrCreateModelFillers(srcHandle: ISrcHandle) : IPseudoModel {
-    if(srcHandle.modelNames().indexOf('fillers') >= 0) {
-        return srcHandle.model('fillers');
-    } else {
-        return srcHandle.model('fillers', SchemaFillers as  IPseudoSchema);
-    }
-}
-
-export function getOrCreateModelOperators(srcHandle: ISrcHandle) : IPseudoModel {
-    if(srcHandle.modelNames().indexOf('operators') >= 0) {
-        return srcHandle.model('operators');
-    } else {
-        return srcHandle.model('operators', SchemaOperators as any as IPseudoModel);
-    }
-}
-
 export function getFillersFromDB( srcHandle : ISrcHandle) : Promise<string[]> {
-
     return srcHandle.getJSON("filler.json") as Promise<string[]>;
-    /*
-    var fillerModel = getOrCreateModelFillers(srcHandle);
-    return fillerModel.find({}).lean().exec().then( (vals : any[]) => {
-        if(vals.length !== 1) {
-            throw new Error('expected exactly one operators entry ');
-        };
-        return vals[0];
-    });
-    */
 }
-
 
 export function getOperatorsFromDB( srcHandle : ISrcHandle) : Promise<any> {
     return srcHandle.getJSON('operators.json');
-    /*   
-    var operatorModel = getOrCreateModelOperators(srcHandle);
-
-    return operatorModel.find({}).lean().exec().then( (vals : any[]) => {
-        if(vals.length !== 1) {
-            throw new Error('expected exactly one operators entry ');
-        };
-        return vals[0];
-    });
-    */
 }
 
 export function getExtendSchemaDocFromDB(srcHandle : ISrcHandle, modelName : string) : Promise<IExtendedSchema> {
@@ -324,54 +287,3 @@ export const MongoNLQ = {
 export const MongooseNLQ = {
     MONGOOSE_MODELNAME_METAMODELS : "metamodels"
 };
-
-export function validateDocMongoose(srcHandle : ISrcHandle, collectionname, schema : ISrcHandle, doc : any ) {
-    var DocModel;
-    //console.log('schema ' + JSON.stringify(schema));
-    if(srcHandle.modelNames().indexOf(collectionname) >= 0) {
-        DocModel = srcHandle.model(collectionname);
-    } else {
-        DocModel = srcHandle.model(collectionname, schema);
-
-    }
-    return validateDocVsMongooseModel(DocModel, doc);
-}
-
-export function validateDocVsMongooseModel(model, doc : any) {
-    return new Promise<any>((resolve,reject) => {
-        var theDoc = new model(doc);
-        theDoc.validate((err) =>  {
-            if (err) {
-                //console.log(err);
-                reject(err);
-            }
-        else {
-            resolve(theDoc);
-        }
-        });
-    });
-}
-
-/*
-export function validateDoc(collectionname: string, schema : ISrcHandle.Schema, doc : any) {
-  var jsonSchemaR = (schema as any).jsonSchema();
-  var jsonSchema = _.cloneDeep(jsonSchemaR);
-  traverseExecuting(jsonSchema, function(obj,val,key) {
-    if(key === 'properties' && obj.type === 'object') {
-        //console.log('augmenting schema');
-        obj.additionalProperties = false;
-    }
-  });
-
-  debuglog(()=> ` here json schema ` + (JSON.stringify(jsonSchema,undefined,2)));
-  var Validator = require('jsonschema').Validator;
-  var v = new Validator();
-  //console.log(JSON.stringify(jsonSchema,undefined,2));
-  var valresult = v.validate(doc,jsonSchema);
-  if(valresult.errors.length) {
-      throw new Error("Schema validating against JSON Schema failed : " + JSON.stringify(valresult.errors,undefined,2));
-  }
-  return true;
-}
-
-*/

@@ -32,8 +32,6 @@ export declare function augmentMongooseSchema(modelDoc: IModelDoc, schemaRaw: IR
  * @param modelName
  */
 export declare function makeMongoCollectionName(modelName: string): string;
-export declare function getOrCreateModelFillers(srcHandle: ISrcHandle): IPseudoModel;
-export declare function getOrCreateModelOperators(srcHandle: ISrcHandle): IPseudoModel;
 export declare function getFillersFromDB(srcHandle: ISrcHandle): Promise<string[]>;
 export declare function getOperatorsFromDB(srcHandle: ISrcHandle): Promise<any>;
 export declare function getExtendSchemaDocFromDB(srcHandle: ISrcHandle, modelName: string): Promise<IExtendedSchema>;
@@ -45,6 +43,4 @@ export declare const MongoNLQ: {
 export declare const MongooseNLQ: {
     MONGOOSE_MODELNAME_METAMODELS: string;
 };
-export declare function validateDocMongoose(srcHandle: ISrcHandle, collectionname: any, schema: ISrcHandle, doc: any): Promise<any>;
-export declare function validateDocVsMongooseModel(model: any, doc: any): Promise<any>;
 export {};
