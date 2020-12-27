@@ -50,6 +50,8 @@
     "collectCoverageFrom": [
       "src/*.{ts,js}",
       "!js/extern/elizabot/elizabot.js",
+      "!js/makeToken.js",
+      "js/*.js",
       "js/**/{!(elizabot.js),}.js"
     ],
     "coveragePathIgnorePatterns": [
@@ -57,6 +59,7 @@
       "js/extern/*.js",
       "src/debug.tc",
       "src/parser.ts",
+      "src/makeToken.js",
       "src/mongoq.ts",
       "src/interfaces.d.ts",
       "src/ast.ts",
