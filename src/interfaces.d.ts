@@ -13,7 +13,7 @@ export const enum ResponseCode {
  * Defines the interface for an analysis
  * reponse
  */
-export interface IResponse {
+export interface IResponseX {
   rating : number,
   type : ResponseCode,
   type2 : number, // ResponseCode,

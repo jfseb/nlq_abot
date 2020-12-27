@@ -1,4 +1,4 @@
-# nlq_abot [![Build Status](https://travis-ci.org/jfseb/nlq_abot.svg?branch=master)](https://travis-ci.org/jfseb/mgnlq_abot) [![Coverage Status](https://coveralls.io/repos/github/jfseb/mgnlq_abot/badge.svg)](https://coveralls.io/github/jfseb/nlq_abot)
+# nlq_abot [![Build Status](https://travis-ci.org/jfseb/nlq_abot.svg?branch=master)](https://travis-ci.org/jfseb/nlq_abot) [![Coverage Status](https://coveralls.io/repos/github/jfseb/nlq_abot/badge.svg)](https://coveralls.io/github/jfseb/nlq_abot)
 
 
 query bot for mongo database
@@ -109,7 +109,7 @@ list all sample questions
 #
 - proper ordering for "numberic" columns
 
-list all sender with gründungsjahr smaller than 1972
+list all sender with grï¿½ndungsjahr smaller than 1972
 
 # discriminate    (less than number <coundcat> from )     (cat less than numberic)
 

@@ -53,7 +53,6 @@
         "src/match/word.ts",
         "src/match/mongoqueries.ts",
         "src/ast.ts",
-        "src/constants.ts",
         "src/formaterror.ts",
         "src/index.ts",
         "src/parser.ts",

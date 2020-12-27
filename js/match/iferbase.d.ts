@@ -177,29 +177,6 @@ export interface IProcessedExtractedCategories extends IProcessed {
 export declare type context = {
     [key: string]: string;
 };
-/**
- * Defines the interface for an analysis
- * reponse
- */
-export interface IResponse {
-    rating: number;
-    type: EnumResponseCode;
-    query: string;
-    context: {
-        [key: string]: string;
-    };
-    text: string;
-    action: IAction;
-    prompts: {
-        [key: string]: {
-            text: string;
-            /**
-             * Follows the features of NPM prompts
-             */
-            description: IPromptDescription;
-        };
-    };
-}
 export declare const enum EnumActionType {
     STARTURL = 0,
     STARTCMDLINE = 1
