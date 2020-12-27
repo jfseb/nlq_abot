@@ -40,7 +40,7 @@
   "jest": {
     "testEnvironment": "node",
     "verbose": true,
-    "testTimeout": 1200,
+    "testTimeout": 12000,
     "testPathIgnorePatterns": [
       "test/regress/smartdialog.regress.test.js",
       "js/extern/elizabot/elizabot.js",
