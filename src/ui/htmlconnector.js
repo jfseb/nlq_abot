@@ -6,7 +6,7 @@
 
 /* nonglobal process:true*/
 
-var BotBuilder = require('botbuilder');
+var BotBuilder = require('../bot/botbuilder.js');
 var Message = BotBuilder.Message;
 var HTMLConnector = (function () {
   function HTMLConnector(options) {
@@ -27,6 +27,7 @@ var HTMLConnector = (function () {
     this.quitHook = quitHook;
   };
   HTMLConnector.prototype.processMessage = function (line, id) {
+    debugger;
     if (typeof id === 'string') {
       id = {
         conversationid : id,

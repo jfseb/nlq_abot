@@ -27,17 +27,6 @@ export interface IFilter {
   value: string
 };
 
-/* construct a mongo query from an AST */
-
-export function makeMongoDistinctGroup(cols: string[]): any {
-  var res = { $group: { _id: {} } };
-  cols.forEach(col => {
-    res.$group[col] = '$' + col;
-    res.$group._id[col] = '$' + col;
-  });
-  return res;
-}
-
 export function getCategoryForNodePair(nodeCat: AST.ASTNode, nodeFact: AST.ASTNode, sentence: IFErBase.ISentence) {
   //  either           <CAT> <FACT>
   //  or               undefined <FACT>
@@ -103,15 +92,6 @@ export function addFilterExpr(res, expr: any) {
   return res;
 };
 
-export function addSortExpression(res, expr: any) {
-  if (res['$sort']) {
-    _.merge(res['$sort'], expr);
-    return res;
-  }
-  res['$sort'] = expr;
-  return res;
-}
-
 export function getNumberArg(node: AST.ASTNode, sentence: IFErBase.ISentence): number { // !! returns a number 
   var startIndex = node && node.bearer && node.bearer.startOffset;
   if (node.type !== NT.NUMBER) {
@@ -123,7 +103,6 @@ export function getNumberArg(node: AST.ASTNode, sentence: IFErBase.ISentence): n
   }
   throw new Error(' no startindex' + JSON.stringify(node));
 };
-
 
 export function isArray(mongoHandleRaw: IFModel.IModelHandleRaw, domain: string, category: string) {
   var cat = Model.getCategoryRec(mongoHandleRaw, domain, category);

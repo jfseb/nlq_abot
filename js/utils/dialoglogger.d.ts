@@ -1,7 +1,7 @@
 /**
  * a logger for dialog conversations
  */
-import * as builder from 'botbuilder';
+import * as builder from '../bot/botbuilder';
 export declare var sqlActive: boolean;
 export interface ILogEntry {
     botid: string;

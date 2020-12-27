@@ -18,28 +18,6 @@ import { ASTNodeType as NT} from './ast';
   // without any actions) using the Tokens defined in the previous step.
   // modification to the grammar will be displayed in the syntax diagrams panel.
 
-/*
-  function a( ) :  {
-    GROUP?: string;
-    PATTERN?: RegExp;
-    LABEL?: string;
-    LONGER_ALT?: chevrotain.TokenConstructor;
-    POP_MODE?: boolean;
-    PUSH_MODE?: string;
-    tokenName?: string;
-    tokenType?: number;
-    extendingTokenTypes?: number[];
-    new (...args: any[]): chevrotain.IToken;
-  } {
-    return { new(...args{}) : function() {
-      return {
-        image : "All"
-      };
-    }
-  };
-  };
-*/
-
   var createToken = chevrotain.createToken;
   var Lexer = chevrotain.Lexer;
   var Parser = chevrotain.Parser;
@@ -49,7 +27,7 @@ import { ASTNodeType as NT} from './ast';
   WhiteSpace.GROUP = Lexer.SKIPPED;
 
 
-import { OperatorLookup as OL, Tokens as T}  from './tokens';
+import { Tokens as T}  from './tokens';
   // whitespace is normally very common so it is placed first to speed up the lexer
   var allTokens = Object.keys(T).map(key => T[key]);
   /* [ FACT, And,

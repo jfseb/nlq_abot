@@ -11,7 +11,7 @@ var debuglog = debugf('model');
 
 import { IFModel as IFModel} from './index_model';
 
-import { applyProject, applyProjectCollecting, IPseudoModel, ISrcHandle, ISynonym} from './srchandle';
+import { applyProject, IPseudoModel, ISrcHandle, ISynonym} from './srchandle';
 
 // the hardcoded domain metamodel!
 const DOMAIN_METAMODEL = 'metamodel';
@@ -29,8 +29,6 @@ import * as CircularSer from 'abot_utils';
 import * as Distance from 'abot_stringdist';
 import * as process from 'process';
 import * as _ from 'lodash';
-
-import * as MongoUtils from '../utils/mongo';
 
 //import * as ISchema from '../modelload/schemaload';
 import * as Schemaload from '../modelload/schemaload';

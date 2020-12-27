@@ -73,6 +73,7 @@
         "src/model/vismodel.ts",
         "src/exec/makeqbetable.ts",
         "src/bot/smartdialog.ts",
+        "src/bot/botbuilder.ts",        
         "src/bot/plainrecognizer.ts",
         "src/utils/logger.ts",
         "src/utils/dialoglogger.ts",

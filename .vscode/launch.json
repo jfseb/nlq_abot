@@ -4,20 +4,19 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-    /*
    {
       "type": "node",
       "request": "launch",
       "name": "JestTests",
       "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
       "args": [
-          "--", "model/model.te"
+          "--", "smartdialo"
       ],
       "internalConsoleOptions": "openOnSessionStart",
       "outFiles": [
       ],
       "sourceMaps": true
-  },*/
+  },/*
    {
       "type": "node",
       "request": "launch",
@@ -35,5 +34,6 @@
       "outFiles": [],
       "sourceMaps": true
     }
+    */
   ]
 }

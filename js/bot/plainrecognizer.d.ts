@@ -4,7 +4,7 @@
  *
  * A recognizer parametrized by regex expressions
  */
-import * as builder from 'botbuilder';
+import * as builder from './botbuilder';
 import * as IMatch from '../match/ifmatch';
 export declare function recognize(sString: any, mRules: Array<IMatch.IntentRule>): any;
 export declare function countParenGroups(s: string): number;

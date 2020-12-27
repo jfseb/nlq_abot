@@ -14,7 +14,7 @@
 
 import * as fs from 'fs';
 
-import * as builder from 'botbuilder';
+import * as builder from './botbuilder';
 import * as debug from 'debug';
 
 //import * as Match from '../match/match';
@@ -52,7 +52,9 @@ if (!(process.env.ABOT_DBNOSSL)) {
 var dialogLogger = DialogLogger.logger("smartbot", dburl, pg);
 
 type stringOrMessage = string | builder.Message;
+
 function send<T extends stringOrMessage>(o: T): T { return o; };
+
 function dialoglog(intent: string, session: builder.Session, response: stringOrMessage) {
   var sResponse: string;
   var sAction: string;
@@ -208,6 +210,7 @@ function getRandomResult(arr: string[]): string {
   return arr[Math.floor(Math.random() * arr.length) % arr.length];
 }
 
+/*
 export class SimpleUpDownRecognizer implements builder.IIntentRecognizer {
   constructor() {
 
@@ -283,6 +286,7 @@ export class SimpleUpDownRecognizer implements builder.IIntentRecognizer {
     callback(undefined, u);
   }
 }
+*/
 
 const AnyObject = Object as any;
 
@@ -360,8 +364,9 @@ function makeBot(connector,
   bot = new builder.UniversalBot(connector);
   var recognizer = new PlainRecognizer.RegExpRecognizer(oRules);
   var dialog = new builder.IntentDialog({ recognizers: [recognizer] });
-  var dialogUpDown = new builder.IntentDialog({ recognizers: [new SimpleUpDownRecognizer()] });
+  // var dialogUpDown = new builder.IntentDialog({ recognizers: [new SimpleUpDownRecognizer()] });
 
+  /*
   bot.dialog('/updown', dialogUpDown);
   dialogUpDown.onBegin(function (session) {
     dialoglog("TrainMe", session, send(getRandomResult(aEnterTrain)));
@@ -402,6 +407,7 @@ function makeBot(connector,
     var res = getRandomResult(aTrainDialog) + getRandomResult(aTrainExitHint);
     dialoglog("TrainMe", session, send(res));
   });
+  */
 
   /*
     bot.dialog('/train', [
@@ -998,7 +1004,7 @@ if (module) {
     aTrainReplies: aTrainReplies,
     restrictData: restrictData,
     isAnonymous: isAnonymous,
-    SimpleUpDownRecognizer: SimpleUpDownRecognizer,
+    //SimpleUpDownRecognizer: SimpleUpDownRecognizer,
     aResponsesOnTooLong: aResponsesOnTooLong,
     metawordsDescriptions: metawordsDescriptions,
     makeBot: makeBot

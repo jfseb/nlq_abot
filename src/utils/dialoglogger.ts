@@ -3,7 +3,7 @@
  */
 //declare module pg {};
 
-import * as builder from 'botbuilder';
+import * as builder from '../bot/botbuilder';
 import * as pg from 'pg';
 import * as debug from 'debug';
 import * as process from 'process';

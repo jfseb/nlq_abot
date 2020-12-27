@@ -6,7 +6,7 @@
  * A recognizer parametrized by regex expressions
  */
 
-import * as builder from 'botbuilder';
+import * as builder from './botbuilder';
 import * as IMatch from '../match/ifmatch';
 import * as debug from 'debug';
 const debuglog = debug('plainrecognizer');
