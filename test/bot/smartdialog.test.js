@@ -64,6 +64,7 @@ function testOne(str, cb, iconn) {
   });
 }
 
+<<<<<<< HEAD
 //SimpleUpDownRecognizer
 
 function doRecognize(sText, cb) {
@@ -76,6 +77,8 @@ function doRecognize(sText, cb) {
   }, cb);
 }
 
+=======
+>>>>>>> b5539cb... cleanup
 // bot tests
 
 it('testdescribeDontKnowQuotes', done => {
