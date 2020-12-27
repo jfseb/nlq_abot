@@ -55,10 +55,6 @@
     "coveragePathIgnorePatterns": [
       "src/sentenceparser.ts",
       "js/extern/*.js",
-      "js/makeToken.js",
-      "js/tokens.js",
-      "src/tokens.ts",
-      "src/makeToken.ts",
       "src/debug.tc",
       "src/parser.ts",
       "src/mongoq.ts",
