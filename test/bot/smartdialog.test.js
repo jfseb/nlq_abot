@@ -64,23 +64,6 @@ function testOne(str, cb, iconn) {
   });
 }
 
-<<<<<<< HEAD
-//SimpleUpDownRecognizer
-
-function doRecognize(sText, cb) {
-  debuglog('type ' + typeof SmartDialog.SimpleUpDownRecognizer);
-  var recognizer = new (SmartDialog.SimpleUpDownRecognizer)();
-  recognizer.recognize({
-    message: {
-      text: sText
-    }
-  }, cb);
-}
-
-=======
->>>>>>> b5539cb... cleanup
-// bot tests
-
 it('testdescribeDontKnowQuotes', done => {
   testOne('describe "ABASDFSR"', function (conn, res) {
     expect(res).toEqual('I don\'t know anything about "ABASDFSR".\n');

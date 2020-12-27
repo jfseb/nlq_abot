@@ -27,7 +27,6 @@ var HTMLConnector = (function () {
     this.quitHook = quitHook;
   };
   HTMLConnector.prototype.processMessage = function (line, id) {
-    debugger;
     if (typeof id === 'string') {
       id = {
         conversationid : id,
