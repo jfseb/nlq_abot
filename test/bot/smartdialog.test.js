@@ -1,5 +1,6 @@
 var process = require('process');
 process.env.NODE_ENV = 'dev';
+process.env.DEBUG = '*';
 jest.resetModules();
 var root = '../../js';
 //var debuglog = require('debug')('plainRecoginizer.nunit');
@@ -32,6 +33,8 @@ var getTestModel = require(root + '/model/testmodels.js').getTestModel1;
 // Create bot and bind to console
 function getBotInstance() {
   var connector = new HTMLConnector.HTMLConnector();
+  var debuglog = require('debug')('smartdialog');
+  debuglog.enabled = true;
   /** the model is lazily obatained, if it is not obtained, there is no model */
   var res = getTestModel();
   res.then((theModel) => connector.theModel = theModel);
