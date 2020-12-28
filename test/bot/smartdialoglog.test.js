@@ -1,6 +1,6 @@
 var process = require('process');
 process.env.NODE_ENV = 'dev';
-process.env.DEBUG = '*';
+process.env.DEBUG = 'smartdialog;erbase';
 jest.resetModules();
 var root = '../../js';
 //var debuglog = require('debug')('plainRecoginizer.nunit');
