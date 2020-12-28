@@ -13,18 +13,8 @@ process.on('unhandledRejection', function onError(err) {
   console.log(err.stack);
   throw err;
 });
-
-
-var logger = require(root + '/utils/logger');
 const SmartDialog = require(root + '/bot/smartdialog.js');
 var HTMLConnector = require(root + '/ui/htmlconnector.js');
-
-
-/*
-var mongooseMock = require('mongoose_record_replay').instrumentMongoose(require('srcHandle'),
-  'node_modules/mgnlq_testmodel_replay/mgrecrep/',
-  'REPLAY');
-*/
 
 var Model = require(root + '/model/index_model.js').Model;
 
