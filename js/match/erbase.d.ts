@@ -95,7 +95,6 @@ export declare function isSameCategoryAndHigherMatch(sentence: IMatch.ISentence,
 }): boolean;
 export declare function isBadOperatorArgs(sentence: IMatch.ISentence, operators: IMatch.IOperators): boolean;
 export declare function isNonOptimalDistinctSourceForSame(sentence: IMatch.ISentence, sentences: Array<IMatch.ISentence>): boolean;
-export declare function isDistinctInterpretationForSameOLD(sentence: IMatch.ISentence): boolean;
 export declare function filterNonSameInterpretations(aSentences: IMatch.IProcessedSentences): IMatch.IProcessedSentences;
 export declare function filterBadOperatorArgs(aSentences: IMatch.IProcessedSentences, operators: IFModel.IOperators): IMatch.IProcessedSentences;
 export declare function filterReverseNonSameInterpretations(aSentences: IMatch.IProcessedSentences): IMatch.IProcessedSentences;

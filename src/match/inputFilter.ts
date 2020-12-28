@@ -168,10 +168,11 @@ function sortByRank(a: IFMatch.ICategorizedString, b: IFMatch.ICategorizedString
   }
   return 0;
 }
-
+/*
 function cmpByRank(a: IFMatch.ICategorizedString, b: IFMatch.ICategorizedString): number {
   return sortByRank(a,b);
 }
+*/
 
 
 function sortByRankThenResult(a: IFMatch.ICategorizedStringRanged, b: IFMatch.ICategorizedStringRanged): number {

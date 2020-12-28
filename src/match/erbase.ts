@@ -720,47 +720,6 @@ export function isNonOptimalDistinctSourceForSame(sentence : IMatch.ISentence, s
 }
 
 
-/*
- * Return true if the identical source word is interpreted
- * (within the same domain and the same wordtype)
- * as a differnent  (e.g. element numb is one interpreted as 'CAT' element name, once as CAT 'element number' in
- * same domain IUPAC elements)
- *
- * - exact match
- * - stemming by removing/appending traling s
- * - closeness
- *
- * @param sentence
- */
-export function isDistinctInterpretationForSameOLD(sentence : IMatch.ISentence) : boolean {
-  var mp = {} as {[key : string] : IMatch.IWord};
-  var res = sentence.every((word, index) => {
-    var seen = mp[word.string];
-    if(!seen)
-    { // exact match
-      /*if( word.string.length > 3 && word.string.charAt(word.string.length - 1).toLowerCase() == 's')
-      {
-
-      }
-      */
-    }
-    if(!seen) {
-      mp[word.string] = word;
-      return true;
-    }
-    if(!seen.rule || !word.rule) {
-      return true;
-    }
-    if(seen.rule.bitindex === word.rule.bitindex
-      && seen.rule.matchedString !== word.rule.matchedString ){
-      //  console.log("skipping this" + JSON.stringify(sentence,undefined,2));
-        return false;
-    }
-    return true;
-  });
-  return res;
-}
-
 export function filterNonSameInterpretations(aSentences :  IMatch.IProcessedSentences ) : IMatch.IProcessedSentences {
   var discardIndex = [] as Array<number>;
   var res = (Object as any).assign( {}, aSentences );
