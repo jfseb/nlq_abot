@@ -536,7 +536,7 @@ export function describeFactInDomain(fact : string, filterdomain : string, theMo
     return (global.Promise as any).all(
       filteredDomains.map( (domain) => {
         if(!filterdomain || domain === filterdomain ) {
-          return Model.getExpandedRecordsFull(theModel, domain).then(records => {
+          return Model.getExpandedRecordsFirst(theModel, domain).then(records => {
             domainRecordCount[domain] = records.length;
             records.map( (record) =>{
       // domainRecordCount[record._domain] = (domainRecordCount[record._domain] || 0) + 1;
@@ -552,7 +552,7 @@ export function describeFactInDomain(fact : string, filterdomain : string, theMo
             });
           });
         } else {
-          return Model.getExpandedRecordsFull(theModel, domain).then(records => {
+          return Model.getExpandedRecordsFirst(theModel, domain).then(records => {
             domainRecordCount[domain] = records.length;
             records.map( (record) =>{
       // domainRecordCount[record._domain] = (domainRecordCount[record._domain] || 0) + 1;

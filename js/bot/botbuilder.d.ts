@@ -6,12 +6,7 @@
  * @module jfseb.nlq_abot.botbuilder
  * @copyright (c) 2016-2109 Gerd Forstmann
  */
-interface Conversation {
-    id: string;
-}
-export interface User {
-    id: string;
-}
+/// <reference types="node" />
 export interface Bot {
     id: string;
 }
@@ -37,15 +32,12 @@ export interface IIntentRecognizer {
     recognize(context: IRecognizeContext, callback: (err: Error, result: IIntentRecognizerResult) => void): void;
 }
 export interface Address {
-    bot: Bot;
-    conversation: Conversation;
-    user: User;
+    conversationId: string;
+    user: string;
 }
 export interface IMessage {
     address: Address;
     type?: string;
-    agent?: string;
-    source: string;
     text: string;
     timestamp: string;
     entities?: string[];
@@ -72,7 +64,6 @@ export interface UserData {
 export interface Session {
     message: IMessage;
     dialogData: any;
-    userData: UserData;
     send(arg: stringOrMessage): void;
     endDialogWithResult(arg: EndDialogArg): any;
     beginDialog(match: string, a: number): any;
@@ -102,5 +93,23 @@ export declare class IntentDialog {
     onBegin(cb: (session: Session) => void): void;
     onDefault(cb: (session: Session) => void): void;
     matches(intent: string, sess: ContinueFunction[]): void;
+}
+export declare class ConsoleConnector {
+    stdin: NodeJS.ReadableStream;
+    stdout: NodeJS.WritableStream;
+    answerHooks: any;
+    answerHook: any;
+    quitHook: any;
+    replyCnt: number;
+    handler: any;
+    conversationId: string;
+    constructor(options: any);
+    listen(): this;
+    setAnswerHook(answerHook: any, id: any): void;
+    setQuitHook(quitHook: any): void;
+    processMessage: (line: any, id: Address) => any;
+    onEvent(handler: any): void;
+    send(messages: IMessage[], done: any): void;
+    startConversation: (address: Address, cb: any) => void;
 }
 export {};

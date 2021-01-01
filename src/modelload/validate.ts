@@ -784,7 +784,7 @@ export function getTableColumns(theModel: IMatch.IModels, domain: string): strin
     if (theModel.domains.indexOf(domain) < 0) {
         throw new Error("Domain \"" + domain + "\" not part of model");
     }
-    return theModel.rawModels[domain].columns.slice(0);
+    return theModel.rawModelByDomain[domain].columns.slice(0);
 }
 
 function forceGC() {

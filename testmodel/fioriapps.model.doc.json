@@ -46,7 +46,7 @@
     },
     {
       "category": "appId",
-      "category_description": "the Fiori appId, note that multiple records exists, as the same ID may change over time with verions",
+      "category_description": "the Fiori appId, note that multiple records exists, as the same ID may change over time with versions",
       "QBEColumnProps": {
         "defaultWidth": 80,
         "QBE": true,

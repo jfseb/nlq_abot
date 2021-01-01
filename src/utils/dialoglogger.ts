@@ -27,7 +27,7 @@ export interface ILogEntry {
   response : string,
   action : string,
   intent : string,
-  conversationid : string,
+  conversationId : string,
   /**
    * an result
    **/
@@ -43,7 +43,7 @@ export interface IAnswer {
   result? : any,
 }
 
-const columns = ["botid","userid", "message", "response", "action", "intent", "conversationid", "meta", "delta"];
+const columns = ["botid","userid", "message", "response", "action", "intent", "conversationId", "meta", "delta"];
 // 0 indicates do not process /truncate, e.g. non string type
 const columnLengths = [10, 40, 1024, 1024, 512, 20, 40, 0,0 ];
 
@@ -70,22 +70,17 @@ export function logAnswer(answer: IAnswer, callback : (err: any, res?: any) => v
   debuglog("here user id of message session.message.address " +
   JSON.stringify(session.message.address.user));
   var oLogEntry : ILogEntry = {
-    botid : (session.message && session.message.address && session.message.address.bot && session.message.address.bot.id ) || this.name,
+    botid : this.name, 
     userid: session.message.address
     && session.message.address.user
-    && session.message.address.user.id || "",
+    && session.message.address.user || "",
     message: session.message.text,
     response : answer.response,
     action : answer.action,
-
     intent: answer.intent,
-
-    conversationid: session.message.address
-    && session.message.address.conversation
-    && session.message.address.conversation.id || "",
-
+    conversationId: session.message.address
+    && session.message.address.conversationId || "",
     meta : answer.result || {},
-
     delta : Date.now() - Date.parse(session.message.timestamp),
   };
 

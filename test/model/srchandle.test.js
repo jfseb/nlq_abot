@@ -18,7 +18,7 @@ it('testevalMatch', async () => {
 });
 
 it('testcollectMemberByPath', async () => {
-  var recs =  [{'domain':'IUPAC','_categories':[{'category':'element name','category_description':'element name','QBEColumnProps':{'defaultWidth':120,'QBE':true,'LUNRIndex':true},'wordindex':true,'category_synonyms':['name']},{'category':'element symbol','category_description':'element symbol','QBEColumnProps':{'defaultWidth':60,'QBE':true,'LUNRIndex':true},'wordindex':true,'category_synonyms':['symbol']},{'category':'atomic weight','category_description':'weigth of the element','QBEColumnProps':{'defaultWidth':80,'QBE':true},'category_synonyms':['element weight']},{'category':'element number','category_description':'weigth of the element','QBEColumnProps':{'defaultWidth':60,'QBE':true,'LUNRIndex':true},'wordindex':true}],'columns':['element symbol','element number','element name']}
+  var recs =  [{'domain':'IUPAC','_categories':[{'category':'element name','category_description':'element name','QBEColumnProps':{'defaultWidth':120,'QBE':true,'LUNRIndex':true},'wordindex':true,'category_synonyms':['name']},{'category':'element symbol','category_description':'element symbol','QBEColumnProps':{'defaultWidth':60,'QBE':true,'LUNRIndex':true},'wordindex':true,'category_synonyms':['symbol']},{'category':'atomic weight','category_description':'weight of the element','QBEColumnProps':{'defaultWidth':80,'QBE':true},'category_synonyms':['element weight']},{'category':'element number','category_description':'weight of the element','QBEColumnProps':{'defaultWidth':60,'QBE':true,'LUNRIndex':true},'wordindex':true}],'columns':['element symbol','element number','element name']}
   ]; 
   expect(SrcHandle.satisfiesMatch(recs[0], { '$lt' : [ { '$eval': '_categories.category'},  'aa' ]} )).toEqual(false); 
   expect(SrcHandle.satisfiesMatch(recs[0], { '$gt' : [ { '$eval': '_categories.category'},  'aa' ]} )).toEqual(true); 
@@ -41,7 +41,7 @@ it('testFlattenDeep', async () => {
 
 it('testApplyProjectCollection', async () => {
   expect(SrcHandle.applyProjectCollecting( [ {a: 'b'}], { 'ab': 123, 'de': 2, _category : { category: 'A' , n : 'B', i : 4 }, columns :['A','B'] }, 
-    { 'ab': 1, 'category': '_category.category' , n: '_category.n', columns: 1 })).toEqual( 
+    { 'ab': 1, 'category': '_category.category' , n: '_category.n', columns: 1 },[])).toEqual( 
     [ {a: 'b'}, 
       { ab: 123, category : 'A', n: 'B', columns : 'A' },
       { ab: 123, category : 'A', n: 'B', columns : 'B' }
@@ -96,6 +96,29 @@ it('testApplyProjectCollection4', async () => {
   );
 });
 
+
+it('testApplyProjectCollectionKeep', async () => {
+  expect(SrcHandle.applyProject( [ { 'ab': 123, 'de': 2, _category : { category: 'A' , Luxidx : [{ n : 'B', i : 4 }, { i:4 }] }, _d : [ { x: 2}, {x: 3} ] }], 
+    { 'ab': 1, 'category': '_category.category' , n: '_category.Luxidx.n' , x : '_d.x'}, ['x'])).toEqual( 
+    [ 
+      { ab: 123, category : 'A', n: 'B', x:[2,3] },
+      { ab: 123, category : 'A', n: undefined, x:[2,3]},
+    ]
+  );
+});
+
+
+it('testApplyProjectCollectionKeep', async () => {
+  expect(SrcHandle.applyProject( [{ 'ab': 123, 'de': 2, _category : { category: 'A' , Luxidx : [{ n : 'B', i : 4 }, { i:4 }] }, _d : [ { x: 2}, {x: 3} ] }], 
+    { 'ab': 1, 'category': '_category.category' , n: '_category.Luxidx.n',  i: '_category.Luxidx.i' , x : '_d.x'}, ['n','i', 'x'])).toEqual( 
+    [
+      { ab: 123, category : 'A', n: ['B'], i:[4,4], x:[2,3] }
+    ]
+  );
+});
+
+
+
 it('testApplyProjectCollection5', async () => {
   expect(SrcHandle.applyProjectCollecting( [ {a: 'b'}], { 'ab': 123, 'de': 2, _category : [{ category: 'A' , Luxidx : [{ n : 'B', i : 4 }, { i:4 }] }], _d : [ { x: 2}, {x: 3} ] }, 
     { 'ab': 1, 'category': '_category.category' , n: '_category.Luxidx.n' , x : '_d.x'})).toEqual( 
@@ -115,11 +138,11 @@ it('testfilterProject', async () => {
 });
 
 it('testProject', async () => {
-  var recs =  [{'domain':'IUPAC','_categories':[{'category':'element name','category_description':'element name','QBEColumnProps':{'defaultWidth':120,'QBE':true,'LUNRIndex':true},'wordindex':true,'category_synonyms':['name']},{'category':'element symbol','category_description':'element symbol','QBEColumnProps':{'defaultWidth':60,'QBE':true,'LUNRIndex':true},'wordindex':true,'category_synonyms':['symbol']},{'category':'atomic weight','category_description':'weigth of the element','QBEColumnProps':{'defaultWidth':80,'QBE':true},'category_synonyms':['element weight']},{'category':'element number','category_description':'weigth of the element','QBEColumnProps':{'defaultWidth':60,'QBE':true,'LUNRIndex':true},'wordindex':true}],'columns':['element symbol','element number','element name']}
+  var recs =  [{'domain':'IUPAC','_categories':[{'category':'element name','category_description':'element name','QBEColumnProps':{'defaultWidth':120,'QBE':true,'LUNRIndex':true},'wordindex':true,'category_synonyms':['name']},{'category':'element symbol','category_description':'element symbol','QBEColumnProps':{'defaultWidth':60,'QBE':true,'LUNRIndex':true},'wordindex':true,'category_synonyms':['symbol']},{'category':'atomic weight','category_description':'weight of the element','QBEColumnProps':{'defaultWidth':80,'QBE':true},'category_synonyms':['element weight']},{'category':'element number','category_description':'weight of the element','QBEColumnProps':{'defaultWidth':60,'QBE':true,'LUNRIndex':true},'wordindex':true}],'columns':['element symbol','element number','element name']}
   ]; 
-  expect(SrcHandle.applyProject(recs, { 'domain': 1 })).toEqual( [{ 'domain' : 'IUPAC'}]);
+  expect(SrcHandle.applyProject(recs, { 'domain': 1 },[])).toEqual( [{ 'domain' : 'IUPAC'}],[]);
   var project = { 'domain' : 1, 'category' : '_categories.category' , 'LUNRIndex' : '_categories.QBEColumnProps.LUNRIndex', 'columns': 1 };
-  expect(SrcHandle.applyProject(recs,project)).toEqual( [{
+  expect(SrcHandle.applyProject(recs,project,[])).toEqual( [{
     'LUNRIndex': true,
     'category': 'element name',
     'columns': 'element symbol',

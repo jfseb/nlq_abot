@@ -526,38 +526,3 @@ export function queryInternal(querystring: string, theModel: IFModel.IModels, ha
   );
   return k;
 }
-
-
-/*
-
-
-          export interface IWhatIsTupelAnswer {
-              sentence: ISentence;
-              record: IRecord;
-              categories: string[];
-              result: string[];
-              _ranking: number;
-          }
-
-
-
-
-
-      });
-    }
-  //  logPerf('listAllWithContext');
-  //  perflog("totalListAllWithContext");
-    var aSentencesReinforced = analyzeContextString(contextQueryString, aRules);
-  //  perflog("LATWC matching records (s=" + aSentencesReinforced.sentences.length + ")...");
-    var matchedAnswers = WhatIs.matchRecordsQuickMultipleCategories(aSentencesReinforced, categories, records, domainCategoryFilter); //aTool: Array<IMatch.ITool>): any /* objectstream * / {
-    if(debuglog.enabled){
-      debuglog(" matched Answers" + JSON.stringify(matchedAnswers, undefined, 2));
-    }
-  //  perflog("filtering topRanked (a=" + matchedAnswers.tupelanswers.length + ")...");
- //   var matchedFiltered = WhatIs.filterOnlyTopRankedTupel(matchedAnswers.tupelanswers);
- //   if (debuglog.enabled) {
- //     debuglog("LATWC matched top-ranked Answers" + JSON.stringify(matchedFiltered, undefined, 2));
- //   }
-  }
-}
-*/

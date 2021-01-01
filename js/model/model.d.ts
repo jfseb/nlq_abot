@@ -15,19 +15,27 @@ export declare function getModelData(srcHandle: ISrcHandle, modelName: string, m
  * returns when all models are loaded and all modeldocs are made
  * @param srcHandle
  */
-export declare function getModelHandle(srcHandle: ISrcHandle, connectionString: string): Promise<IMatch.IModelHandleRaw>;
+export declare function getModelHandle(srcHandle: ISrcHandle, modelPath: string): Promise<IMatch.IModelHandleRaw>;
 export declare function getFactSynonyms(mongoHandle: IMatch.IModelHandleRaw, modelname: string): Promise<ISynonym[]>;
 export declare function getMongoCollectionNameForDomain(theModel: IMatch.IModels, domain: string): string;
 export declare function getMongooseModelNameForDomain(theModel: IMatch.IModels, domain: string): string;
 export declare function getModelForModelName(theModel: IMatch.IModels, modelname: string): any;
 export declare function getModelForDomain(theModel: IMatch.IModels, domain: string): any;
 export declare function getModelNameForDomain(handle: IMatch.IModelHandleRaw, domain: string): string;
+export declare function getDomainForModelName(models: IMatch.IModels, modelName: string): string;
 export declare function filterRemapCategories(mongoMap: IMatch.CatMongoMap, categories: string[], records: any[]): any[];
 export declare function filterRemapCategories2(mongoMap: IMatch.CatMongoMap, categories: string[], records: any[]): any[];
 export declare function checkModelMongoMap(model: IPseudoModel, modelname: string, mongoMap: IMatch.CatMongoMap, category?: string): any;
-export declare function getExpandedRecordsFull(theModel: IMatch.IModels, domain: string): Promise<{
+/**
+ * Unwraps array, retaining the *FIRST* member of an array,
+ * note that the result is indexed by { category : member }
+ * @param theModel
+ * @param domain
+ */
+export declare function getExpandedRecordsFirst(theModel: IMatch.IModels, domain: string): Promise<{
     [key: string]: any;
 }>;
+export declare function getExpandedRecordsSome(theModel: IMatch.IModels, domain: string, categories: string[], keepAsArray: string[]): Promise<any[]>;
 export declare function getExpandedRecordsForCategory(theModel: IMatch.IModels, domain: string, category: string): Promise<{
     [key: string]: any;
 }>;
@@ -62,12 +70,18 @@ export declare function addCloseExactRangeRules(rules: IMatch.mRule[], seenRules
 export declare function readFillers(srcHandle: ISrcHandle, oModel: IMatch.IModels): Promise<any>;
 export declare function readOperators(srcHandle: ISrcHandle, oModel: IMatch.IModels): Promise<any>;
 export declare function releaseModel(model: IMatch.IModels): void;
-export declare function loadModelsOpeningConnection(srchandle: ISrcHandle, connectionString?: string, modelPath?: string): Promise<IMatch.IModels>;
+export declare function LoadModels(modelPath: string): Promise<IMatch.IModels>;
+/**
+ * @deprecated use LoadModels
+ * @param srchandle
+ * @param modelPath
+ */
+export declare function loadModelsOpeningConnection(srchandle: ISrcHandle, modelPath?: string): Promise<IMatch.IModels>;
 /**
  * @param srcHandle
  * @param modelPath
  */
-export declare function loadModels(srcHandle: ISrcHandle, connectionString: string, modelPath: string): Promise<IMatch.IModels>;
+export declare function loadModels(srcHandle: ISrcHandle, modelPath: string): Promise<IMatch.IModels>;
 export declare function _loadModelsFull(modelHandle: IMatch.IModelHandleRaw, modelPath?: string): Promise<IMatch.IModels>;
 export declare function sortCategoriesByImportance(map: {
     [key: string]: IMatch.ICategoryDesc;

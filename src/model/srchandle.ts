@@ -141,7 +141,9 @@ export function satisfiesMatch(rec : any, match : any) : boolean {
       var rhs = evalArg(rec,match[op][1]);
       debuglog(() => 'rhs ' + JSON.stringify(lhs) + " rhs:" + JSON.stringify(rhs));
       return evalSet(op,lhs,rhs);
-  } 
+  } else if ( match["$expr"]) {
+    return satisfiesMatch(rec,match["$expr"]);
+  }
   else {
     console.log('unknown op ' + JSON.stringify(match));
   }
@@ -154,9 +156,58 @@ export function applyMatch(records:any[], match: any) : any[] {
   return res;
 }
 
-export function applyProject(records:any[], project: any) : any[] {
+export function applyProjectOnly(records:any[], project: any) : any[] {
   var res = [];
-  records.forEach(rec => res = applyProjectCollecting(res,rec,project));
+  var len = records.length; 
+  records.forEach((rec,index) =>{
+    if(index % 200 == 10) {
+      console.log('' + index + "/" + len + " " + res.length);
+    }
+    res = applyProjectCollecting(res,rec,project,{})
+  });
+  return res;
+}
+
+/**
+ * 
+ * @param records 
+ * @param project 
+ * @param keepAsArray  members ( keys of project! ) are directly collected as array and not to-n-expanded, 
+ * so  [{a :1, b:"B1" },{a:2, b:"B2"}] , c[ "C1", "C2" ] 
+ * will become  a: [1,2], b: ["B1", B2], c: ["C1" , "C2"] if  ["a","b","c"] is passed
+ */
+export function applyProject(records:any[], project: any, keepAsArray : string[]) : any[] {
+  // 1) collect all keepasarray directly, 
+  var splitKeepAsArrayPaths = {};
+  keepAsArray.forEach( k => {
+    splitKeepAsArrayPaths[k] = project[k].split('.');
+  });
+  var recFixed = records;
+  if( keepAsArray.length) {
+    console.log(" keep fixed" + JSON.stringify(keepAsArrayMap));
+    recFixed = records.map( r => {
+      var rfix = _.clone(r);
+      keepAsArray.forEach( p => {
+        rfix[p] = MongoMap.collectMemberByPath(r, splitKeepAsArrayPaths[p]);      
+      });
+      return rfix;
+    });
+  }
+  
+  var newproject = _.clone(project);
+  var keepAsArrayMap = {};
+  keepAsArray.forEach( k => {
+    newproject[k] = k;
+    keepAsArrayMap[k] = 1;
+  });
+  var res = [];
+  var len = records.length; 
+  recFixed.forEach((rec,index) =>{
+    if(index % 200 == 10) {
+      console.log('' + index + "/" + len + " " + res.length);
+    }
+    res = applyProjectCollecting(res,rec,newproject, keepAsArrayMap)
+  });
   return res;
 }
 
@@ -209,8 +260,8 @@ export function flattenDeep( rec : any, compact : string[]) : any[] {
   return res;
 }
 
- export function applyProjectCollecting(res:any[], rec:any, project: any): any[] {
-  // 1) retrieve onyl members part of the project, flattening the records in the process
+ export function applyProjectCollecting(res:any[], rec:any, project: any, keepAsArrayMap : any): any[] {
+  // 1) retrieve only members part of the project, flattening the records in the process
   var fields = Object.getOwnPropertyNames(project);
   var seen = {};
   var compact = [];
@@ -221,7 +272,10 @@ export function flattenDeep( rec : any, compact : string[]) : any[] {
       var fullpath = (project[f] == 1)?  f : project[f];
       var path = fullpath.split(".");
       if ( path.length == 1) {
-        if ( _.isArray(rec[fullpath])) {
+        if ( _.isArray(rec[fullpath]) && keepAsArrayMap[f]) {
+          // keep array!
+          tmpl[path] = rec[fullpath];
+        } else if ( _.isArray(rec[fullpath])) {
           compact.push(fullpath)
           tmpl[f] = rec[fullpath];
           return;
@@ -238,7 +292,7 @@ export function flattenDeep( rec : any, compact : string[]) : any[] {
         compact.push(prefix);
         var projSuffix = filterProject(project,prefix);
         Object.getOwnPropertyNames(projSuffix).forEach( a=> seen[a] = 1);
-        var localExpand = applyProject(wrapArray(rec[prefix]), projSuffix);
+        var localExpand = applyProjectOnly(wrapArray(rec[prefix]), projSuffix);
         tmpl[prefix] = localExpand;
       }
     }
@@ -311,11 +365,12 @@ export function applySort(records:any[], match: any) : any[] {
   return records; 
 }
 
+
 export function applyStep(records:any[], queryStep: any) : any[] {
   if( queryStep["$match"]) {
     return applyMatch(records, queryStep["$match"])
   } else if ( queryStep["$project"]) {
-    return applyProject(records, queryStep["$project"]);    
+    return applyProject(records, queryStep["$project"], queryStep["$keepAsArray"] || []);    
   } else if ( queryStep["$sort"] ) {
     return applySort(records, queryStep["$sort"]);
   } else if ( queryStep["$unwind"] ) {
@@ -420,10 +475,14 @@ class APseudoModel implements IPseudoModel {
 class ASrcHandle implements ISrcHandle {
   _modelNames : string[];
   _pseudoModels : Map<String,IPseudoModel>;
-  name: string;
+  //name: string;
   path : string;
   constructor(path: string) {
     this.path = path;
+    if( !this.path.endsWith('/')) {
+      this.path = this.path + '/';
+    }
+    console.log(' this is the path' + path);
     this._pseudoModels = {} as Map<String,IPseudoModel>; 
   }
   modelNames() : string[] {
@@ -439,13 +498,12 @@ class ASrcHandle implements ISrcHandle {
     debuglog("Setting model " + modelName + " with " + records.length + " records ");
     this._pseudoModels[modelName] = new APseudoModel(modelName, records, schema); 
   }
-  connect( connectionString : string ) : Promise<ISrcHandle> {
-    this.name = connectionString; 
-    if ( this.name.indexOf("2")>= 0) {
-      this.path = "./testmodel2" + "/";
-    } else {
-      this.path = "./testmodel" + "/";
+  connect( modelPath : string ) : Promise<ISrcHandle> {
+    this.path = modelPath;
+    if( !this.path.endsWith('/')) {
+      this.path = this.path + '/';
     }
+    console.log(' this is the path' + this.path);
     var self = this;
     return new Promise<ISrcHandle>( (resolve, reject) => {
       fs.readFile( this.path + "models.json", (err, buffer ) => {

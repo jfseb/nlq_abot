@@ -8,7 +8,7 @@ var prom1 = null;
 export function getTestModel1(): Promise<void | IFModel.IModels> {
   if ( !prom1 ) {
     var srcHandle = SrcHandle.createSourceHandle();
-    prom1 = Model.loadModelsOpeningConnection( srcHandle, "testmodel", "./testmodel");
+    prom1 = Model.loadModelsOpeningConnection( srcHandle, "./testmodel");
   }
   return prom1;
 }
@@ -20,5 +20,5 @@ export function getTestModel1(): Promise<void | IFModel.IModels> {
  */
 export function getTestModel2(): Promise<void | IFModel.IModels> {
   var srcHandle = SrcHandle.createSourceHandle();
-  return Model.loadModelsOpeningConnection( srcHandle, "testmodel2", "./testmodel2");
+  return Model.loadModelsOpeningConnection( srcHandle, "./testmodel2");
 }

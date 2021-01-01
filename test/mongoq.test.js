@@ -40,17 +40,7 @@ describe('testMakeMongoDomain', () => {
     var res = mongoBridge.mongoooseDomainToDomain('FioriBOM');
     expect(res).toEqual('FioriBOM');
   });
-  /*
-  exports.testMakeMongoDomain = function (test) {
-    getModel().then((theModel) => {
-      var mongoBridge = new MongoQ.MongoBridge(theModel);
-      var res = mongoBridge.mongoooseDomainToDomain('FioriBOM');
-      test.equal(res, 'FioriBOM', 'bad result');
-      test.done();
-      Model.releaseModel(theModel);
-    });
-  };
-  */
+
 
   //exports.testMakeMongoDomain = function (test) {
   //  getModel().then((theModel)

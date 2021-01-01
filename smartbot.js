@@ -3,9 +3,9 @@
 //  port: 8080
 // })
 
-var builder = require('botbuilder');
+var builder = require('./js/bot/botbuilder.js');
 // Create bot and bind to console
-var connector = new builder.ConsoleConnector().listen();
+var connector = new builder.ConsoleConnector();
 
 var botdialog = require('./js/bot/smartdialog.js');
 
@@ -19,5 +19,7 @@ function loadModel() {
   return Model.loadModelsOpeningConnection(srcHandle, 'testmodel', './testmodel');
 }
 
-
 botdialog.makeBot(connector, loadModel, { showModelLoadTime: true});
+
+
+connector.listen();

@@ -345,6 +345,7 @@ export interface IRawSchema {
 export interface QBEColumnProp {
       defaultWidth?: number,
       QBE: boolean,
+      QBEConcat? : boolean, // whether to not unwrap (full cross product) the property but keep as an array of strings during indexing, the concatenate via join(',') for the display data
       LUNRIndex?: boolean,
       QBEInclude? : boolean
 }
@@ -445,9 +446,9 @@ export interface IModels {
         }
       }
     },
-    rawModels : { [key : string] : IModel};
+    rawModelByDomain : { [key : string] : IModel};
+    rawModelByModelName : { [key : string] : IModel};
     domains: string[],
-//    tools: ITool[],
     category: string[],
     operators : { [key: string] : IOperator },
     mRules: mRule[],

@@ -19,14 +19,14 @@
     },
   	{
       "name": "atomic weight",
-      "description": "weigth of the element",
+      "description": "weight of the element",
       "defaultWidth": 80,
       "QBE": true,
       "LUNRIndex": false
     },
   	{
       "name": "element number",
-      "description": "weigth of the element",
+      "description": "weight of the element",
       "defaultWidth": 60,
       "QBE": true,
       "LUNRIndex": true

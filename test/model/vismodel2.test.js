@@ -83,9 +83,13 @@ it('testMakeTab', done => {
   });
 });
 
-var TESTMODELLOCATION = '';
+var TESTMODELLOCATION = './testmodel';
 
-it('testMakeLUNR', done => {
-  Vismodel.makeLunrIndex(TESTMODELLOCATION + 'testmodel/iupacs', './tmp/model_iupac', true);
-  done();
+it('testMakeLUNR', (done) => {
+  Model.LoadModels(TESTMODELLOCATION).then( imodels => {
+    //var path = imodels.mongoHandle.srcHandle.getPath(); 
+    //var mdls = JSON.parse('' + fs.readFileSync(path + '/models.json'));
+    Vismodel.makeLunrIndex(imodels, 'iupacs').then( ()=> { done(); });
+  });
+  //  Vismodel.makeLunrIndex(TESTMODELLOCATION + 'testmodel/iupacs', './tmp/model_iupac', true);
 });

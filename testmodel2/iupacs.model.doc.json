@@ -29,7 +29,7 @@
     },
     {
       "category": "atomic weight",
-      "category_description": "weigth of the element",
+      "category_description": "weight of the element",
       "QBEColumnProps": {
         "defaultWidth": 80,
         "QBE": true
@@ -40,7 +40,7 @@
     },
     {
       "category": "element number",
-      "category_description": "weigth of the element",
+      "category_description": "weight of the element",
       "QBEColumnProps": {
         "defaultWidth": 60,
         "QBE": true,

@@ -1,6 +1,6 @@
 {
   "name": "nlq_abot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a bot engine using an english query language",
   "main": "js/index.js",
   "typings": "js/index.d.ts",
@@ -15,9 +15,9 @@
     "setup": "gulp default",
     "test": "gulp test",
     "build": "gulp && tsc",
-    "startConsole": "node console_app.js",
     "version": "npm show nlq_abot@* version",
     "run": "node smartbot",
+    "preparemodel": "node --max-old-space-size=14000 preparemodel",    
     "start": "node smartbot",
     "coverage": "jest --coverage",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
@@ -100,7 +100,6 @@
     "elizabot": "0.0.2",
     "lodash": "^4.17.4",
     "merge-stream": "^2.0.0",
-    "pg": "^7.12.1",
     "uuid": "^3.1.0"
   }
 }

@@ -11,7 +11,7 @@ interface CategoryRecord {
     nrTotalRecordsInDomain: number;
 }
 export declare function JSONEscape(s: string): string;
-export declare function makeLunrIndex(modelpath: string, output: string, silent?: boolean): void;
+export declare function makeLunrIndex(imodels: IMatch.IModels, modelname: string, silent?: boolean): Promise<any>;
 export declare function calcCategoryRecord(m: IMatch.IModels, category: string, domain: string, cache?: any): Promise<CategoryRecord>;
 export declare function graphDomain(domain: string, m: IMatch.IModels, domainRecordCache?: any): Promise<string>;
 /**
@@ -19,5 +19,5 @@ export declare function graphDomain(domain: string, m: IMatch.IModels, domainRec
  */
 export declare function tabDomain(domain: string, m: IMatch.IModels): Promise<string>;
 export declare function visModels(m: IMatch.IModels, folderOut: string): Promise<any>;
-export declare function tabModels(m: IMatch.IModels, folderOut: string): Promise<any>;
+export declare function tabModels(m: IMatch.IModels): Promise<any>;
 export {};

@@ -49,7 +49,7 @@ it('testLogger', done => {
 
     intent: answer.intent,
 
-    conversationid: session.message.address
+    conversationId: session.message.address
     && session.message.address.conversation
     && session.message.address.conversation.id || "",
 */
@@ -60,9 +60,7 @@ it('testLogger', done => {
         timestamp : new Date().toISOString(),
         address : {
           user : 'theUSER',
-          conversation : {
-            id : 'TheID'
-          }
+          conversationId :  'TheID'
         }
       }
     },
@@ -84,11 +82,11 @@ it('testLogger', done => {
       debuglog('callback');
       expect(1).toEqual(1);
       expect(cA1).toEqual(
-        'INSERT INTO logconv (botid,userid,message,response,action,intent,conversationid,meta,delta) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9)'
+        'INSERT INTO logconv (botid,userid,message,response,action,intent,conversationId,meta,delta) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9)'
       );
       cA2[8] = 1234;
       expect(cA2).toEqual([ 'LOGID',
-        '',
+        'theUSER',
         'undefined',
         'TheResponse',
         'TheAction',

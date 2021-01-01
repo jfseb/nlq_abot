@@ -18,7 +18,7 @@
       "category": "element symbol",
       "category_description": "element symbol",
       "QBEColumnProps": {
-        "defaultWidth": 60,
+        "defaultWidth": 160,
         "QBE": true,
         "LUNRIndex": true
       },
@@ -29,9 +29,9 @@
     },
     {
       "category": "atomic weight",
-      "category_description": "weigth of the element",
+      "category_description": "weight of the element",
       "QBEColumnProps": {
-        "defaultWidth": 80,
+        "defaultWidth": 180,
         "QBE": true
       },
       "category_synonyms": [
@@ -40,9 +40,9 @@
     },
     {
       "category": "element number",
-      "category_description": "weigth of the element",
+      "category_description": "weight of the element",
       "QBEColumnProps": {
-        "defaultWidth": 60,
+        "defaultWidth": 160,
         "QBE": true,
         "LUNRIndex": true
       },

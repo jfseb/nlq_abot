@@ -13,13 +13,13 @@ const HtmlConnector = require(root + '/ui/htmlconnector.js');
 
 it("testWithIdHook", done => {
   expect.assertions(4);
-  var address = { user: 'abc'};
-  var out = new HtmlConnector.HTMLConnector({ user : "auser", bot : "bbot"});
+  var address = { user: 'abcX', conversationId : "convX"};
+  var out = new HtmlConnector.HTMLConnector({ user : "auser", conversationId : "xid"});
   out.startConversation(address, function(err, adr){
     expect(err).toEqual(null);
-    expect(adr.user).toEqual('abc');
-    expect(adr.conversation.id).toEqual('Convo1');
-    expect(adr=== address).toEqual(false);
+    expect(adr.user).toEqual('abcX');
+    expect(adr.conversationId).toEqual('convX');
+    expect(adr=== address).toEqual(true);
     done();
   });
 })
@@ -65,35 +65,23 @@ it("testWithIdHook", done => {
   });
 
 
-  out.processMessage("this is the line", { user : "auser", "conversationid" : "convid"});
+  out.processMessage("this is the line", { user : "auser", "conversationId" : "convid"});
   expect(hook3.cnt).toEqual(1);
   hook3.a[0].timestamp = "TSXXX"
   expect(hook3.a).toEqual([
   {
     "type": "message",
-    "agent": "botbuilder",
     "address": {
-      "channelId": "console",
-      "user": {
-        "id": "auser",
-        "name": "auser"
-      },
-      "bot": {
-        "id": "bbot",
-        "name": "bbot"
-      },
-      "conversation": {
-        "id": "convid"
-      }
+      "user": "auser",
+      "conversationId": "convid"
     },
-    "source": "console",
     "timestamp": "TSXXX",
     "text": "this is the line"
   }
 ]);
 
-  expect(hook3.a[0].address.user).toEqual({ id :"auser", name : "auser"});
-  expect(hook3.a[0].address.conversation.id).toEqual("convid");
+  expect(hook3.a[0].address.user).toEqual("auser");
+  expect(hook3.a[0].address.conversationId).toEqual("convid");
 
 
   // send to id2
@@ -102,29 +90,17 @@ it("testWithIdHook", done => {
   expect(hook1.cnt).toEqual(0);
   expect(hook2.cnt).toEqual(0);
 
-  expect(hook3.a[0].address.user).toEqual({ id :"id2", name : "id2"});
-  expect(hook3.a[0].address.conversation.id).toEqual("id2");
+  expect(hook3.a[0].address.user).toEqual("id2");
+  expect(hook3.a[0].address.conversationId).toEqual("id2");
 
  hook3.a[0].timestamp = "TSXXX"
   expect(hook3.a).toEqual([
   {
     "type": "message",
-    "agent": "botbuilder",
     "address": {
-      "channelId": "console",
-      "user": {
-        "id": "id2",
-        "name": "id2"
-      },
-      "bot": {
-        "id": "bbot",
-        "name": "bbot"
-      },
-      "conversation": {
-        "id": "id2"
-      }
+      "user": "id2",
+      "conversationId": "id2"
     },
-    "source": "console",
     "timestamp": "TSXXX",
     "text": "this is the line2"
   }
@@ -156,7 +132,7 @@ it("testWithIdHook", done => {
   var msg = {
     text : "here text",
     entities : ["entity0"],
-    address : { conversation : { id  : "id2" } }
+    address : { conversationId : "id2" }
   }
 
   hook2 = { a : 0, cnt : 0};
@@ -191,7 +167,7 @@ it("testWithIdHook", done => {
 
   expect(hookNoID.a).toEqual("here text2");
   expect(hookNoID.b).toEqual("entity2");
-  expect(hookNoID.c).toEqual(undefined);
+  expect(hookNoID.c).toEqual("noconvid");
 
   expect(hookDone.cnt).toEqual(3);
   expect(hookDone.a).toEqual(null);

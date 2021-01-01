@@ -31,12 +31,21 @@ export declare function compareByType(op: string, l: any, r: any): boolean;
 export declare function evalSet(op: string, lhs: any, rhs: any): boolean;
 export declare function satisfiesMatch(rec: any, match: any): boolean;
 export declare function applyMatch(records: any[], match: any): any[];
-export declare function applyProject(records: any[], project: any): any[];
+export declare function applyProjectOnly(records: any[], project: any): any[];
+/**
+ *
+ * @param records
+ * @param project
+ * @param keepAsArray  members ( keys of project! ) are directly collected as array and not to-n-expanded,
+ * so  [{a :1, b:"B1" },{a:2, b:"B2"}] , c[ "C1", "C2" ]
+ * will become  a: [1,2], b: ["B1", B2], c: ["C1" , "C2"] if  ["a","b","c"] is passed
+ */
+export declare function applyProject(records: any[], project: any, keepAsArray: string[]): any[];
 export declare function filterProject(project: any, prefix: string): {};
 export declare function wrapArray(a: any): any[];
 export declare function copyAllBut(rec: any, removedProperties: string[]): {};
 export declare function flattenDeep(rec: any, compact: string[]): any[];
-export declare function applyProjectCollecting(res: any[], rec: any, project: any): any[];
+export declare function applyProjectCollecting(res: any[], rec: any, project: any, keepAsArrayMap: any): any[];
 export declare function isDeep(a: any): boolean;
 export declare function makeKey(a: any): string;
 export declare function isAllPropsEmpty(s: string): boolean;

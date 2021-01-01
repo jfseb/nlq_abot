@@ -1,5 +1,5 @@
 
-/* #userid", "text", "response", "action", "intent", "conversationid",
+/* #userid", "text", "response", "action", "intent", "conversationId",
 #"res", "delta" */
 
 CREATE TABLE IF NOT EXISTS logconv (
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS logconv (
           response varchar(1024) not null,
           action varchar(512) not null,
           intent varchar(20) not null,
-          conversationid varchar(40) not null,
+          conversationId varchar(40) not null,
           delta int not null,
           meta json
 );

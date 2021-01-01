@@ -2,9 +2,11 @@ node_modules
 *.tgz
 *.bak
 **/*.bak
-.nyc_output
+coverage/*
+tmp/*
 docs
 logs
+env/*
 src
 test
 log.json
@@ -15,18 +17,41 @@ post_sort
 test1x.json
 *.log
 **/*.bak
+
+# test files
+test/*
+**/_cache.zip
+**/*.zip
+
+# root files
+*.cmd
+*.txt
+
+smartbot.js
+transform.js
+
+*.bak
+*.md.bak
+
+# build files etc.
 .vscode/*
-tsconfig.json
-README.md
 .eslintrc.json
 .npmignore
 .gitignore
 .travis.yml
+.eslintignore
 gulpfile.js
-smbmodel
+tsconfig.json
+README.md
+
+# 
+testdb/*
+
+
 *.txt
+*.cmd
+smartbot.js
 **/*.map
 *.bak
 gen2
-oo.txt
 

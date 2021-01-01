@@ -10,6 +10,7 @@ import * as debugf from 'debugf';
 var debuglog = debugf('model');
 
 import { IFModel as IFModel} from './index_model';
+import * as SrcHandle from './srchandle';
 
 import { applyProject, IPseudoModel, ISrcHandle, ISynonym} from './srchandle';
 
@@ -84,7 +85,7 @@ export function getModelData(srcHandle: ISrcHandle, modelName: string, modelName
  * returns when all models are loaded and all modeldocs are made
  * @param srcHandle
  */
-export function getModelHandle(srcHandle: ISrcHandle, connectionString : string): Promise<IMatch.IModelHandleRaw> {
+export function getModelHandle(srcHandle: ISrcHandle, modelPath : string): Promise<IMatch.IModelHandleRaw> {
     var res = {
         srcHandle: srcHandle,
         modelDocs: {},
@@ -92,7 +93,7 @@ export function getModelHandle(srcHandle: ISrcHandle, connectionString : string)
         mongoMaps: {}
     } as IMatch.IModelHandleRaw;
     //var modelES = Schemaload.getExtendedSchemaModel(srcHandle);
-    return srcHandle.connect(connectionString).then( () =>{
+    return srcHandle.connect(modelPath).then( () =>{
     var modelnames = srcHandle.modelNames(); 
     //return modelES.distinct('modelname').then(
     //var fn = (modelnames) => {
@@ -180,6 +181,15 @@ export function getModelNameForDomain(handle : IMatch.IModelHandleRaw, domain : 
 }
 
 
+export function getDomainForModelName(models : IMatch.IModels, modelName : string) : string {
+    var handle = models.mongoHandle;
+    var res = handle.modelDocs[modelName]?.domain; 
+    if ( res == null) {
+        throw " this is not a modelName " + modelName; 
+    }
+    return res; 
+}
+
 function assureDirExists(dir : string) {
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
@@ -212,7 +222,7 @@ export function filterRemapCategories2( mongoMap : IMatch.CatMongoMap, categorie
         var categoryPath = mongoMap[category].fullpath;
         project[category] = categoryPath;
     });
-    return applyProject(records,project);
+    return applyProject(records,project,[]);
 }
 
 export function checkModelMongoMap(model: IPseudoModel, modelname : string, mongoMap: IMatch.CatMongoMap, category? : string) {
@@ -234,7 +244,13 @@ export function checkModelMongoMap(model: IPseudoModel, modelname : string, mong
     return undefined;
 }
 
-export function getExpandedRecordsFull(theModel : IMatch.IModels, domain : string) : Promise<{ [key : string] : any}> {
+/**
+ * Unwraps array, retaining the *FIRST* member of an array, 
+ * note that the result is indexed by { category : member }
+ * @param theModel 
+ * @param domain 
+ */
+export function getExpandedRecordsFirst(theModel : IMatch.IModels, domain : string) : Promise<{ [key : string] : any}> {
     var mongoHandle = theModel.mongoHandle;
     var modelname = getModelNameForDomain(theModel.mongoHandle, domain);
     debuglog(()=>` modelname for ${domain} is ${modelname}`);
@@ -263,6 +279,36 @@ export function getExpandedRecordsFull(theModel : IMatch.IModels, domain : strin
     });
 }
 
+
+export function getExpandedRecordsSome(theModel: IMatch.IModels, domain : string, categories : string[], keepAsArray : string[]) : Promise<any[]> {
+    var mongoHandle = theModel.mongoHandle;
+    var modelname = getModelNameForDomain(theModel.mongoHandle, domain);
+    debuglog(()=>` modelname for ${domain} is ${modelname}`);
+    var model = mongoHandle.srcHandle.model(modelname);
+    var mongoMap = mongoHandle.mongoMaps[modelname];
+    debuglog(()=> 'here the mongomap' + JSON.stringify(mongoMap,undefined,2));
+    var p = checkModelMongoMap(model,modelname, mongoMap);
+    debuglog(()=>` here the modelmap for ${domain} is ${JSON.stringify(mongoMap,undefined,2)}`);
+    // construct the flattened recordlist, retaining the 
+    var project = {};
+    categories.forEach( cat => {
+        var cn = mongoMap[cat].shortName;
+        project[cn] = mongoMap[cat].fullpath;
+    })
+    var query = [{ $project : project, $keepAsArray : keepAsArray }];
+    console.log(" Project for " + modelname + " is " + JSON.stringify(query,undefined,2));
+    var res = theModel.mongoHandle.srcHandle.model(modelname).aggregate( query );
+    console.log(JSON.stringify(res,undefined,2));
+    // now remap towards categories? 
+    return res.then( rs => rs.map( rec => {
+        var rn = {};
+        categories.forEach( cat => {
+            var cn = mongoMap[cat].shortName;
+            rn[cat] = rec[cn];
+        });
+        return rn;
+    }));
+}
 
 export function getExpandedRecordsForCategory(theModel : IMatch.IModels,domain : string,category : string) : Promise<{ [key : string] : any}> {
     var mongoHandle = theModel.mongoHandle;
@@ -648,7 +694,8 @@ function makeMdlMongo(modelHandle: IMatch.IModelHandleRaw, sModelName: string, o
     */
 
     // consider streamlining the categories
-    oModel.rawModels[oMdl.domain] = oMdl;
+    oModel.rawModelByDomain[oMdl.domain] = oMdl;
+    oModel.rawModelByModelName[oMdl.modelname] = oMdl;
 
     oModel.full.domain[oMdl.domain] = {
         description: oMdl.description,
@@ -1093,19 +1140,36 @@ export function readOperators(srcHandle: ISrcHandle, oModel: IMatch.IModels) : P
 export function releaseModel(model : IMatch.IModels) {
 }
 
-export function loadModelsOpeningConnection(srchandle: ISrcHandle, connectionString? : string,  modelPath? : string) : Promise<IMatch.IModels> {
-    return loadModels(srchandle, connectionString, modelPath);
+export function LoadModels( modelPath : string ) : Promise<IMatch.IModels> {
+    var srcHandle = SrcHandle.createSourceHandle();
+  if ( modelPath == './testmodel') {
+    modelPath = __dirname + '/../../testmodel';
+  }
+  if ( modelPath == './testmodel2') {
+    modelPath = __dirname + "/../../testmodel2";
+  }
+  console.log(' modelpath ' + modelPath)
+  return loadModelsOpeningConnection(srcHandle, modelPath);
+}
+
+/**
+ * @deprecated use LoadModels
+ * @param srchandle 
+ * @param modelPath 
+ */
+export function loadModelsOpeningConnection(srchandle: ISrcHandle, modelPath? : string) : Promise<IMatch.IModels> {
+    return loadModels(srchandle, modelPath);
 }
 
 /**
  * @param srcHandle
  * @param modelPath
  */
-export function loadModels(srcHandle: ISrcHandle, connectionString : string, modelPath : string) : Promise<IMatch.IModels> {
+export function loadModels(srcHandle: ISrcHandle, modelPath : string) : Promise<IMatch.IModels> {
     if(srcHandle === undefined) {
         throw new Error('expect a srcHandle handle to be passed');
     }
-    return getModelHandle(srcHandle, connectionString).then( (modelHandle) =>{
+    return getModelHandle(srcHandle, modelPath ).then( (modelHandle) =>{
         debuglog(`got a mongo handle for ${modelPath}`);
         return _loadModelsFull(modelHandle, modelPath);
     });
@@ -1123,7 +1187,8 @@ export function _loadModelsFull(modelHandle: IMatch.IModelHandleRaw, modelPath?:
     oModel = {
         mongoHandle : modelHandle,
         full: { domain: {} },
-        rawModels: {},
+        rawModelByDomain: {},
+        rawModelByModelName : {},
         domains: [],
         rules: undefined,
         category: [],
@@ -1142,7 +1207,7 @@ export function _loadModelsFull(modelHandle: IMatch.IModelHandleRaw, modelPath?:
         // TODO
         //console.log("found a cache ?  " + !!a);
         //a = undefined;
-        if (a && !process.env.MGNLQ_MODEL_NO_FILECACHE) {
+        if (a && !process.env.NLQ_ABOT_NO_FILECACHE) {
             //console.log('return preps' + modelPath);
             debuglog("\n return prepared model !!");
             console.log("using prepared model  " + modelPath);
@@ -1351,9 +1416,11 @@ export function getCategoriesForDomain(theModel: IMatch.IModels, domain: string)
     return Meta.getStringArray(res);
 }
 
+
 export function getTableColumns(theModel: IMatch.IModels, domain: string): string[] {
     checkDomainPresent(theModel, domain);
-    return theModel.rawModels[domain].columns.slice(0);
+    var modelName = getModelNameForDomain(theModel.mongoHandle, domain);
+    return theModel.mongoHandle.modelDocs[modelName].columns.slice(0);
 }
 
 function forceGC() {

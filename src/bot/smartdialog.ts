@@ -1,9 +1,7 @@
 /**
  * The bot implementation
  *
- * Instantiate apssing a connector via
- * makeBot
- *
+ * Instantiate creation via makeBot
  *
  */
 /**
@@ -16,12 +14,6 @@ import * as fs from 'fs';
 
 import * as builder from './botbuilder';
 import * as debug from 'debug';
-
-//import * as Match from '../match/match';
-//import * as srcHandle from 'srcHandle';
-
-//import * as Analyze from '../match/analyze';
-import { BreakDown } from '../model/index_model';
 
 import * as WhatIs from '../match/whatis';
 import * as ListAll from '../match/listall';
@@ -86,7 +78,7 @@ import * as PlainRecognizer from './plainrecognizer';
 function getConversationId(session: builder.Session): string {
   return session.message &&
     session.message.address &&
-    session.message.address.conversation.id;
+    session.message.address.conversationId;
 }
 
 var elizabots = {};
@@ -131,8 +123,7 @@ export function restrictData(arr: any[]): any[] {
 
 function restrictLoggedOn(session: builder.Session, arr: any[]): any[] {
   var userid = session.message.address
-    && session.message.address.user
-    && session.message.address.user.id || "";
+    && session.message.address.user || "";
   if (process.env.ABOT_EMAIL_USER && isAnonymous(userid)) {
     return restrictData(arr);
   }
@@ -292,7 +283,7 @@ const AnyObject = Object as any;
 
 var bot;
 
-var oJSON = JSON.parse('' + fs.readFileSync('./resources/model/intents.json'));
+var oJSON = JSON.parse('' + fs.readFileSync(__dirname + '/../../resources/model/intents.json'));
 var oRules = PlainRecognizer.parseRules(oJSON);
 // var Recognizer = new (recognizer.RegExpRecognizer)(oRules);
 
@@ -305,11 +296,9 @@ function logQuery(session: builder.Session, intent: string, result?: Array<any>)
     intent: intent,
     res: result && result.length && JSON.stringify(result[0]) || "0",
     conversationId: session.message.address
-    && session.message.address.conversation
-    && session.message.address.conversation.id || "",
+    && session.message.address.conversationId || "",
     userid: session.message.address
-    && session.message.address.user
-    && session.message.address.user.id || ""
+    && session.message.address.user || ""
   }) , function (err) {
     if (err) {
       debuglog("logging failed " + err);
@@ -326,11 +315,10 @@ function logQueryWhatIsTupel(session: builder.Session, intent: string, result?: 
     intent: intent,
     res: result && result.length && WhatIs.dumpNiceTupel(result[0]) || "0",
     conversationId: session.message.address
-    && session.message.address.conversation
-    && session.message.address.conversation.id || "",
+    && session.message.address.conversationId
+    || "",
     userid: session.message.address
-    && session.message.address.user
-    && session.message.address.user.id || ""
+    && session.message.address.user || ""
   }), function (err) {
     if (err) {
       debuglog("logging failed " + err);
@@ -351,9 +339,9 @@ function makeBot(connector,
   var theModelP = modelProvider();
   theModelP.then(
     (theModel) => {
-      var t = Date.now() - t0;
+      var t = (Date.now() - t0)/1000;
       if (options && options.showModelLoadTime) {
-        console.log(`model load time ${(t)}`);
+        console.log(`model load time ${(t)}s`);
       }
     });
 
@@ -953,7 +941,7 @@ function makeBot(connector,
         intent: "Wrong",
         response: '<begin updown>'
       }); */
-      session.beginDialog('/updown', session.userData.count);
+      session.beginDialog('/updown', 1);
     },
     function (session, results, next) {
       var alarm = session.dialogData.alarm;

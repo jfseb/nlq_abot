@@ -10,7 +10,7 @@ export interface ILogEntry {
     response: string;
     action: string;
     intent: string;
-    conversationid: string;
+    conversationId: string;
     /**
      * an result
      **/

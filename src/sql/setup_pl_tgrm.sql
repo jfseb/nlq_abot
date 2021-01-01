@@ -1,5 +1,5 @@
 
-/* #userid", "text", "response", "action", "intent", "conversationid",
+/* #userid", "text", "response", "action", "intent", "conversationId",
 #"res", "delta" */
 
 CREATE INDEX idx_words_trgm_gin_lowercaseword

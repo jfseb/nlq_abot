@@ -1,13 +1,19 @@
 # nlq_abot [![Build Status](https://travis-ci.org/jfseb/nlq_abot.svg?branch=master)](https://travis-ci.org/jfseb/nlq_abot) [![Coverage Status](https://coveralls.io/repos/github/jfseb/nlq_abot/badge.svg)](https://coveralls.io/github/jfseb/nlq_abot)
 
 
-query bot for mongo database
+database free query bot. 
 
+This project contains 
 
+ 1. the nlq bot. 
+ 2. two testmodels ( testmodel , testmodel2 ) 
+ 3. functionality to generate files required by wosap_app for 
+    arbitrary models. 
+    
+    
 
 ```javascript
 npm install
-
 
 gulp test
 ```
@@ -25,14 +31,23 @@ testdb on the default port
 
 
 
-# Development
+# Generating model files 
 
-Where is what ?
+ each model consists of two schema files and the data file
+   xxxx.model.doc.json
+   xxxx.model.mongooseschema.json
+   xxxx.model.data.json
 
-mgnlq_er
-mgnlq_parser1
+The following additional files are generated from this data via 
+
+```
+set NQL_ABOT_MODELPATH=...\testmodel 
+npm run preparemodels
+
+node --max-old-space-size=14000 preparemodel
 
 
+```
 
 
 # Deployment

@@ -1,9 +1,7 @@
 /**
  * The bot implementation
  *
- * Instantiate apssing a connector via
- * makeBot
- *
+ * Instantiate creation via makeBot
  *
  */
 /**

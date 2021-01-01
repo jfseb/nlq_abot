@@ -271,6 +271,7 @@ export interface IRawSchema {
 export interface QBEColumnProp {
     defaultWidth?: number;
     QBE: boolean;
+    QBEConcat?: boolean;
     LUNRIndex?: boolean;
     QBEInclude?: boolean;
 }
@@ -363,7 +364,10 @@ export interface IModels {
             };
         };
     };
-    rawModels: {
+    rawModelByDomain: {
+        [key: string]: IModel;
+    };
+    rawModelByModelName: {
         [key: string]: IModel;
     };
     domains: string[];

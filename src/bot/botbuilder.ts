@@ -8,18 +8,10 @@
  */
 
 import * as fs from 'fs';
-import { send } from 'process';
+import { removeListener, send } from 'process';
 
 interface BotBuilder {
 
-}
-
-interface Conversation {
-  id : string;
-}
-
-export interface User {
-  id : string;
 }
 
 export interface Bot {
@@ -61,16 +53,13 @@ export interface IIntentRecognizer {
 }
 
 export interface Address {
-  bot: Bot;
-  conversation: Conversation;
-  user : User;
+  conversationId: string;
+  user : string
 }
 
 export interface IMessage {
   address : Address;
   type?:string;
-  agent? : string;
-  source: string;
   text : string;
   timestamp : string;
   entities? : string[];
@@ -81,8 +70,7 @@ export class Message {
   constructor(s: Session) { 
     this._theMsg = {
       type : "message",
-      agent:"botbuilder", 
-    "source" : "console" } as IMessage;
+       } as IMessage;
   }
   toMessage() : IMessage {
     return this._theMsg; 
@@ -130,7 +118,6 @@ export interface UserData {
 export interface Session {
   message : IMessage;
   dialogData : any;
-  userData : UserData;
   send(arg : stringOrMessage) : void;
   endDialogWithResult( arg : EndDialogArg);
   beginDialog(match: string, a: number);
@@ -215,7 +202,6 @@ export class IntentDialog {
   }
 
   onBegin( cb: (session: Session) => void) : void {
-
   }
 
   onDefault( cb : (session: Session) => void ) {
@@ -225,4 +211,103 @@ export class IntentDialog {
   matches( intent: string, sess : ContinueFunction[] ) : void {
     this._matches.set(intent, sess);
   }
+}
+
+import * as readline from 'readline';
+
+import { Stream } from 'stream';
+
+export class ConsoleConnector {
+  stdin : NodeJS.ReadableStream;
+  stdout : NodeJS.WritableStream;
+  answerHooks : any;
+  answerHook : any;
+  quitHook: any;
+  replyCnt : number;
+  handler : any;
+
+  conversationId : string;
+  constructor(options) {
+    options = options || {};
+    this.stdin = options.stdin || process.stdin; 
+    this.stdout = options.stdout || process.stdout;
+    this.replyCnt = 0;
+    this.conversationId = options && options.conversationId || ('' + Date.now());
+    return this;
+  }
+
+  listen() {
+    var self = this;
+    var rl = readline.createInterface( this.stdin, this.stdout); // output: this.stdout } );
+    this.answerHook = (txt,cmd, conversationId) => {
+      console.log(txt); 
+      if ( cmd ) {
+        console.log( "cmd " + JSON.stringify(cmd));
+      }
+      rl.prompt();
+    };
+    // forever .... 
+    rl.setPrompt(">");
+    rl.prompt();
+    rl.on('close', () => { process.exit(-1);} )
+    rl.on('line', (line) => {
+      self.processMessage(line, { conversationId : "conv1", user:"nouser" });      
+    });
+    return this;
+  }
+
+  setAnswerHook(answerHook, id) {
+    if (id) {
+      this.answerHooks[id] = answerHook;
+    }
+    this.answerHook = answerHook;
+  };
+  setQuitHook(quitHook) {
+    this.quitHook = quitHook;
+  };
+  processMessage = function (line, id : Address) {
+    if (typeof id === 'string') {
+      id = {
+        conversationId : id,
+        user : id,
+      };
+    }
+    if (this.handler) {
+      var msg = new Message(null)
+        .address(id)
+        .timestamp()
+        .text(line);
+      this.handler([msg.toMessage()]);
+    }
+    return this;
+  };
+  onEvent(handler) {
+    this.handler = handler;
+  };
+  send(messages : IMessage[], done) {
+    for (var i = 0; i < messages.length; i++) {
+      if (this.replyCnt++ > 0) {
+      //  console.log(' reply ');
+      }
+      var msg = messages[i];
+      if (msg.text) {
+        var command = undefined;
+        if(msg.entities && msg.entities[0] && msg.entities[0]) {
+          command = msg.entities[0];
+        }
+        if (msg.address && msg.address.conversationId
+        && this.answerHooks[msg.address.conversationId] ) {
+          this.answerHooks[msg.address.conversationId](msg.text, command, msg.address.conversationId );
+        } else {
+          this.answerHook(msg.text, command, "singletarget");
+        }
+      }
+    }
+    done(null);
+  };
+  startConversation = function (address : Address, cb) {
+    // TODO invoke this at an appropriate time
+    var adr = Object.assign({}, address); 
+    cb(null, adr);
+  };
 }

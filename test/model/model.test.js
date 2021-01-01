@@ -421,7 +421,7 @@ exports.testModelGetOperator = function (test) {
   it('testgetExpandedRecordsFull', (done) => {
     expect.assertions(3);
     //  return getModel().then(theModel => {
-    return Model.getExpandedRecordsFull(theModel, 'Cosmos').then((res) => {
+    return Model.getExpandedRecordsFirst(theModel, 'Cosmos').then((res) => {
       expect(res.length).toEqual(7);
       res.sort(Model.sortFlatRecords);
       expect(res[0].orbits).toEqual('Sun');
@@ -442,7 +442,7 @@ exports.testModelGetOperator = function (test) {
     var r = Model.getCategoryRec(mongoHandleRaw, 'iupacs', 'element number');
     delete r._id;
     debuglog(()=>JSON.stringify(r));
-    expect(r).toEqual({ 'type': 'Number', 'category': 'element number', 'category_description': 'weigth of the element', 'QBEColumnProps': { 'defaultWidth': 60, 'QBE': true, 'LUNRIndex': true }, 'wordindex': true });
+    expect(r).toEqual({ 'type': 'Number', 'category': 'element number', 'category_description': 'weight of the element', 'QBEColumnProps': { 'defaultWidth': 160, 'QBE': true, 'LUNRIndex': true }, 'wordindex': true });
     expect(r.type).toEqual('Number');
     //   Model.releaseModel(theModel);
     done();
@@ -476,7 +476,7 @@ exports.testModelGetOperator = function (test) {
       expect(1).toEqual(1);
     }
 
-    return Model.getExpandedRecordsFull(theModel, 'metamodel').then((res) => {
+    return Model.getExpandedRecordsFirst(theModel, 'metamodel').then((res) => {
       expect(res.length).toEqual(85); // 98);
       res.sort(Model.sortFlatRecords);
       expect(res[0].category).toEqual('_url');
@@ -488,7 +488,7 @@ exports.testModelGetOperator = function (test) {
   it('testgetExpandedRecordsFullArray2', (done) => {
     expect.assertions(3);
     //  return getModel().then(theModel => {
-    return Model.getExpandedRecordsFull(theModel, 'metamodel').then((res) => {
+    return Model.getExpandedRecordsFirst(theModel, 'metamodel').then((res) => {
       expect(res.length).toEqual(85); // 98);
       res.sort(Model.sortFlatRecords);
       expect(res[0].category).toEqual('_url');

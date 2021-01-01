@@ -46,96 +46,121 @@ export function JSONEscape(s: string) {
   // .replace(/\f/g, "\\f");
 };
 
+export function makeLunrIndex(imodels : IMatch.IModels, modelname : string, silent?: boolean) : Promise<any> {
 
-// TODO: this has to be rewritten!
+  var modelPath = imodels.mongoHandle.srcHandle.getPath();
+  var modelDoc = imodels.mongoHandle.modelDocs[modelname];
+  if ( !modelDoc) {
+    throw " Unknown model name " + modelname + " known names are " + Object.getOwnPropertyNames(imodels.mongoHandle.modelDocs).join(',');
+  }
+  //var mdl = JSON.parse('' + fs.readFileSync(modelPath + '.model.json'));
+  //var data = JSON.parse('' + fs.readFileSync(modelpath + '.data.json'));
+/*
+  "_categories": [
+    {
+      "category": "element name",
+      "category_description": "element name",
+      "QBEColumnProps": {
+        "defaultWidth": 120,
+        "QBE": true,
+        "LUNRIndex": true
+      },
+      "wordindex" : true,
+      "category_synonyms": [
+        "name"
+      ]
+    },
+*/
 
-export function makeLunrIndex(modelpath: string, output: string, silent?: boolean) {
-  var mdl = JSON.parse('' + fs.readFileSync(modelpath + '.model.json'));
-  var data = JSON.parse('' + fs.readFileSync(modelpath + '.data.json'));
-
-  var cats = mdl.category.filter(a => typeof a !== 'string');
-
-  var qbeDataObjects = cats.filter(cat => (cat.QBE || cat.QBEInclude));
+  var cats = modelDoc._categories;  
+  var qbeDataObjects = cats.filter(cat => ( (cat.QBEColumnProps?.QBE == true) || cat.QBEColumnProps?.QBEInclude));
 
   //console.log("here cats" + JSON.stringify(cats));
   //console.log("\nhere data objects" + JSON.stringify(qbeDataObjects));
-  var qbeDataNames = qbeDataObjects.map(cat => cat.name);
+  var qbeDataNames = qbeDataObjects.map(cat => cat.category);
 
-  qbeDataNames = _.union(qbeDataNames, mdl.columns)
+  qbeDataNames = _.union(qbeDataNames, modelDoc.columns)
+    console.log(JSON.stringify(qbeDataObjects, undefined,2));
+  var keepAsArray = qbeDataObjects.filter( cat => cat.QBEColumnProps.QBEConcat ).map(cat => cat.category); 
 
-
-  var LUNRIndex = cats.filter(cat => cat.LUNRIndex).map(cat => cat.name);
+  var LUNRIndex = cats.filter(cat => cat.QBEColumnProps?.LUNRIndex).map(cat => cat.category);
   //var elasticlunr = require('lunr');
-  var bomdata = data;
-  // index all LUNR properties
-  var index = elasticlunr(function () {
-    var that = this;
-    LUNRIndex /*
-            ["appId",
-            "AppKey",
-            "AppName",
-                "ApplicationComponent",
-                "RoleName",
-                "ApplicationType",
-                "BSPName",
-                "BSPApplicationURL",
-                "releaseName",
-                "BusinessCatalog",
-                "TechnicalCatalog"] */ .forEach(function (field) {
-        that.addField(field);
+
+  var domain = Model.getDomainForModelName(imodels, modelname); 
+  return Model.getExpandedRecordsSome(imodels, domain, qbeDataNames,keepAsArray).then( (data) => {      
+      // index all LUNR properties
+      var elasticindex = elasticlunr(function () {
+        var that = this;
+        LUNRIndex /*
+        ["appId",
+        "AppKey",
+        "AppName",
+        "ApplicationComponent",
+        "RoleName",
+        "ApplicationType",
+        "BSPName",
+        "BSPApplicationURL",
+        "releaseName",
+        "BusinessCatalog",
+        "TechnicalCatalog"] */ .forEach(function (field) {
+          that.addField(field);
+        });
+        this.setRef('id');
+        this.saveDocument(false);
       });
-    this.setRef('id');
-    this.saveDocument(false);
-  });
-  bomdata.forEach(function (o, index) {
-    o.id = index;
-  });
-  bomdata.forEach(function (record) {
-    index.addDoc(record);
-  });
-  var elastic = index;
+      data.forEach(function (o, index) {
+        o.id = index;
+        if ( modelname == "iupacs" ) {
+          console.log(" rec" + JSON.stringify(o,undefined,2));
+        }
+      });
+      var len = data.length;
+      data.forEach(function (record, index) {
+        if ( index % Math.floor(len/10) == 0) {
+          console.log(' ' + index + "/" + len);
+        }
+        elasticindex.addDoc(record);
+      });
 
-  // dump the lunr index
-  //
-  var theIndex = index.toJSON();
-  var columns = mdl.columns.map(colname => {
-    var res = cats.filter(cat => cat.name === colname);
-    if (res.length !== 1) {
-      throw new Error("undefined or non-object column : " + colname);
-    };
-    return res[0];
-  });
-
-  var columnNames = columns.map(col => col.name);
-
-  var jsonp = `var mdldata = {};\n//columns \n mdldata.columns = ["${columns.map(col => col.name).join('","')}"];`;
-
-  var json = `{ "columns"  : ["${columns.map(col => JSONEscape(col.name)).join('","')}"],`;
-  // jsonp += `\n mdldata.fulldata = ${JSON.stringify(bomdata)};\n`;
-  //jsonp += `\n//columns info \n mdldata.lunrcolumns = ["{${LUNRIndex.join('","')}"];`;
-
-  jsonp += `\n//columns info \n mdldata.columnsDescription = {${columns.map(col =>
-    ` \n "${col.name}" :  "${JSONEscape(col.description || col.name)}" `
-  ).join(',')}
-      };`;
-
-  json += `"columnsDescription" : {${columns.map(col =>
-    ` \n "${col.name}" :  "${JSONEscape(col.description || col.name)}" `
-  ).join(',')}
-      },`;
+      // dump the lunr index
+      //
+      var theIndex = elasticindex.toJSON();
+      var columns = modelDoc.columns.map(colname => {
+        var res = cats.filter(cat => cat.category === colname);
+        if (res.length !== 1) {
+          throw new Error("undefined or non-object column : " + colname);
+        };
+        return res[0];
+      });
+      
+      var columnNames = columns.map(col => col.category);
+      
+      var jsonp = `var mdldata = {};\n//columns \n mdldata.columns = ["${columns.map(col => col.category).join('","')}"];`;
+      
+      var json = `{ "columns"  : ["${columns.map(col => JSONEscape(col.category)).join('","')}"],`;
+      // jsonp += `\n mdldata.fulldata = ${JSON.stringify(bomdata)};\n`;
+      //jsonp += `\n//columns info \n mdldata.lunrcolumns = ["{${LUNRIndex.join('","')}"];`;
+      
+      jsonp += `\n//columns info \n mdldata.columnsDescription = {${columns.map(col =>
+      ` \n "${col.category}" :  "${JSONEscape(col.category_description || col.category)}" `
+      ).join(',')}
+    };`;
+    
+    json += `"columnsDescription" : {${columns.map(col =>
+      ` \n "${col.category}" :  "${JSONEscape(col.category_description || col.category)}" `
+    ).join(',')}
+  },`;
 
 
   jsonp += `\n//columns info \n mdldata.columnsDefaultWidth = {${columns.map(col =>
-    ` \n "${col.name}" : ${col.defaultWidth || 150} `
-  ).join(',')}
-      };`;
+  ` \n "${col.category}" : ${col.QBEColumnProps?.defaultWidth || 150} `
+    ).join(',')}
+  };`;
 
-  json += `\n"columnsDefaultWidth" : {${columns.map(col =>
-    ` \n "${col.name}" : ${col.defaultWidth || 150} `
-  ).join(',')}
-      },`;
-
-
+    json += `\n"columnsDefaultWidth" : {${columns.map(col =>
+      ` \n "${col.category}" : ${col.QBEColumnProps?.defaultWidth || 150} `
+    ).join(',')}
+  },`;
 
   var theIndexStr = JSON.stringify(theIndex);
 
@@ -146,14 +171,18 @@ export function makeLunrIndex(modelpath: string, output: string, silent?: boolea
   json += '\n"serIndex" :' + theIndexStr + ',';
 
   //console.log("here all names " + JSON.stringify(qbeDataNames));
-  var cleanseddata = bomdata.map(o => {
+  var cleanseddata = data.map(o => {
     var res = {};
     qbeDataNames.forEach(key => {
       res[key] = o[key];
+      if ( keepAsArray.indexOf(key)>=0 && _.isArray(o[key])) {
+        res[key] = o[key].join(",");
+      }
     });
     return res;
   });
 
+  var output = modelPath + "gen_" + modelname + ".lunr.json" ;
   if (!silent) {
     console.log("dumping " + output);
     console.log("length of index str" + theIndexStr.length)
@@ -170,14 +199,15 @@ export function makeLunrIndex(modelpath: string, output: string, silent?: boolea
 
   jsonp += `
 
-           // var elastic = elasticlunr.Index.load(serIndex);
+  // var elastic = elasticlunr.Index.load(serIndex);
 
   `;
 
   //fs.writeFileSync(output + ".lunr.js", jsonp);
-  fs.writeFileSync(output + ".lunr.json", json);
+  console.log('Writing lunr index for ' + modelname + " as file " + output);
+  fs.writeFileSync(output, json);
+});
 }
-
 
 
 
@@ -220,7 +250,7 @@ export function calcCategoryRecord(m: IMatch.IModels, category: string, domain: 
       return Promise.resolve(cache[dom]);
     } else {
       debuglog('not seen domain ' + dom)
-      var p = Model.getExpandedRecordsFull(m, dom);
+      var p = Model.getExpandedRecordsFirst(m, dom);
       return p.then((records) => {
         cache[dom] = records; return records;
       })
@@ -385,10 +415,6 @@ export function tabDomain(domain: string, m: IMatch.IModels): Promise<string> {
       var domainDescr = m.full.domain[domain].description || "";
       domainDescr = replaceBr(domainDescr);
       res = `
-
-// preset form values if we receive a userdata object //
-- user = user
-
 extends ../layout_p
 
 block content
@@ -481,53 +507,6 @@ block content
 \t\t| ${Util.listToCommaAnd(remainingCategories)}
        `
         }
-        /*
-          // calculate other domains.
-          // draw "other categories"
-          res += `node [color=purple, style=filled]; \n`
-          otherdomains.forEach(function(otherdomain) {
-            res += `"${otherdomain}" \n`;
-          });
-          // count records in domain :
-          var nrRecords = m.records.reduce(function(prev,entry) {
-          return prev + ((entry._domain === domain) ? 1 : 0);
-          },0);
-          res += `node [shape=record]; \n`
-          res += ` "record" [label="{<f0> ${domain} | ${nrRecords}}"] \n`;
-
-          res += ` "r_other" [label="{<f0> other | ${nrRecords}}"] \n `;
-
-          res += `# relation from categories to domain\n`;
-          cats.forEach(function(cat) {
-            res += ` "${cat}" -> "${domain}" \n`;
-          })
-
-
-          res += `# relation from categories to records\n`;
-          cats.forEach(function(cat) {
-            var rec = categoryResults[cat];
-            res += ` "${cat}" -> "record" \n`;
-          })
-
-
-          //other domains to this
-          cats.forEach(function(cat) {
-
-
-          })
-        */
-        /*
-        cats fo
-          digraph sdsu {
-        size="36,36";
-        node [color=yellow, style=filled];
-        FLPD FLP "BOM Editor", "WIKIURL" "UI5 Documentation", "UI5 Example", "STARTTA"
-        BCP
-        node [color=grey, style=filled];
-        node [fontname="Verdana", size="30,30"];
-        node [color=grey, style=filled];
-        graph [ fontname = "Arial",
-        */
         res += `
 		h3 Version
 			a.small(href="/whatsnew")
@@ -582,30 +561,45 @@ export function visModels(m: IMatch.IModels, folderOut: string): Promise<any> {
   });
   return p;
 };
-/*
-  return Promise.all(m.domains.map(function (sDomain) {
-    console.log('making domain' + sDomain);
-    return graphDomain(sDomain, m).then((s) => {
-      var fnGraph = folderOut + "/" + sDomain.replace(/ /g, '_') + ".gv";
-      fs.writeFileSync(fnGraph, s);
-      if (process.env.GRAPHVIZ) {
-        console.log("here the file " + fnGraph);
-        execCmd(process.env.GRAPHVIZ + " -Tjpeg -O " + fnGraph);
-      }
-    });
-  })
-  );
-}
-*/
 
-export function tabModels(m: IMatch.IModels, folderOut: string): Promise<any> {
+export function tabModels(m: IMatch.IModels): Promise<any> {
   var p = Promise.resolve();
+  var folderOut = m.mongoHandle.srcHandle.getPath();
+  if ( !fs.existsSync(folderOut + "views")) {
+    fs.mkdirSync(folderOut + 'views');
+  }
+  // copy the layout_p.pug file
+  var layout_p = fs.readFileSync('resources/templates_pug/layout_p.pug')
+  fs.writeFileSync(folderOut + "views/layout_p.pug", layout_p);
+
+  var excludedModelNames = ["metamodels","hints","questions"];
+  // generate the models file
+  var models = fs.readFileSync('resources/templates_pug/models.pug');
+  if( !fs.existsSync(folderOut + "views/models.pug")) {
+    console.log('You want to manually adjust  ' + folderOut + "views/models.pug" );
+    fs.writeFileSync(folderOut + "views/models.pug", models);
+  }
+  var dumpedModelNames = Object.getOwnPropertyNames(m.rawModelByModelName).filter( modelName => excludedModelNames.indexOf(modelName) < 0);
+
+  dumpedModelNames.forEach( modelName => {
+    var domain = m.rawModelByModelName[modelName].domain;
+    var table = ''+fs.readFileSync('resources/templates_pug/table_xxx.pug');
+    table = table.replace("FioriBOM",domain);
+    table = table.replace("js/model_fioribom.lunr.json", "js/gen_" + modelName + ".lunr.json"); 
+    fs.writeFileSync(folderOut + "views/gen_table_" + modelName + ".pug", table);
+  });
+
   m.domains.forEach((sDomain) => {
     p = p.then(() => {
       tabDomain(sDomain, m).then((s) => {
-        var fnGraph = folderOut + "/" + sDomain.replace(/ /g, '_') + ".jade";
+        var modelName = Model.getModelNameForDomain(m.mongoHandle,sDomain);
+        var fnGraph = folderOut + "views/gen_model_" + modelName + ".pug";
         debuglog("here the file " + fnGraph);
+        console.log('Writing model overview file for ' + modelName + ' as ' + fnGraph);
         fs.writeFileSync(fnGraph, s);
+        // 
+
+
       });
     });
   });
