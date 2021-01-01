@@ -17,7 +17,7 @@
     "build": "gulp && tsc",
     "version": "npm show nlq_abot@* version",
     "run": "node smartbot",
-    "preparemodel": "node --max-old-space-size=14000 preparemodel",    
+    "preparemodel": "node --max-old-space-size=14000 preparemodel",
     "start": "node smartbot",
     "coverage": "jest --coverage",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
@@ -75,8 +75,8 @@
     "@types/lodash": "^4.14.161",
     "@types/node": "^8.10.64",
     "babel-jest": "^26.6.3",
-    "del": "^5.1.0",
     "coveralls": "^3.0.7",
+    "del": "^5.1.0",
     "elasticlunr": "^0.9.5",
     "eslint-plugin-jest": "^24.1.0",
     "gulp": "^4.0.2",

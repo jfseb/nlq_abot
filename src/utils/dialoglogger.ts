@@ -4,7 +4,6 @@
 //declare module pg {};
 
 import * as builder from '../bot/botbuilder';
-import * as pg from 'pg';
 import * as debug from 'debug';
 import * as process from 'process';
 
@@ -89,7 +88,8 @@ export function logAnswer(answer: IAnswer, callback : (err: any, res?: any) => v
   if (!sqlIsActive) {
     return;
   }
-  pg.connect(this.dburl, (err, client : pg.Client, pgDone) => {
+  if ( pg ) {
+    pg.connect(this.dburl, (err, client : any /*pg.Client*/, pgDone) => {
       if (err) {
         // failed to acquire connection
         //logger.emit('error', err);
@@ -100,37 +100,40 @@ export function logAnswer(answer: IAnswer, callback : (err: any, res?: any) => v
         //   (convid, sessionid, user, message, response, meta) ` +
         "VALUES ( "  +
         // $1, $2, ...
-         columns.map(function(o,iIndex) { return "$" + (iIndex+1); }).join(", ") + ")";
-
+        columns.map(function(o,iIndex) { return "$" + (iIndex+1); }).join(", ") + ")";
+        
         var values = columns.map(function(sCol) {
-             return oLogEntry[sCol];
-           });
-           //  [level, msg, meta instanceof Array ? JSON.stringify(meta) : meta],
-
+          return oLogEntry[sCol];
+        });
+        //  [level, msg, meta instanceof Array ? JSON.stringify(meta) : meta],
+        
         client.query(query,values,
-
-                     (err, result) => {
+          
+          (err, result) => {
             pgDone();
             if (err) {
-             // logger.emit('error', err);
-             debuglog('Error inserting record into db ' + err + '\n' +
+              // logger.emit('error', err);
+              debuglog('Error inserting record into db ' + err + '\n' +
                 values.join("\n"));
-              callback(err);
-            } else {
-            //  logger.emit('logged');
-              callback(null, true);
-            }
-        });
+                callback(err);
+              } else {
+                //  logger.emit('logged');
+                callback(null, true);
+              }
+            });
       }
     });
+  } else {
+    callback(null,true);
   }
+}
 
-var loggers = {} as { [key: string]: ILogger };
-
-export function logger(name: string, dburl : string, pg: any) : (a: IAnswer, callback?: (err:any, res? :any) => void) => void  {
-  if (!dburl) {
-    throw new Error('need database url');
-  }
+  var loggers = {} as { [key: string]: ILogger };
+  
+  export function logger(name: string, dburl : string, pg: any) : (a: IAnswer, callback?: (err:any, res? :any) => void) => void  {
+    if (!dburl) {
+      throw new Error('need database url');
+    }
   if (typeof name !== "string" || !/^[A-Za-z][A-Za-z0-9_]+$/.exec(name)) {
     throw new Error('Logger name must be at least two alphanumeric characters')
   }

@@ -42,7 +42,6 @@
         "src/match/inputFilter.ts",
         "src/match/algol.ts",
         "src/match/describe.ts",
-        "src/match/indexwords.ts",
         "src/match/listall.ts",
         "src/match/matchdata.ts",
         "src/match/whatis.ts",

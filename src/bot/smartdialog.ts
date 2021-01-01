@@ -34,14 +34,7 @@ import * as process from 'process';
 
 var dburl = process.env.DATABASE_URL || "";
 
-var pglocalurl = "postgres://joe:abcdef@localhost:5432/abot";
-var dburl = process.env.DATABASE_URL || pglocalurl;
-import * as pg from 'pg';
-var o = pg as any;
-if (!(process.env.ABOT_DBNOSSL)) {
-  o.defaults.ssl = true; // Only used internally !
-}
-var dialogLogger = DialogLogger.logger("smartbot", dburl, pg);
+var dialogLogger = DialogLogger.logger("smartbot", dburl, null);
 
 type stringOrMessage = string | builder.Message;
 
