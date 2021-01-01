@@ -131,9 +131,6 @@ export function logAnswer(answer: IAnswer, callback : (err: any, res?: any) => v
   var loggers = {} as { [key: string]: ILogger };
   
   export function logger(name: string, dburl : string, pg: any) : (a: IAnswer, callback?: (err:any, res? :any) => void) => void  {
-    if (!dburl) {
-      throw new Error('need database url');
-    }
   if (typeof name !== "string" || !/^[A-Za-z][A-Za-z0-9_]+$/.exec(name)) {
     throw new Error('Logger name must be at least two alphanumeric characters')
   }
