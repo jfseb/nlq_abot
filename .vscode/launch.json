@@ -10,7 +10,7 @@
       "name": "JestTests",
       "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
       "args": [
-          "--", "srchand"
+          "--", "erbase"
       ],
       "internalConsoleOptions": "openOnSessionStart",
       "outFiles": [

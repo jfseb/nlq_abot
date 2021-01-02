@@ -41,6 +41,19 @@ export function makeError_NO_KNOWN_WORD(index : number, tokens : string[]) :IMat
   } as IMatch.IERErrorNO_KNOWN_WORD;
 }
 
+export function makeError_OFFENDING_WORD(word : string, tokens: string[], index : number) :IMatch.IERErrorNO_KNOWN_WORD {
+return {
+  err_code: IMatch.ERR_NO_KNOWN_WORD,
+  text : `I do not understand "${word}".`,
+  context : {
+    tokens: tokens,
+    token : tokens[index],
+    index : index
+  }
+} as IMatch.IERErrorNO_KNOWN_WORD;
+}
+
+
 
 export function makeError_EMPTY_INPUT( ) :IMatch.IERError {
   return {

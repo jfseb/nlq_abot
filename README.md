@@ -72,59 +72,26 @@ must be supplied:
 
 # running the bot / picking a db
 
-the bot runs against "testdb" per default,
+the bot runs against "testmodel" per default,
 
 to change this one must either remove the cache in smbmodel\_cache.js.zp and/or set
- SET MQNLQ_MODEL_NO_FILECACHE=true
-Then one may set ABOT_MONGODB=testdb2  to switch to an alternate db.
-
-the cache is recreated on the first run.
-
-
-
-# Regression tests
-
-per default the regression test runs against mock db files!
-
-
- example: run against testmodel2  ( constants are in mgnlq_testmodel2)
-
-to run against true db:
- SET MQNLQ_MODEL_NO_FILECACHE=true
- SET ABOT_MONGODB=testdb2
- SET MGNLQ_TESTMODEL2_REPLAY=RECORD
-
-
-beware, recently changed behaviour to let modelnames and collection names be plural
-
-# A quick mongo guide
-
-locate mongo on your system, e.g.
 ```
->mongo
-
-show dbs
-
-use test2db
-
-show collections
-
-db.metamodels.find({modelname: 'iupacs'});
-
-db.collections.find()
-
+ SET NLQ_ABOT_MODELPATH=c:\.....\model`
+ SET NLQ_ABOT_MODELPATH=c:/...../model`
 ```
+(No trailing slash)
 
 
--> testdb2 : Too large keys to index ( WiredTiger ) ?
+# model cache 
+ SET NLQ_ABOT_NO_FILECACHE=true or manually delete the _cache.zip file to adjust to model changes. 
+ the cache is recreated on the first run.
 
-list all sample questions
 
+# whats new
 
-#
 - proper ordering for "numberic" columns
 
-list all sender with gr�ndungsjahr smaller than 1972
+list all sender with gründungsjahr smaller than 1972
 
 # discriminate    (less than number <coundcat> from )     (cat less than numberic)
 
@@ -135,3 +102,149 @@ list all sender with gr�ndungsjahr smaller than 1972
 
 # date columns   before after
 
+
+# Query behaviour on specific data aspects
+
+The model now supports 
+  1) multivalued members,
+  2) non-stringy members
+
+
+## undefined or empty 
+
+The following are treated equivalently: 
+```json 
+{}  // property not prest
+{ categoryA : undefined }
+{ categoryA: null} 
+{ categoryA: [] }  // for multivalues
+```
+
+
+## Multivalued members 
+
+Multivalued members come in two flavours, simple multivalued and tuple 
+
+
+
+### simple multivalued members vs tuple 
+
+```json
+{
+  category0 : "Akey",
+  categoryA : ["Val1","Val2"],
+  categoryB : [1,2]
+}
+```
+
+tupled member: 
+```json
+{
+  category0 : "Akey",
+  _category : [{ catA1 : "val1", catA2 : 1, catA3 :["AB","CD"]},
+               { catA1 : "val2", catA2 : 2},
+  ],
+  categoryB : [1,2]
+}
+```
+
+list all category0 where CatA1 val1 and catA2 2; 
+
+list all category0, catA3 where CatA3 CD; 
+
+This will *not* find Akey. 
+
+
+
+
+
+
+
+
+### Behaviour on result processing: 
+
+There are basically 3 options when 
+
+```json
+{
+  category0 : "Akey",
+  categoryA : ["Val1","Val2"],
+  categoryB : [1,2]
+}
+```
+
+ list all category0, categoryA, categoryB 
+
+  1) Pick "first" representative value 
+      ```
+      "AKey" and "Val1" and 1
+      ```
+
+  2) Flatten lists
+      ```
+      "AKey" and "Val1","Val2" and 1,2
+      ```
+ 
+  3) expand cross product
+      ```
+      "AKey" and "Val1" and 1
+      "AKey" and "Val1" and 2
+      "AKey" and "Val2" and 1
+      "AKey" and "Val2" and 2
+      ```
+
+With tuples, additional combinations either losing or retaining the correlation can be envisioned, e.g.
+```
+   "("val1",1,"AB"),("val1",1,"CD"),("val2",2)
+```
+
+```
+"AKey" and "Val1" and 1 and "AB" and 1
+"AKey" and "Val1" and 1 and "CD" and 1
+"AKey" and "Val1" and 1 and "CD" and 2
+"AKey" and "Val1" and 1 and "AB" and 2
+"AKey" and "Val2" and 2 and undefined and 1
+"AKey" and "Val2" and 2 and undefined and 2
+```
+
+Similar considerations can be made when generating the QBE table. 
+
+  { category : PickFirst|Flatten|Expand }
+
+
+Should the filter be used to eliminate 
+  only whole records or member/tuples of the result? 
+
+    List all AppKey, BusinessGroup with more than 3 BusinessGroup?
+    => `Akey, ["A","B","C","D","E"]`
+
+    List all AppKey, BusinessGroup with more than 3 BusinessGroup and BusinessGroup A? 
+    => `Akey, "A"`
+
+At which phase. 
+
+Note ambiguities like. 
+ 
+   on the input BusinessGroup : [ "GRPA_1", "GRPA_2", "GRP_B" ]
+
+  List all AppKey with more than 2 BusinessGroup starting with 'GRPA'  (currently not supported)
+  List all AppKey with more than 2 BusinessGroup and BusinessGroup starting with 'GRPA'
+  List all AppKey with more than 2 BusinessGroup and BusinessGroup starting with 'GRPA'
+
+
+
+### complex (tupled multivalued members)
+
+```json 
+{ categoryA : undefined }   <=> { categoryA: null} <=> { categoryA: [] };
+```
+
+
+The model now supports 
+  1) multivalued members,
+  2) non-stringy members
+
+{
+
+
+}

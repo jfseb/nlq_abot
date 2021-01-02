@@ -145,14 +145,17 @@ function findEschemaPropForCategoryInt(eSchemaProps : any, category : string) : 
 }
 
 /**
- * 
+ * return an array(may be empty) containing 
  * @param rec 
  * @param paths 
  */
 export function collectMemberByPath(rec : any, paths : string[]) : any[] {
-    var root = rec;
     if ( rec == undefined) {
         return [];
+    }
+    if( !_.isArray(paths)) {
+        debugger;
+        console.log(' not an array' + paths);
     }
     return paths.reduce( (prev, segment,index) => {
         debuglog(()=> `at index ${index} segment ${segment} on ${JSON.stringify(prev)}`);
@@ -166,7 +169,7 @@ export function collectMemberByPath(rec : any, paths : string[]) : any[] {
         } else {
             return prev;
         }
-    }, [rec]);
+    }, [rec]).filter( a => a != undefined); // should we filter by undefined or null
 }
 /**
  * Given a record and a paths expression, return

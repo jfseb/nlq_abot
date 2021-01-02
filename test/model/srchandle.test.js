@@ -38,6 +38,18 @@ it('testFlattenDeep', async () => {
     ]);
 });
 
+it('testcollectRelevantCategoriesWithSingleArrayOnPath', async () => {
+  var recs = [ { 'abc' : '123', 'BusinessGroup' : 44}, {'abc' : ['A', 'B'], 'BusinessGroup' : [2]}];
+  expect(SrcHandle.collectRelevantCategoriesWithSingleArrayOnPath( recs, { $match : { $and : [ { $lt : [{$eval : 'BusinessGroup' } ,3 ]  },
+    { $gt: [{ $eval : '_table.BBB' },
+      { $eval :'abc'}
+    ]
+    }]}})).toEqual( [{ pathToArr : 'abc'}]);
+});
+
+
+
+
 
 it('testApplyProjectCollection', async () => {
   expect(SrcHandle.applyProjectCollecting( [ {a: 'b'}], { 'ab': 123, 'de': 2, _category : { category: 'A' , n : 'B', i : 4 }, columns :['A','B'] }, 

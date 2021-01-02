@@ -25,12 +25,30 @@ export interface ISrcHandle {
     getJSON(filename: string, modelnames?: string[]): Promise<any>;
     getJSONArr(filename: string): Promise<any[]>;
 }
+export declare function isEvalArr(rec: any, arg: any): boolean;
 export declare function evalArg(rec: any, arg: any): any[];
 export declare function asString(a: any): string;
 export declare function compareByType(op: string, l: any, r: any): boolean;
 export declare function evalSet(op: string, lhs: any, rhs: any): boolean;
-export declare function satisfiesMatch(rec: any, match: any): boolean;
+export declare function isCountOp(rec: any, matchOp: any): boolean;
+export declare function satisfiesMatch(rec: any, match: any, ignoreCount?: boolean): boolean;
 export declare function applyMatch(records: any[], match: any): any[];
+interface RelevantArrCategory {
+    pathToArr: string;
+}
+export declare function collectPaths(prev: string[], match: any): string[];
+export declare function collectRelevantCategoriesWithSingleArrayOnPath(records: any[], match: any): RelevantArrCategory[];
+/**
+ * This step apply match conditions on records, pruning non-fitting array members on the result stream
+ *
+ * A complete implementation would have to denormalize the tuples, then apply the filters (ignoring more than count x conditions),
+ * then recombine them into "unique" arrays
+ * this is currenlty not implemented
+ *
+ * @param records
+ * @param match
+ */
+export declare function applyMatchAsFilter(records: any[], match: any): any[];
 export declare function applyProjectOnly(records: any[], project: any): any[];
 /**
  *
@@ -61,3 +79,4 @@ export declare function applySort(records: any[], match: any): any[];
 export declare function applyStep(records: any[], queryStep: any): any[];
 export declare function filterByQuery(records: any[], query: any): any[];
 export declare function createSourceHandle(): ISrcHandle;
+export {};

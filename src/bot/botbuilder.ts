@@ -9,6 +9,8 @@
 
 import * as fs from 'fs';
 import { removeListener, send } from 'process';
+import * as debug from 'debugf';
+let debuglog = debug('botbuilder');
 
 interface BotBuilder {
 
@@ -28,7 +30,6 @@ export interface IEntity {
 
 export class EntityRecognizer {
   static findEntity(entities: IEntity[], type: string) : any {
-    debugger;
     for(let en of entities) {
       if(en.type == type ) {
         return en;
@@ -189,14 +190,13 @@ export class IntentDialog {
       ir.recognize( irc, (err, result) => {
         var intent = result.intent;
         if ( result.score > 0.1 && intent !== 'None') {
-          debugger;
+          debuglog(' intent fits' + intent);
           this._matches.get(intent).forEach( a => a(session,result, ()=>{}) );
           Bfound.found = true;
         }
       });
     });
     if ( !Bfound.found) {
-      debugger;
       this._default(session);
     }
   }

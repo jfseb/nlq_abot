@@ -1,3 +1,30 @@
+
+bugs : 
+
+
+list all 
+
+list all AppIds, FioriIntents, BusinessCatalog 
+
+list all AppIds with more than one FioriIntent
+
+
+list all AppKey with URLParameters MaterialForEdit
+
+021-01-01T22:18:53.973486+00:00 app[web.1]: [PROCESS] Unhandled Promise Rejection
+2021-01-01T22:18:53.973711+00:00 app[web.1]: - - - - - - - - - - - - - - - - - - -
+2021-01-01T22:18:53.980417+00:00 app[web.1]: Error: category not found URLParameters [{"category":"uri","category_description":"link to fiori app reference library","QBEColumnProps":{"QBEInclude":true},"showURI":true,"type":"String"},{"category":"uri_rank","category_description":"Sort criteria for URI","QBEColumnProps":{"QBEInclude":false},"showURIRank":true,"type":"Number"
+
+
+------------------------------
+remove #null-null 
+
+-----------------------
+
+consider making the result sort case neutral. 
+
+"wcf-id=TBT112MCR&/h4screen=TBT112MCR" and "#null-null";
+
 r3trans
 
 repalce transaction description => transaction_description
@@ -12,3 +39,17 @@ rename bom.data to fioriapps.data
 rename iupac to iupacs 
 
 rename geneticDNA to geneticdna
+
+
+list all AppIds with more than 2 FioriIntent
+
+21-01-01T22:14:49.608536+00:00 app[web.1]: [PROCESS] Unhandled Promise Rejection
+2021-01-01T22:14:49.608764+00:00 app[web.1]: - - - - - - - - - - - - - - - - - - -
+2021-01-01T22:14:49.609181+00:00 app[web.1]: TypeError: Cannot read property 'reduce' of undefined
+2021-01-01T22:14:49.609183+00:00 app[web.1]: at Object.collectMemberByPath (/app/node_modules/nlq_abot/js/model/mongomap.js:137:18)
+2021-01-01T22:14:49.609183+00:00 app[web.1]: at evalArg (/app/node_modules/nlq_abot/js/model/srchandle.js:25:28)
+2021-01-01T22:14:49.609184+00:00 app[web.1]: at satisfiesMatch (/app/node_modules/nlq_abot/js/model/srchandle.js:109:19)
+2021-01-01T22:14:49.609184+00:00 app[web.1]: at satisfiesMatch (/app/node_modules/nlq_abot/js/model/srchandle.js:115:16)
+2021-01-01T22:14:49.609184+00:00 app[web.1]: at /app/node_modules/nlq_abot/js/model/srchandle.js:102:44
+2021-01-01T22:14:49.609185+00:00 app[web.1]: at Array.every (<anonymous>)
+2021-01-01T22:14:49.609185+00:00 app[web.1]: at satisfiesMatch (/app/node_modules/n

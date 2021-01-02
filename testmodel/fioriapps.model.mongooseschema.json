@@ -121,24 +121,24 @@
       "trim": true,
       "_m_category": "AppDocumentationLinkKW"
     },
-    "BusinessRoleName": {
+    "BusinessRoleName": [{
       "type": "String",
       "trim": true,
       "_m_category": "BusinessRoleName",
       "index": true
-    },
-    "BusinessGroupName": {
+    }],
+    "BusinessGroupName": [{
       "type": "String",
       "trim": true,
       "_m_category": "BusinessGroupName",
       "index": true
-    },
-    "BusinessGroupDescription": {
+    }],
+    "BusinessGroupDescription": [{
       "type": "String",
       "trim": true,
       "_m_category": "BusinessGroupDescription",
       "index": true
-    },
+    }],
     "PrimaryODataServiceName": {
       "type": "String",
       "trim": true,

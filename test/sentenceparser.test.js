@@ -66,6 +66,41 @@ it('testTokenizeNumber', done => {
   });
 });
 
+it('testTokenizeNE', done => {
+  expect.assertions(1);
+  getModel().then((theModel) => {
+    // debuglog(JSON.stringify(ifr, undefined, 2))
+    var s = 
+    'AppId, BusinessRoleName with BusinessRoleName starting with "SAP_BR" and BusinessRoleName != "SAP_BR_PROD_STWRDSHP_SPECLST"';
+    var res = Erbase.processString(s, theModel.rules, words);
+    debuglog('res > ' + JSON.stringify(res, undefined, 2));
+    var lexingResult = SentenceParser.getLexer().tokenize(res.sentences[0]);
+    var sStrings = lexingResult.map(t => t.image);
+    debuglog(sStrings.join('\n'));
+    expect(sStrings).toEqual(['CAT', 'CAT' , 'with', 'CAT', 'starting with', 'ANY', 'and', 'CAT', '!=','ANY']);
+    done();
+    Model.releaseModel(theModel);
+  });
+});
+
+// and not is not parsed, as not is not an opertor. 
+// TODO: this returns  0 sentences without any error message!?
+it('testTokenizeAndNot', done => {
+  expect.assertions(2);
+  getModel().then((theModel) => {
+    var s = 
+    'AppId, BusinessRoleName with BusinessRoleName starting with "SAP_BR" and not BusinessRoleName = "SAP_BR_PROD_STWRDSHP_SPECLST"';
+    var res = Erbase.processString(s, theModel.rules, words);
+    debuglog('res > ' + JSON.stringify(res, undefined, 2));
+    expect(res.errors.length).toEqual(0);
+    expect(res.sentences.length).toEqual(0); 
+    done();
+    Model.releaseModel(theModel);
+  });
+});
+
+
+
 it('testTokenizeNumberOrElement', done => {
   expect.assertions(3);
   getModel().then((theModel) => {

@@ -428,6 +428,9 @@ export function expandTokenMatchesToSentences2(tokens: string[], tokenMatches: A
     res = nextBase;
   }
   debuglogV(debuglogV.enabled ? ("APPENDING TO RES1#" + 0 + ":" + l + " >" + JSON.stringify(nextBase)) : '-');
+  var lastBad = { indexWord : -1, indexSentence : -1};
+  // filter away inhomogeneous sentences w.r.t. a domain
+  var sentencesPrior = res;
   res = res.filter( (sentence,index) => {
     var full = 0xFFFFFFFF;
     //console.log(`sentence  ${index}  \n`)
@@ -435,9 +438,17 @@ export function expandTokenMatchesToSentences2(tokens: string[], tokenMatches: A
       if (!word.rule)
         return true;
       full = (full & word.rule.bitSentenceAnd);
+      if ( full == 0 && index2 > lastBad.indexWord ) {
+        lastBad.indexSentence = index;
+        lastBad.indexWord = index2;
+      }
       //console.log(` word  ${index2} ${full} "${word.matchedString}" ${word.rule.bitSentenceAnd}  ${tokens[index2]} \n`);
       return full !== 0 } )
   });
+  if ( res.length == 0  && result.errors.length == 0 && lastBad.indexWord >= 0 && lastBad.indexSentence >= 0 ) {
+    debugger;
+    result.errors.push(ERError.makeError_OFFENDING_WORD(sentencesPrior[lastBad.indexSentence][lastBad.indexWord].string, tokens, lastBad.indexWord));
+  }
   result.sentences = res;
   return result;
 }

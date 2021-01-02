@@ -14,6 +14,8 @@ import { Sentence } from "../match/er_index";
 import { assert } from "console";
 import { nextTick } from "process";
 import { isEmpty } from "lodash";
+import { recognize } from "../bot/plainrecognizer";
+import { Z_PARTIAL_FLUSH } from "zlib";
 
 var debuglog = debugf('srchandle');
 
@@ -47,6 +49,18 @@ export interface ISrcHandle {
   getJSONArr( filename : string) : Promise<any[]>;
 }
 
+export function isEvalArr(rec: any, arg : any) : boolean {
+  if ( arg['$ARRAYSIZE_OR_VAL_OR1']) {
+    var path = arg['$ARRAYSIZE_OR_VAL_OR1'];
+    var propPath = path.split("."); // is this the category or the path
+    var res = MongoMap.collectMemberByPath(rec, propPath);
+    if( res.length && typeof res[0] == "number") {
+      return false; // a numberical evaluation which can be done!
+    }
+    return true; 
+  }
+}
+
 export function evalArg(rec: any, arg : any) : any[] {
   if ( arg['$eval']) {
     // TODO elements
@@ -57,7 +71,8 @@ export function evalArg(rec: any, arg : any) : any[] {
     return arg['$regex'];
   } else if ( arg['$ARRAYSIZE_OR_VAL_OR1']) {
     var path = arg['$ARRAYSIZE_OR_VAL_OR1'];
-    var res = MongoMap.collectMemberByPath(rec, str);
+    var propPath = path.split("."); // is this the category or the path
+    var res = MongoMap.collectMemberByPath(rec, propPath);
     if( res.length && typeof res[0] == "number") {
       return res;
     }
@@ -126,23 +141,30 @@ export function evalSet(op : string, lhs: any, rhs: any ) : boolean {
 
 var ops = ["$lt", "$eq", "$ne", "$lte", "$gt", "$gte", "$exists", "$regex" ];
 
-export function satisfiesMatch(rec : any, match : any) : boolean {
+export function isCountOp(rec:any , matchOp : any) {
+  return isEvalArr(rec, matchOp[0]) || isEvalArr(rec, matchOp[1]);
+}
+
+export function satisfiesMatch(rec : any, match : any, ignoreCount? : boolean) : boolean {
   var props = Object.getOwnPropertyNames(match);
   if(props.length == 0 ){
     return true;
   } else if(match['$and']) {
     debuglog('found $and');
-    return match['$and'].every( cond => satisfiesMatch(rec, cond));
+    return match['$and'].every( cond => satisfiesMatch(rec, cond, ignoreCount));
   } else if (match['$or']) {
-    return match['$or'].any( cond => satisfiesMatch(rec, cond));
+    return match['$or'].any( cond => satisfiesMatch(rec, cond, ignoreCount));
   } else if ( ops.indexOf(Object.getOwnPropertyNames(match)[0]) >= 0) {
       var op = Object.getOwnPropertyNames(match)[0];
       var lhs = evalArg(rec,match[op][0])
       var rhs = evalArg(rec,match[op][1]);
       debuglog(() => 'rhs ' + JSON.stringify(lhs) + " rhs:" + JSON.stringify(rhs));
+      if ( ignoreCount && isCountOp(rec, match[op])) {
+        return true; // this precluded logical not above!
+      }
       return evalSet(op,lhs,rhs);
   } else if ( match["$expr"]) {
-    return satisfiesMatch(rec,match["$expr"]);
+    return satisfiesMatch(rec,match["$expr"], ignoreCount);
   }
   else {
     console.log('unknown op ' + JSON.stringify(match));
@@ -155,6 +177,85 @@ export function applyMatch(records:any[], match: any) : any[] {
   debuglog(' applied match ' + res.length + "/" + l1 );
   return res;
 }
+
+interface RelevantArrCategory {
+  pathToArr : string
+}
+
+function atLeastOneIsArrayMult( records: any[], path: string) {
+  return path.indexOf('.') < 0 && records.some( r => _.isArray(r[path]) && r[path].length > 1);
+}
+
+export function collectPaths(prev : string[], match: any) {
+  if( match["$eval"] ) {
+    var path = match["$eval"]; 
+    if ( path.indexOf(".")< 0) {
+      prev.push(path);
+    }
+    return prev;
+  }
+  if ( _.isArray(match) ) {
+    var r = prev;
+    match.forEach( m => { r = collectPaths(r,m)});
+    return r;
+  } 
+  if ( typeof match == "object") {
+    var r = prev;
+    Object.getOwnPropertyNames(match).forEach(  pn => {
+      r = collectPaths(r,match[pn]);
+    });
+    return r;
+  }
+  return prev;
+}
+  
+export function collectRelevantCategoriesWithSingleArrayOnPath( records: any[], match: any) : RelevantArrCategory[] {
+  // we only support "trivial categories, for now, not deep ones"
+  var matchPaths = _.uniq(collectPaths([],match));
+  // 1) we collect all evalution path   XXXXXXXX
+  // then we analyse a record whether it is array-ish
+  return matchPaths.filter( path =>
+             atLeastOneIsArrayMult(records,path)).map( path =>{ var res = { "pathToArr": path} as RelevantArrCategory; return res});
+}
+
+/**
+ * This step apply match conditions on records, pruning non-fitting array members on the result stream
+ * 
+ * A complete implementation would have to denormalize the tuples, then apply the filters (ignoring more than count x conditions), 
+ * then recombine them into "unique" arrays
+ * this is currenlty not implemented 
+ *  
+ * @param records 
+ * @param match 
+ */
+export function applyMatchAsFilter(records:any[], match: any) : any[] {
+  var l1= records.length;
+  var relevantCategories = collectRelevantCategoriesWithSingleArrayOnPath(records, match);
+  if ( relevantCategories.length == 0) {
+    return records;
+  }
+  var res = records.map( rec => {
+    // iterate over each relevant property,
+    var rcClone = _.cloneDeep(rec);
+    relevantCategories.forEach( relcat => {
+      if ( _.isArray(rec[relcat.pathToArr])) {
+        var rcOne = _.cloneDeep(rec);
+        rcClone[relcat.pathToArr] = rcClone[relcat.pathToArr].filter(
+          arrMem => {
+            // construct a clone with the single member set
+            rcOne[relcat.pathToArr] = [arrMem];
+            return satisfiesMatch(rcOne, match, true);
+          });
+        } else {
+          // nothign to filter 
+        }
+    });
+    return rcClone;
+  });
+  debuglog(' applied match ' + res.length + "/" + l1 );
+  return res;
+}
+
 
 export function applyProjectOnly(records:any[], project: any) : any[] {
   var res = [];
@@ -367,8 +468,10 @@ export function applySort(records:any[], match: any) : any[] {
 
 
 export function applyStep(records:any[], queryStep: any) : any[] {
+  debugger;
   if( queryStep["$match"]) {
-    return applyMatch(records, queryStep["$match"])
+    var r = applyMatch(records, queryStep["$match"])
+    return applyMatchAsFilter(r, queryStep["$match"]);
   } else if ( queryStep["$project"]) {
     return applyProject(records, queryStep["$project"], queryStep["$keepAsArray"] || []);    
   } else if ( queryStep["$sort"] ) {
@@ -385,6 +488,7 @@ export function applyStep(records:any[], queryStep: any) : any[] {
 
 export function filterByQuery(records:any[], query: any): any[] {
   var res = records;
+  debugger;
   query.forEach( qcomp => { res = applyStep(res,qcomp)});
   return removeDuplicates(res);
 }

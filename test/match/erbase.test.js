@@ -1819,7 +1819,24 @@ it("testTokenizeStringOrbitBitFiltered", done => {
 });
 
 
-
+it("EmptySentencesError", done => {
+  getRules().then((args) => {
+    var [rules, srcHandle] = args;
+    // debuglog(JSON.stringify(ifr, undefined, 2))
+    //console.log(theModel.mRules);
+    //console.log(theModel.rules.wordMap["of"]);
+    //var augmentedRules = ErIndex.augmentedRules(theModel.rules);
+    var s = 
+    'AppId, BusinessRoleName with BusinessRoleName starting with "SAP_BR" and not BusinessRoleName = "SAP_BR_PROD_STWRDSHP_SPECLST"';
+    var res = Erbase.processString(s, rules, {});
+    debuglog('res > ' + JSON.stringify(res, undefined, 2));
+    console.log('res > ' + JSON.stringify(res, undefined, 2));
+    expect(res.sentences.length).toEqual(0);
+    expect(res.errors[0].text).toEqual('I do not understand \"not\".');
+    done();
+    releaseRules(srcHandle);
+  });
+});
 
 
 it("testTokenizeStringOrbitEbase", done => {

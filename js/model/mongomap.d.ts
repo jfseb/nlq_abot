@@ -8,7 +8,7 @@ import * as IMatch from '../match/ifmatch';
 export declare function collectCategories(eSchemaProps: any): IMatch.CatMongoMap;
 export declare function findEschemaPropForCategory(eSchemaProps: any, category: string): any;
 /**
- *
+ * return an array(may be empty) containing
  * @param rec
  * @param paths
  */

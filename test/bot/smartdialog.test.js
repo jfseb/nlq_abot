@@ -155,6 +155,218 @@ it('testUpDWhatisTransactionCodeALR', done => {
   });
 });
 
+//
+
+it('testMultipleGroup', done => {
+  expect.assertions(1);
+  testOne('List all AppId, BusinessGroupName with Intent #ComplianceAlerts-manage"', function (conn, res) {
+    expect(res).toEqual(
+      // 'the bspname, fiori intent, appname for manage labels are ...\n"FRA_ALERT_MAN", "#ComplianceAlerts-manage" and "Manage Alerts";\n"n/a", "#ProductLabel-manage" and "Manage Labels"'
+      'the AppId, BusinessGroupName with Intent #ComplianceAlerts-manage" are ...\n' +
+      '"F1638" and "SAP_ACS_BCG_INVESTIGATION";\n' +
+      '"F1638" and "SAP_GRP2"'
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+it('testFilterForMultipleGroup', done => {
+  expect.assertions(1);
+  testOne('List all AppId, BusinessGroupName with more than 1 BusinessGroupNames"', function (conn, res) {
+    expect(res).toEqual(
+      // 'the bspname, fiori intent, appname for manage labels are ...\n"FRA_ALERT_MAN", "#ComplianceAlerts-manage" and "Manage Alerts";\n"n/a", "#ProductLabel-manage" and "Manage Labels"'
+      'the AppId, BusinessGroupName with more than 1 BusinessGroupNames" are ...\n' 
+      + '"F1638" and "SAP_ACS_BCG_INVESTIGATION";\n'
+      + '"F1638" and "SAP_GRP2"' 
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+it('testFilterForMultipleGroupAndGroup', done => {
+  expect.assertions(1);
+  testOne('List all AppId, BusinessGroupName with more than 1 BusinessGroupNames and BusinessGroupName SAP_GRP2"', function (conn, res) {
+    expect(res).toEqual(
+      // 'the bspname, fiori intent, appname for manage labels are ...\n"FRA_ALERT_MAN", "#ComplianceAlerts-manage" and "Manage Alerts";\n"n/a", "#ProductLabel-manage" and "Manage Labels"'
+      'the AppId, BusinessGroupName with more than 1 BusinessGroupNames and BusinessGroupName SAP_GRP2" are ...\n' 
+      + '"F1638" and "SAP_GRP2"' 
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+
+it('testFilterForMultipleGroupByName', done => {
+  expect.assertions(1);
+  testOne('List all AppId, BusinessGroupName with BusinessGroupName SAP_GRP2"', function (conn, res) {
+    expect(res).toEqual(
+      // 'the bspname, fiori intent, appname for manage labels are ...\n"FRA_ALERT_MAN", "#ComplianceAlerts-manage" and "Manage Alerts";\n"n/a", "#ProductLabel-manage" and "Manage Labels"'
+      'the AppId, BusinessGroupName with BusinessGroupName SAP_GRP2" are ...\n' 
+      + '"F1638" and "SAP_GRP2"' 
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+it('testFilterForMultipleGroupStartingWith', done => {
+  expect.assertions(1);
+  testOne('List all AppId, BusinessRoleName with more than 2 BusinessRoleName starting with SAP_BR_ACS_C', function (conn, res) {
+    expect(res).toEqual(
+      // 'the bspname, fiori intent, appname for manage labels are ...\n"FRA_ALERT_MAN", "#ComplianceAlerts-manage" and "Manage Alerts";\n"n/a", "#ProductLabel-manage" and "Manage Labels"'
+      'I don\'t know anything about "AppId, BusinessRoleName with more than 2 BusinessRoleName starting with SAP_BR_ACS_C" ("").\n'
+      + 'Error: NotAllInputParsedException: Redundant input, expecting EOF but found: starting with\n'
+      + 'Error: EarlyExitException: expecting at least one iteration which starts with one of these possible Token sequences::\n'
+      + '  <[Comma] ,[and] ,[CAT]> but found: \'FACT\''
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+it('testFilterForMultipleGroupStartingWith2', done => {
+  expect.assertions(1);
+  testOne('List all AppId, BusinessRoleName with more than 2 BusinessRoleName and businessRoleName starting with SAP_BR_ACS_C', function (conn, res) {
+    expect(res).toEqual(
+      'the AppId, BusinessRoleName with more than 2 BusinessRoleName and businessRoleName starting with SAP_BR_ACS_C are ...\n' 
+      + '"F1638" and "SAP_BR_ACS_CE";\n'
+      + '"F1638" and "SAP_BR_ACS_CM"' 
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+/*
+it('testW2IFilterForMultipleGroupStartingWith2', done => {
+  expect.assertions(1);
+  testOne('What is AppId, BusinessRoleName for businessRoleName starting with SAP_BR_ACS_C', function (conn, res) {
+    expect(res).toEqual(
+      // 'the bspname, fiori intent, appname for manage labels are ...\n"FRA_ALERT_MAN", "#ComplianceAlerts-manage" and "Manage Alerts";\n"n/a", "#ProductLabel-manage" and "Manage Labels"'
+      'the AppId, BusinessRoleName with more than 2 BusinessRoleName and businessRoleName starting with SAP_BR_ACS_C are ...\n' 
+      + '"F1638" and "SAP_BR_ACS_BA";\n'
+      + '"F1638" and "SAP_BR_ACS_CE";\n'
+      + '"F1638" and "SAP_BR_ACS_CM"' 
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+*/
+
+it('testWIFilterForMultipleFilter', done => {
+  expect.assertions(1);
+  testOne('What is the AppId, BusinessRoleName for "SAP_BR_ACS_CE"', function (conn, res) {
+    expect(res).toEqual(
+      // 'the bspname, fiori intent, appname for manage labels are ...\n"FRA_ALERT_MAN", "#ComplianceAlerts-manage" and "Manage Alerts";\n"n/a", "#ProductLabel-manage" and "Manage Labels"'
+      'The AppId, BusinessRoleName of "SAP_BR_ACS_CE" are ...\n' 
+      + '"F1638" and "SAP_BR_ACS_CE"'
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+it('testWIFilterForMultipleGroupStartingWith', done => {
+  expect.assertions(1);
+  testOne('What is the AppId, BusinessRoleName for BusinessRoleName starting with "SAP_BR"', function (conn, res) {
+    expect(res).toEqual(
+      'The AppId, BusinessRoleName of BusinessRoleName starting with "SAP_BR" are ...\n'
+      + '"CBGLWB" and "SAP_BR_PROD_STWRDSHP_SPECLST";\n'
+      + '"F1638" and "SAP_BR_ACS_BA";\n'
+      + '"F1638" and "SAP_BR_ACS_CE";\n'
+      + '"F1638" and "SAP_BR_ACS_CM";\n'
+      + '"F2311" and "SAP_BR_INVENTORY_ANALYST";\n'
+      + '"S_ALR_87012394" and "SAP_BR_GL_ACCOUNTANT_CA, SAP_BR_GL_ACCOUNTANT";\n'
+      + '"XK99" and "SAP_BR_BUPA_MASTER_SPECIALIST"'
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+it('testWIFilterForMultipleGroupStartingWithAndNotFlawed', done => {
+  expect.assertions(1);
+  testOne('What is the AppId, BusinessRoleName for BusinessRoleName starting with "SAP_BR" and not BusinessRoleName = "SAP_BR_PROD_STWRDSHP_SPECLST"', function (conn, res) {
+    expect(res).toEqual(
+      'I don\'t know anything about "AppId, BusinessRoleName" ("appId" and "BusinessRoleName") in relation to "BusinessRoleName starting with "SAP_BR" and not BusinessRoleName = "SAP_BR_PROD_STWRDSHP_SPECLST"".\n'
+      + 'I do not understand "not".'
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+it('testWIFilterForMultipleGroupStartingWithAndNE', done => {
+  expect.assertions(1);
+  testOne('What is the AppId, BusinessRoleName for BusinessRoleName starting with "SAP_BR" and BusinessRoleName != "SAP_BR_PROD_STWRDSHP_SPECLST"', function (conn, res) {
+    expect(res).toEqual(
+      'The AppId, BusinessRoleName of BusinessRoleName starting with "SAP_BR" and BusinessRoleName != "SAP_BR_PROD_STWRDSHP_SPECLST" are ...\n'
+      + '"F1638" and "SAP_BR_ACS_BA";\n'
+      + '"F1638" and "SAP_BR_ACS_CE";\n'
+      + '"F1638" and "SAP_BR_ACS_CM";\n'
+      + '"F2311" and "SAP_BR_INVENTORY_ANALYST";\n'
+      + '"S_ALR_87012394" and "SAP_BR_GL_ACCOUNTANT_CA, SAP_BR_GL_ACCOUNTANT";\n'
+      + '"XK99" and "SAP_BR_BUPA_MASTER_SPECIALIST"'
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+it('testWIFilterForMultipleGroupStartingWithAndNEInMult', done => {
+  expect.assertions(1);
+  testOne('What is the AppId, BusinessRoleName for BusinessRoleName starting with "SAP_BR" and BusinessRoleName != "SAP_BR_ACS_CE"', function (conn, res) {
+    expect(res).toEqual(
+      'The AppId, BusinessRoleName of BusinessRoleName starting with "SAP_BR" and BusinessRoleName != "SAP_BR_ACS_CE" are ...\n'
+      + '"CBGLWB" and "SAP_BR_PROD_STWRDSHP_SPECLST";\n'
+      + '"F1638" and "SAP_BR_ACS_BA";\n'
+      + '"F1638" and "SAP_BR_ACS_CM";\n'
+      + '"F2311" and "SAP_BR_INVENTORY_ANALYST";\n'
+      + '"S_ALR_87012394" and "SAP_BR_GL_ACCOUNTANT_CA, SAP_BR_GL_ACCOUNTANT";\n'
+      + '"XK99" and "SAP_BR_BUPA_MASTER_SPECIALIST"'
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+
+it('testPickFirstVsExpandForMultipleGroup', done => {
+  expect.assertions(1);
+  testOne('List all AppId, BusinessGroupName, BusinessGroupDescription with more than 1 BusinessGroupNames"', function (conn, res) {
+    expect(res).toEqual(
+      // 'the bspname, fiori intent, appname for manage labels are ...\n"FRA_ALERT_MAN", "#ComplianceAlerts-manage" and "Manage Alerts";\n"n/a", "#ProductLabel-manage" and "Manage Labels"'
+      'the AppId, BusinessGroupName, BusinessGroupDescription with more than 1 BusinessGroupNames" are ...\n' 
+      + '"F1638", "SAP_ACS_BCG_INVESTIGATION" and "Alert investigation";\n'
+      + '"F1638", "SAP_ACS_BCG_INVESTIGATION" and "Investigate Alerts";\n'
+      + '"F1638", "SAP_GRP2" and "Alert investigation";\n'            
+      + '"F1638", "SAP_GRP2" and "Investigate Alerts"'
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
+it('testPickFirstVsExpandForMultipleGroup2', done => {
+  expect.assertions(1);
+  testOne('List all AppId, BusinessGroupName, BusinessGroupDescription with AppId "F1638"', function (conn, res) {
+    expect(res).toEqual(
+      // 'the bspname, fiori intent, appname for manage labels are ...\n"FRA_ALERT_MAN", "#ComplianceAlerts-manage" and "Manage Alerts";\n"n/a", "#ProductLabel-manage" and "Manage Labels"'
+      'the AppId, BusinessGroupName, BusinessGroupDescription with AppId "F1638" are ...\n' 
+      + '"F1638", "SAP_ACS_BCG_INVESTIGATION" and "Alert investigation";\n'
+      + '"F1638", "SAP_ACS_BCG_INVESTIGATION" and "Investigate Alerts";\n'
+      + '"F1638", "SAP_GRP2" and "Alert investigation";\n'            
+      + '"F1638", "SAP_GRP2" and "Investigate Alerts"'
+    );
+    done();
+    releaseConnector(conn);
+  });
+});
+
 
 
 it('testUpDownListAllBSPName', done => {

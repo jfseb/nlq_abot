@@ -1056,7 +1056,7 @@ it('testModelCheckExactOnly', (done) => {
     var res = u.mRules.filter(function (oRule) {
       return oRule.exactOnly === true;
     });
-    expect(res.length).toEqual(173); // 187 /*431*/);
+    expect(res.length).toEqual(176); // 187 /*431*/);
     Model.releaseModel(theModel);
     done();
   });
