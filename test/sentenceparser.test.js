@@ -92,7 +92,7 @@ it('testTokenizeAndNot', done => {
     'AppId, BusinessRoleName with BusinessRoleName starting with "SAP_BR" and not BusinessRoleName = "SAP_BR_PROD_STWRDSHP_SPECLST"';
     var res = Erbase.processString(s, theModel.rules, words);
     debuglog('res > ' + JSON.stringify(res, undefined, 2));
-    expect(res.errors.length).toEqual(0);
+    expect(res.errors.length).toEqual(1);
     expect(res.sentences.length).toEqual(0); 
     done();
     Model.releaseModel(theModel);
